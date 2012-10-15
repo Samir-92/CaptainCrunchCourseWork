@@ -1,4 +1,4 @@
-CaptainCrunchCourseWork
-=======================
+gp2
+===
 
-Captain Crunch and the Cereal Killers ie. The best coursework repository.
+The base code for the Games Programming 2 module
