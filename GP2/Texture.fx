@@ -30,12 +30,11 @@ PS_INPUT VS(VS_INPUT input)
 }
 
 Texture2D diffuseTexture;
-
 SamplerState diffuseSampler
 {
-	Filter = MIN_MAG_LINEAR_MIP_POINT;
-	AddressU = CLAMP;
-	AddressV = CLAMP;
+    Filter = MIN_MAG_LINEAR_MIP_POINT;
+    AddressU = Wrap;
+    AddressV = Wrap;
 };
 
 float4 PS(PS_INPUT input):SV_TARGET
@@ -45,16 +44,16 @@ float4 PS(PS_INPUT input):SV_TARGET
 
 RasterizerState DisableCulling
 {
-	CullMode = NONE;	
+    CullMode = NONE;
 };
 
-technique10 Render 
+technique10 Render
 {
 	pass P0
 	{
-		SetVertexShader(CompileShader(vs_4_0, VS()));
-		SetGeometryShader(NULL);
-		SetPixelShader(CompileShader(ps_4_0, PS()));
-		SetRasterizerState(DisableCulling);
+		SetVertexShader(CompileShader(vs_4_0, VS() ) );
+		SetGeometryShader( NULL );
+		SetPixelShader( CompileShader( ps_4_0,  PS() ) );
+		SetRasterizerState(DisableCulling); 
 	}
 }
