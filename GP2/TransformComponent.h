@@ -105,14 +105,13 @@ public:
 		
 		D3DXVECTOR3 direction;
 		//Calculate direction from rotation, replace the following line
-		direction=D3DXVECTOR3(0.0f,0.0f,1.0f);
+		direction=D3DXVECTOR3(1.0f,0.0f,1.0f);
 		//Normalize
 		D3DXVec3Normalize(&direction,&direction);
 		direction*=speed;
 
-		m_vecPosition.x+=direction.x*cos(m_vecRotation.y);
-		//m_vecPosition.y+=direction.y;
-		m_vecPosition.z+=direction.z*sin(m_vecRotation.z);
+		m_vecPosition.x+=(direction.x*sin(m_vecRotation.y));
+		m_vecPosition.z+=(direction.z*cos(m_vecRotation.y));
 	};
 private:
 	//vectors

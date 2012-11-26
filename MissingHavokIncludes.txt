@@ -1,0 +1,15 @@
+hkBase.lib
+hkCompat.lib
+hkSceneData.lib
+hkSerialize.lib
+hkVisualize.lib
+hkInternal.lib
+hkGeometryUtilities.lib
+hkcdInternal.lib
+hkcdCollide.lib
+hkpCollide.lib
+hkpConstraintSolver.lib
+hkpDynamics.lib
+hkpInternal.lib
+hkpUtilities.lib
+hkpVehicle.lib
