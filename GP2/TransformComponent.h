@@ -79,9 +79,11 @@ public:
 	//rotate
 	void rotate(float x,float y,float z)
 	{
-		m_vecRotation.x+=x;
-		m_vecRotation.y+=y;
-		m_vecRotation.z+=z;
+		if((m_vecRotation.y < 90)){
+			m_vecRotation.x+=x;
+			m_vecRotation.y+=y;
+			m_vecRotation.z+=z;
+		}
 	};
 
 	//translate
@@ -102,16 +104,18 @@ public:
 
 	void MoveForward(float speed)
 	{
-		
-		D3DXVECTOR3 direction;
-		//Calculate direction from rotation, replace the following line
-		direction=D3DXVECTOR3(1.0f,0.0f,1.0f);
-		//Normalize
-		D3DXVec3Normalize(&direction,&direction);
-		direction*=speed;
+		//Don't move the car if we are going to go off the screen.
+		if((m_vecPosition.x >= -5) && (m_vecPosition.x <= 5)){
+			D3DXVECTOR3 direction;
+			//Calculate direction from rotation, replace the following line
+			direction=D3DXVECTOR3(1.0f,0.0f,1.0f);
+			//Normalize
+			D3DXVec3Normalize(&direction,&direction);
+			direction*=speed;
 
-		m_vecPosition.x+=(direction.x*sin(m_vecRotation.y));
-		m_vecPosition.z+=(direction.z*cos(m_vecRotation.y));
+			m_vecPosition.x+=(direction.x*sin(m_vecRotation.y));
+			m_vecPosition.z+=(direction.z*cos(m_vecRotation.y));
+		}
 	};
 private:
 	//vectors

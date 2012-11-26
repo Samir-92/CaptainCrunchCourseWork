@@ -258,13 +258,13 @@ void CGameApplication::update()
 	{
 		//play sound
 		CTransformComponent * pTransform=m_pGameObjectManager->findGameObject("Test")->getTransform();
-		pTransform->MoveForward(m_Timer.getElapsedTime()*30);
+		pTransform->MoveForward(m_Timer.getElapsedTime()*5);
 	}
 	else if (CInput::getInstance().getKeyboard()->isKeyDown((int)'S'))
 	{
 		//play sound
 		CTransformComponent * pTransform=m_pGameObjectManager->findGameObject("Test")->getTransform();
-		pTransform->MoveForward(m_Timer.getElapsedTime()*-30);
+		pTransform->MoveForward(m_Timer.getElapsedTime()*-5);
 		
 	}
 	if (CInput::getInstance().getKeyboard()->isKeyDown((int)'A'))
@@ -272,6 +272,7 @@ void CGameApplication::update()
 		//play sound
 		CTransformComponent * pTransform=m_pGameObjectManager->findGameObject("Test")->getTransform();
 		pTransform->rotate(0.0f,m_Timer.getElapsedTime()*-1,0.0f);
+		
 	}
 	else if (CInput::getInstance().getKeyboard()->isKeyDown((int)'D'))
 	{
