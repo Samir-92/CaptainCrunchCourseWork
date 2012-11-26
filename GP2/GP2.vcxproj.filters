@@ -196,5 +196,6 @@
     <None Include="Environment.fx">
       <Filter>Effects</Filter>
     </None>
+    <None Include="fbxsdk-2013.1d.dll" />
   </ItemGroup>
 </Project>

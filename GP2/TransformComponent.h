@@ -110,9 +110,9 @@ public:
 		D3DXVec3Normalize(&direction,&direction);
 		direction*=speed;
 
-		m_vecPosition.x+=direction.x;
-		m_vecPosition.y+=direction.y;
-		m_vecPosition.z+=direction.z;
+		m_vecPosition.x+=direction.x*cos(m_vecRotation.y);
+		//m_vecPosition.y+=direction.y;
+		m_vecPosition.z+=direction.z*sin(m_vecRotation.z);
 	};
 private:
 	//vectors
