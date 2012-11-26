@@ -43,6 +43,7 @@ public:
 		//Multiply the matrices together
 		D3DXMatrixMultiply(&m_matWorld,&m_matScale,&m_matRotation);
 		D3DXMatrixMultiply(&m_matWorld,&m_matWorld,&m_matTranslate);
+		D3DXMatrixMultiply(&m_matWorld,&m_matRotation,&m_matTranslate);
 		
 	};
 
@@ -105,7 +106,7 @@ public:
 		
 		D3DXVECTOR3 direction;
 		//Calculate direction from rotation, replace the following line
-		direction=D3DXVECTOR3(0.0f,0.0f,1.0f);
+		direction=
 		//Normalize
 		D3DXVec3Normalize(&direction,&direction);
 		direction*=speed;

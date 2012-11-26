@@ -85,6 +85,7 @@ bool CGameApplication::initGame()
 	//Set the name
 	pTestGameObject->setName("Test");
 	//Position
+
 	pTestGameObject->getTransform()->setPosition(0.0f,-6.0f,10.0f);
 	//create material
 	pMaterial=new CMaterialComponent();
@@ -96,6 +97,7 @@ bool CGameApplication::initGame()
 	pMaterial->loadBumpTexture("armoredrecon_N.png");
 	pMaterial->loadParallaxTexture("armoredrecon_Height.png");
 	pTestGameObject->addComponent(pMaterial);
+	
 
 	//Create Mesh
 	pMesh=modelloader.loadModelFromFile(m_pD3D10Device,"armoredrecon.fbx");
@@ -133,10 +135,12 @@ bool CGameApplication::initGame()
 	CGameObject *pCameraGameObject=new CGameObject();
 	pCameraGameObject->getTransform()->setPosition(0.0f,2.0f,-5.0f);
 	pCameraGameObject->setName("Camera");
+	
 
 	D3D10_VIEWPORT vp;
 	UINT numViewports=1;
 	m_pD3D10Device->RSGetViewports(&numViewports,&vp);
+	
 
 	CCameraComponent *pCamera=new CCameraComponent();
 	pCamera->setUp(0.0f,1.0f,0.0f);
@@ -146,8 +150,13 @@ bool CGameApplication::initGame()
 	pCamera->setFarClip(1000.0f);
 	pCamera->setNearClip(0.1f);
 	pCameraGameObject->addComponent(pCamera);
+	
 
 	m_pGameObjectManager->addGameObject(pCameraGameObject);
+	D3DXVECTOR3 objPos= pTestGameObject->getTransform()->getPosition();
+	D3DXVECTOR3 camPos= pCameraGameObject->getTransform()->getPosition();
+	camPos= objPos-D3DXVECTOR3(0.0f,0.0f,-10.0f);
+	
 
 	CGameObject *pLightGameObject=new CGameObject();
 	pLightGameObject->setName("DirectionalLight");
@@ -202,6 +211,7 @@ void CGameApplication::render()
 		if (pMaterial)
 		{
 			CCameraComponent *camera=m_pGameObjectManager->getMainCamera();
+			
 
 			//set the matrices
 			pMaterial->setProjectionMatrix((float*)camera->getProjection());
