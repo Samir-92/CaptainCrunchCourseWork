@@ -147,6 +147,8 @@ bool CGameApplication::initGame()
 	pCamera->setNearClip(0.1f);
 	pCameraGameObject->addComponent(pCamera);
 
+	pCamera->setTarget(m_pGameObjectManager->findGameObject("Test"));
+
 	m_pGameObjectManager->addGameObject(pCameraGameObject);
 
 	CGameObject *pLightGameObject=new CGameObject();
@@ -258,13 +260,13 @@ void CGameApplication::update()
 	{
 		//play sound
 		CTransformComponent * pTransform=m_pGameObjectManager->findGameObject("Test")->getTransform();
-		pTransform->MoveForward(m_Timer.getElapsedTime()*30);
+		pTransform->MoveForward(m_Timer.getElapsedTime()*5);
 	}
 	else if (CInput::getInstance().getKeyboard()->isKeyDown((int)'S'))
 	{
 		//play sound
 		CTransformComponent * pTransform=m_pGameObjectManager->findGameObject("Test")->getTransform();
-		pTransform->MoveForward(m_Timer.getElapsedTime()*-30);
+		pTransform->MoveForward(m_Timer.getElapsedTime()*-5);
 		
 	}
 	if (CInput::getInstance().getKeyboard()->isKeyDown((int)'A'))

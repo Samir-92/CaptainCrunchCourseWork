@@ -51,6 +51,10 @@ public:
 	{
 		m_fFarClip=farClip;
 	};
+
+	void setTarget(CGameObject* target){
+		m_pTarget = target;
+	};
 private:
 	D3DXMATRIX m_matView;
 	D3DXMATRIX m_matProjection;
@@ -62,4 +66,6 @@ private:
 	float m_fFOV;
 	float m_fNearClip;
 	float m_fFarClip;
+
+	CGameObject* m_pTarget;
 };
