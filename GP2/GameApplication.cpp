@@ -1,6 +1,7 @@
 #include "GameApplication.h"
 #include "GameObject.h"
-
+#include "CameraComponent.h"
+#include "TransformComponent.h"
 
 #include "Input.h"
 #include "Keyboard.h"
@@ -105,27 +106,28 @@ bool CGameApplication::initGame()
 	//add the game object
 	m_pGameObjectManager->addGameObject(pTestGameObject);
 
-	//pTestGameObject=new CGameObject();
-	////Set the name
-	//pTestGameObject->setName("Test2");
-	////Position
-	//pTestGameObject->getTransform()->setPosition(5.0f,0.0f,10.0f);
-	////create material
-	//pMaterial=new CMaterialComponent();
-	//pMaterial->SetRenderingDevice(m_pD3D10Device);
-	//pMaterial->setEffectFilename("DirectionalLight.fx");
-	//pMaterial->setAmbientMaterialColour(D3DXCOLOR(0.5f,0.5f,0.5f,1.0f));
-	//pMaterial->loadDiffuseTexture("armoredrecon_diff.png");
-	//pMaterial->loadSpecularTexture("armoredrecon_spec.png");
-	//pTestGameObject->addComponent(pMaterial);
+	pTestGameObject=new CGameObject();
+	//Set the name
+	pTestGameObject->setName("floor");
+	//Position
+	pTestGameObject->getTransform()->setPosition(0.0f,-125.0f,200.0f);
+	pTestGameObject->getTransform()->setRotation(180.0f,0.0f,0.0f);
+	//create material
+	pMaterial=new CMaterialComponent();
+	pMaterial->SetRenderingDevice(m_pD3D10Device);
+	pMaterial->setEffectFilename("DirectionalLight.fx");
+	pMaterial->setAmbientMaterialColour(D3DXCOLOR(0.5f,0.5f,0.5f,1.0f));
+	pMaterial->loadDiffuseTexture("Floor.png");
+	//pMaterial->loadSpecularTexture("Floor.png");
+	pTestGameObject->addComponent(pMaterial);
 
-	////Create Mesh
-	//pMesh=modelloader.loadModelFromFile(m_pD3D10Device,"armoredrecon.fbx");
-	////CMeshComponent *pMesh=modelloader.createCube(m_pD3D10Device,10.0f,10.0f,10.0f);
-	//pMesh->SetRenderingDevice(m_pD3D10Device);
-	//pTestGameObject->addComponent(pMesh);
-	////add the game object
-	//m_pGameObjectManager->addGameObject(pTestGameObject);
+	//Create Mesh
+	pMesh=modelloader.loadModelFromFile(m_pD3D10Device,"floor.fbx");
+	//CMeshComponent *pMesh=modelloader.createCube(m_pD3D10Device,10.0f,10.0f,10.0f);
+	pMesh->SetRenderingDevice(m_pD3D10Device);
+	pTestGameObject->addComponent(pMesh);
+	//add the game object
+	m_pGameObjectManager->addGameObject(pTestGameObject);
 
 	//Create Mesh
 
@@ -281,9 +283,8 @@ void CGameApplication::update()
 		CTransformComponent * pTransform=m_pGameObjectManager->findGameObject("Test")->getTransform();
 		pTransform->rotate(0.0f,m_Timer.getElapsedTime(),0.0f);
 	}
-	m_pGameObjectManager->update(m_Timer.getElapsedTime());
 
-	
+	m_pGameObjectManager->update(m_Timer.getElapsedTime());
 	
 }
 
