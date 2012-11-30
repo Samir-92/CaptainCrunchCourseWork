@@ -1,5 +1,7 @@
 #include "GameApplication.h"
 #include "GameObject.h"
+#include "cXAudio.h"
+
 
 
 #include "Input.h"
