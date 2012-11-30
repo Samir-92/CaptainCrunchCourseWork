@@ -119,6 +119,7 @@
   </ItemGroup>
   <ItemGroup>
     <None Include="ambient.fx" />
+    <None Include="barrel.fbx" />
     <None Include="Bumpmapping.fx" />
     <None Include="diffuse.fx" />
     <None Include="DirectionalLight.fx" />

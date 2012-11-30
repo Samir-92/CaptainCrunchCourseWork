@@ -197,5 +197,6 @@
       <Filter>Effects</Filter>
     </None>
     <None Include="fbxsdk-2013.1d.dll" />
+    <None Include="barrel.fbx" />
   </ItemGroup>
 </Project>

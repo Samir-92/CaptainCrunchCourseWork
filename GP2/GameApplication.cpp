@@ -98,29 +98,30 @@ bool CGameApplication::initGame()
 	pTestGameObject->addComponent(pMaterial);
 
 	////Create Mesh
-	//pMesh=modelloader.loadModelFromFile(m_pD3D10Device,"armoredrecon.fbx");
-	////CMeshComponent *pMesh=modelloader.createCube(m_pD3D10Device,10.0f,10.0f,10.0f);
-	//pMesh->SetRenderingDevice(m_pD3D10Device);
-	//pTestGameObject->addComponent(pMesh);
-	////add the game object
-	//m_pGameObjectManager->addGameObject(pTestGameObject);
+	pMesh=modelloader.loadModelFromFile(m_pD3D10Device,"armoredrecon.fbx");
+	//CMeshComponent *pMesh=modelloader.createCube(m_pD3D10Device,10.0f,10.0f,10.0f);
+	pMesh->SetRenderingDevice(m_pD3D10Device);
+	pTestGameObject->addComponent(pMesh);
+	//add the game object
+	m_pGameObjectManager->addGameObject(pTestGameObject);
 
-	//pTestGameObject=new CGameObject();
-	////Set the name
-	//pTestGameObject->setName("Test2");
-	////Position
-	//pTestGameObject->getTransform()->setPosition(5.0f,0.0f,10.0f);
-	////create material
-	//pMaterial=new CMaterialComponent();
-	//pMaterial->SetRenderingDevice(m_pD3D10Device);
-	//pMaterial->setEffectFilename("DirectionalLight.fx");
-	//pMaterial->setAmbientMaterialColour(D3DXCOLOR(0.5f,0.5f,0.5f,1.0f));
+	pTestGameObject=new CGameObject();
+	//Set the name
+	pTestGameObject->setName("Barrel");
+	//Position
+	pTestGameObject->getTransform()->setPosition(5.0f,0.0f,10.0f);
+	pTestGameObject->getTransform()->setScale(0.01f,0.01f,0.01f);
+	//create material
+	pMaterial=new CMaterialComponent();
+	pMaterial->SetRenderingDevice(m_pD3D10Device);
+	pMaterial->setEffectFilename("DirectionalLight.fx");
+	pMaterial->setAmbientMaterialColour(D3DXCOLOR(0.5f,0.5f,0.5f,1.0f));
 	//pMaterial->loadDiffuseTexture("armoredrecon_diff.png");
 	//pMaterial->loadSpecularTexture("armoredrecon_spec.png");
-	//pTestGameObject->addComponent(pMaterial);
+	pTestGameObject->addComponent(pMaterial);
 
 	//Create Mesh
-	pMesh=modelloader.loadModelFromFile(m_pD3D10Device,"armoredrecon.fbx");
+	pMesh=modelloader.loadModelFromFile(m_pD3D10Device,"barrel.fbx");
 	//CMeshComponent *pMesh=modelloader.createCube(m_pD3D10Device,10.0f,10.0f,10.0f);
 	pMesh->SetRenderingDevice(m_pD3D10Device);
 	pTestGameObject->addComponent(pMesh);
