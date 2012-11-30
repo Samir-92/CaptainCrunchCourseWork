@@ -131,11 +131,13 @@
     <None Include="DirectionalLight.fx" />
     <None Include="Environment.fx" />
     <None Include="fbxsdk-2013.1d.dll" />
+    <None Include="humanoid.fbx" />
     <None Include="Parallax.fx" />
     <None Include="ScreenSpace.fx" />
     <None Include="Specular.fx" />
     <None Include="Texture.fx" />
     <None Include="Transform.fx" />
+    <None Include="ZOMBIE.png" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">

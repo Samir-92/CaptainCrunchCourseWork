@@ -154,9 +154,33 @@ bool CGameApplication::initGame()
 	pTestGameObject->addComponent(pMesh);
 	//add the game object
 	m_pGameObjectManager->addGameObject(pTestGameObject);
+	
+	pTestGameObject=new CGameObject();
+	//Set the name
+	pTestGameObject->setName("Zombie");
+	//Position
+	pTestGameObject->getTransform()->setPosition(-1.0f,0.0f,-1.0f);
+	pTestGameObject->getTransform()->setScale(0.01f,0.01f,0.01f);
+	//create material for zombie
+	pMaterial=new CMaterialComponent();
+	pMaterial->SetRenderingDevice(m_pD3D10Device);
+	pMaterial->setEffectFilename("DirectionalLight.fx");
+	pMaterial->setAmbientMaterialColour(D3DXCOLOR(0.5f,0.5f,0.5f,1.0f));
+	pMaterial->loadDiffuseTexture("ZOMBIE.png");
+	//pMaterial->loadSpecularTexture("barrel_spec_01.png");
+	//pMaterial->loadBumpTexture("barrel_nmap_01.png");
+    pTestGameObject->addComponent(pMaterial);
+
 	//Create Mesh
+	pMesh=modelloader.loadModelFromFile(m_pD3D10Device,"humanoid.fbx");
+	//CMeshComponent *pMesh=modelloader.createCube(m_pD3D10Device,10.0f,10.0f,10.0f);
+	pMesh->SetRenderingDevice(m_pD3D10Device);
+	pTestGameObject->addComponent(pMesh);
+	//add the game object
+	m_pGameObjectManager->addGameObject(pTestGameObject);
 
 
+	//Create Mesh
 	CGameObject *pCameraGameObject=new CGameObject();
 	pCameraGameObject->getTransform()->setPosition(0.0f,2.0f,-5.0f);
 	pCameraGameObject->setName("Camera");

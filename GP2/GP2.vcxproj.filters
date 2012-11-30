@@ -216,5 +216,9 @@
     <None Include="barrel_spec_01.png">
       <Filter>Resource Files</Filter>
     </None>
+    <None Include="humanoid.fbx" />
+    <None Include="ZOMBIE.png">
+      <Filter>Resource Files</Filter>
+    </None>
   </ItemGroup>
 </Project>
