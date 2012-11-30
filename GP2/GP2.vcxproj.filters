@@ -198,5 +198,23 @@
     </None>
     <None Include="fbxsdk-2013.1d.dll" />
     <None Include="barrel.fbx" />
+    <None Include="barrel_color_02.png">
+      <Filter>Resource Files</Filter>
+    </None>
+    <None Include="barrel_nmap_02.png">
+      <Filter>Resource Files</Filter>
+    </None>
+    <None Include="barrel_spec_02.png">
+      <Filter>Resource Files</Filter>
+    </None>
+    <None Include="barrel_color_01.png">
+      <Filter>Resource Files</Filter>
+    </None>
+    <None Include="barrel_nmap_01.png">
+      <Filter>Resource Files</Filter>
+    </None>
+    <None Include="barrel_spec_01.png">
+      <Filter>Resource Files</Filter>
+    </None>
   </ItemGroup>
 </Project>

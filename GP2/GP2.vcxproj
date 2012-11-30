@@ -120,6 +120,12 @@
   <ItemGroup>
     <None Include="ambient.fx" />
     <None Include="barrel.fbx" />
+    <None Include="barrel_color_01.png" />
+    <None Include="barrel_color_02.png" />
+    <None Include="barrel_nmap_01.png" />
+    <None Include="barrel_nmap_02.png" />
+    <None Include="barrel_spec_01.png" />
+    <None Include="barrel_spec_02.png" />
     <None Include="Bumpmapping.fx" />
     <None Include="diffuse.fx" />
     <None Include="DirectionalLight.fx" />
