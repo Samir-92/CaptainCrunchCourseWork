@@ -14,6 +14,10 @@
 
 #include "ModelLoader.h"
 
+//Audio - Includes
+#include "AudioListenerComponent.h"
+#include "AudioSourceComponent.h"
+#include "AudioSystem.h"
 #include <vector>
 
 using namespace std;
@@ -30,6 +34,7 @@ private:
 	bool initGame();
 	bool initGraphics();
 
+	bool initAudio();
 	bool initWindow();
 	void render();
 	void update();

@@ -77,6 +77,9 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
+    <ClCompile Include="AudioListenerComponent.cpp" />
+    <ClCompile Include="AudioSourceComponent.cpp" />
+    <ClCompile Include="AudioSystem.cpp" />
     <ClCompile Include="CameraComponent.cpp" />
     <ClCompile Include="DirectionalLightComponent.cpp" />
     <ClCompile Include="GameApplication.cpp" />
@@ -96,6 +99,9 @@
     <ClCompile Include="Win32Window.cpp" />
   </ItemGroup>
   <ItemGroup>
+    <ClInclude Include="AudioListenerComponent.h" />
+    <ClInclude Include="AudioSourceComponent.h" />
+    <ClInclude Include="AudioSystem.h" />
     <ClInclude Include="CameraComponent.h" />
     <ClInclude Include="DefaultEffect.h" />
     <ClInclude Include="DirectionLightComponent.h" />
@@ -118,6 +124,8 @@
     <ClInclude Include="Win32Window.h" />
   </ItemGroup>
   <ItemGroup>
+    <None Include="44770__rfhache__f1-br-06-engine-starts-9.wav" />
+    <None Include="52271__dparke4__zombie.wav" />
     <None Include="ambient.fx" />
     <None Include="Bumpmapping.fx" />
     <None Include="diffuse.fx" />
@@ -128,6 +136,7 @@
     <None Include="Specular.fx" />
     <None Include="Texture.fx" />
     <None Include="Transform.fx" />
+    <None Include="zombie.mp3" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">

@@ -1,7 +1,7 @@
 #include "GameApplication.h"
+#include "ModelLoader.h"
 #include "GameObject.h"
-
-
+#include "Mouse.h"
 #include "Input.h"
 #include "Keyboard.h"
 
@@ -54,6 +54,11 @@ bool CGameApplication::init()
 		return false;
 	if (!initGame())
 		return false;
+	//Audio - Call initAudio
+	if (!initAudio())
+		return false;
+	if (!initGame())
+		return false;
 	return true;
 }
 
@@ -97,6 +102,16 @@ bool CGameApplication::initGame()
 	pMaterial->loadParallaxTexture("armoredrecon_Height.png");
 	pTestGameObject->addComponent(pMaterial);
 
+	//Audio - Create our Audio Component
+	CAudioSourceComponent *pAudio=new CAudioSourceComponent();
+	//Audio - If its a wav file, you should not stream
+	pAudio->setFilename("44770__rfhache__f1-br-06-engine-starts-9.wav");
+	//Audio - stream set to false
+	
+	pAudio->setStream(true);
+	//Audio - Add it to the Game Object
+	pTestGameObject->addComponent(pAudio);
+
 	//Create Mesh
 	pMesh=modelloader.loadModelFromFile(m_pD3D10Device,"armoredrecon.fbx");
 	//CMeshComponent *pMesh=modelloader.createCube(m_pD3D10Device,10.0f,10.0f,10.0f);
@@ -104,31 +119,6 @@ bool CGameApplication::initGame()
 	pTestGameObject->addComponent(pMesh);
 	//add the game object
 	m_pGameObjectManager->addGameObject(pTestGameObject);
-
-	//pTestGameObject=new CGameObject();
-	////Set the name
-	//pTestGameObject->setName("Test2");
-	////Position
-	//pTestGameObject->getTransform()->setPosition(5.0f,0.0f,10.0f);
-	////create material
-	//pMaterial=new CMaterialComponent();
-	//pMaterial->SetRenderingDevice(m_pD3D10Device);
-	//pMaterial->setEffectFilename("DirectionalLight.fx");
-	//pMaterial->setAmbientMaterialColour(D3DXCOLOR(0.5f,0.5f,0.5f,1.0f));
-	//pMaterial->loadDiffuseTexture("armoredrecon_diff.png");
-	//pMaterial->loadSpecularTexture("armoredrecon_spec.png");
-	//pTestGameObject->addComponent(pMaterial);
-
-	////Create Mesh
-	//pMesh=modelloader.loadModelFromFile(m_pD3D10Device,"armoredrecon.fbx");
-	////CMeshComponent *pMesh=modelloader.createCube(m_pD3D10Device,10.0f,10.0f,10.0f);
-	//pMesh->SetRenderingDevice(m_pD3D10Device);
-	//pTestGameObject->addComponent(pMesh);
-	////add the game object
-	//m_pGameObjectManager->addGameObject(pTestGameObject);
-
-	//Create Mesh
-
 
 	CGameObject *pCameraGameObject=new CGameObject();
 	pCameraGameObject->getTransform()->setPosition(0.0f,2.0f,-5.0f);
@@ -149,6 +139,19 @@ bool CGameApplication::initGame()
 
 	m_pGameObjectManager->addGameObject(pCameraGameObject);
 
+	//Audio - Create another audio component for music
+	CAudioSourceComponent *pMusic=new CAudioSourceComponent();
+	//Audio -If it is an mp3 or ogg then set stream to true
+	pMusic->setFilename("zombie.mp3");
+	//Audio - stream to true
+	pMusic->setStream(true);
+	//Audio - Add to camera, don't call play until init has been called
+	pCameraGameObject->addComponent(pMusic);
+
+	//Audio - Attach a listener to the camera
+	CAudioListenerComponent *pListener=new CAudioListenerComponent();
+	pCameraGameObject->addComponent(pListener);
+
 	CGameObject *pLightGameObject=new CGameObject();
 	pLightGameObject->setName("DirectionalLight");
 
@@ -163,6 +166,8 @@ bool CGameApplication::initGame()
 	//init, this must be called after we have created all game objects
 	m_pGameObjectManager->init();
 	
+	pMusic->play();
+
 	m_Timer.start();
 	return true;
 }
@@ -253,10 +258,12 @@ void CGameApplication::render()
 void CGameApplication::update()
 {
 	m_Timer.update();
-
+	
 	if (CInput::getInstance().getKeyboard()->isKeyDown((int)'W'))
 	{
-		//play sound
+		CAudioSourceComponent * pAudio=(CAudioSourceComponent *)m_pGameObjectManager->findGameObject("Test")->getComponent("AudioSourceComponent");
+	
+		pAudio->play();
 		CTransformComponent * pTransform=m_pGameObjectManager->findGameObject("Test")->getTransform();
 		pTransform->MoveForward(m_Timer.getElapsedTime());
 	}
@@ -288,6 +295,11 @@ void CGameApplication::update()
 bool CGameApplication::initInput()
 {
 	CInput::getInstance().init();
+	return true;
+}
+bool CGameApplication::initAudio()
+{
+	CAudioSystem::getInstance().init();
 	return true;
 }
 

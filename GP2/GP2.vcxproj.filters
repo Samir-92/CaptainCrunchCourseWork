@@ -49,11 +49,11 @@
     <Filter Include="Components\Camera">
       <UniqueIdentifier>{04c31a65-dfe5-4bbb-9678-f1fa5f74b35e}</UniqueIdentifier>
     </Filter>
+    <Filter Include="Audio">
+      <UniqueIdentifier>{fdc3aa7d-8596-4e6e-a038-4689e9495920}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
-    <ClCompile Include="main.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
     <ClCompile Include="Win32Window.cpp">
       <Filter>Window</Filter>
     </ClCompile>
@@ -101,6 +101,18 @@
     </ClCompile>
     <ClCompile Include="MeshComponent.cpp">
       <Filter>Components\Geometry</Filter>
+    </ClCompile>
+    <ClCompile Include="AudioListenerComponent.cpp">
+      <Filter>Audio</Filter>
+    </ClCompile>
+    <ClCompile Include="AudioSourceComponent.cpp">
+      <Filter>Audio</Filter>
+    </ClCompile>
+    <ClCompile Include="AudioSystem.cpp">
+      <Filter>Audio</Filter>
+    </ClCompile>
+    <ClCompile Include="main.cpp">
+      <Filter>Source Files</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
@@ -164,6 +176,15 @@
     <ClInclude Include="Geometry.h">
       <Filter>Components\Geometry</Filter>
     </ClInclude>
+    <ClInclude Include="AudioListenerComponent.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="AudioSourceComponent.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="AudioSystem.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <None Include="ScreenSpace.fx">
@@ -195,6 +216,15 @@
     </None>
     <None Include="Environment.fx">
       <Filter>Effects</Filter>
+    </None>
+    <None Include="44770__rfhache__f1-br-06-engine-starts-9.wav">
+      <Filter>Resource Files</Filter>
+    </None>
+    <None Include="52271__dparke4__zombie.wav">
+      <Filter>Resource Files</Filter>
+    </None>
+    <None Include="zombie.mp3">
+      <Filter>Resource Files</Filter>
     </None>
   </ItemGroup>
 </Project>
