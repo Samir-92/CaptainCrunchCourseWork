@@ -2,9 +2,10 @@
 #include "GameObject.h"
 #include "CameraComponent.h"
 #include "TransformComponent.h"
-
 #include "Input.h"
 #include "Keyboard.h"
+#include "Mouse.h"
+#include "ModelLoader.h"
 
 CGameApplication::CGameApplication(void)
 {
@@ -55,6 +56,8 @@ bool CGameApplication::init()
 		return false;
 	if (!initGame())
 		return false;
+	if (!initAudio())
+		return false;
 	return true;
 }
 
@@ -97,6 +100,16 @@ bool CGameApplication::initGame()
 	pMaterial->loadBumpTexture("armoredrecon_N.png");
 	pMaterial->loadParallaxTexture("armoredrecon_Height.png");
 	pTestGameObject->addComponent(pMaterial);
+
+		//Audio - Create our Audio Component
+	CAudioSourceComponent *pAudio=new CAudioSourceComponent();
+	//Audio - If its a wav file, you should not stream
+	pAudio->setFilename("44770__rfhache__f1-br-06-engine-starts-9.wav");
+	//Audio - stream set to false
+	
+	pAudio->setStream(true);
+	//Audio - Add it to the Game Object
+	pTestGameObject->addComponent(pAudio);
 
 	//Create Mesh
 	pMesh=modelloader.loadModelFromFile(m_pD3D10Device,"armoredrecon.fbx");
@@ -156,6 +169,20 @@ bool CGameApplication::initGame()
 
 	m_pGameObjectManager->addGameObject(pCameraGameObject);
 
+	//Audio - Create another audio component for music
+	CAudioSourceComponent *pMusic=new CAudioSourceComponent();
+	//Audio -If it is an mp3 or ogg then set stream to true
+	pMusic->setFilename("zombie.mp3");
+	//Audio - stream to true
+	pMusic->setStream(true);
+	//Audio - Add to camera, don't call play until init has been called
+	pCameraGameObject->addComponent(pMusic);
+
+	//Audio - Attach a listener to the camera
+	CAudioListenerComponent *pListener=new CAudioListenerComponent();
+	pCameraGameObject->addComponent(pListener);
+
+
 	CGameObject *pLightGameObject=new CGameObject();
 	pLightGameObject->setName("DirectionalLight");
 
@@ -170,6 +197,8 @@ bool CGameApplication::initGame()
 	//init, this must be called after we have created all game objects
 	m_pGameObjectManager->init();
 	
+	pMusic->play();
+
 	m_Timer.start();
 	return true;
 }
@@ -270,6 +299,10 @@ void CGameApplication::update()
 			//play sound
 			CTransformComponent * pTransform=m_pGameObjectManager->findGameObject("Test")->getTransform();
 			pTransform->MoveForward(m_Timer.getElapsedTime()*30);
+			CAudioSourceComponent * pAudio=(CAudioSourceComponent *)m_pGameObjectManager->findGameObject("Test")->getComponent("AudioSourceComponent");
+	
+			pAudio->play();
+
 		}else{
 			//Move the debug camera -- doesn't work yet.
 			D3DXVECTOR3 cameraNewPosition = D3DXVECTOR3(m_Timer.getElapsedTime()*-30, 0, 0);
@@ -315,7 +348,11 @@ bool CGameApplication::initInput()
 	CInput::getInstance().init();
 	return true;
 }
-
+bool CGameApplication::initAudio()
+{
+	CAudioSystem::getInstance().init();
+	return true;
+}
 
 //initGraphics - initialise the graphics subsystem - BMD
 bool CGameApplication::initGraphics()
