@@ -76,6 +76,30 @@ public:
 		return m_direction;
 	};
 
+	bool getIsMoving()
+	{
+		return m_isMoving;
+	}
+
+	void setIsMoving(bool isMoving)
+	{
+		m_isMoving = isMoving;
+	}
+
+	int getMovementDirection()
+	{
+		//1/true for right
+		//0/false for left
+		return m_moveDirRight;
+	}
+
+	void setMovementDirection(bool moveDir)
+	{
+		//1/true for right
+		//0/false for left
+		m_moveDirRight = moveDir;
+	}
+
 	//get world
 	D3DXMATRIX& getWorld()
 	{
@@ -127,12 +151,46 @@ public:
 
 		}
 	};
+	void enemyMovement(float speed)
+	{
+		//Don't move the zombie if zombie going off platform
+		//need to add
+		
+		////calculate direction from rotation
+		//m_direction=D3DXVECTOR3(1.0f,0.0f,1.0f);
+		////Normalize
+		//D3DXVec3Normalize(&m_direction, &m_direction);
+
+	 //   m_vecPosition.x+=(m_direction.x*sin(m_vecRotation.y));
+		//m_vecPosition.z+=(m_direction.z*cos(m_vecRotation.y));
+		//m_direction.x=m_direction.x*sin(m_vecRotation.y);
+		//m_direction.z=m_direction.z*cos(m_vecRotation.y);
+
+		//Move the zombie between a distance back and forward between distance
+		if(m_moveDirRight){
+			m_vecPosition.x += 0.001;
+			if(m_vecPosition.x >= 1.5){
+				m_moveDirRight = false;
+			}
+		}else{
+			m_vecPosition.x -= 0.001;
+			if(m_vecPosition.x <= -1.5){
+				m_moveDirRight = true;
+			}
+		}
+
+	};
+
+
 private:
 	//vectors
 	D3DXVECTOR3 m_vecPosition;
 	D3DXVECTOR3 m_vecRotation;
 	D3DXVECTOR3 m_vecScale;
 	D3DXVECTOR3 m_direction;
+
+	bool m_isMoving;
+	bool m_moveDirRight;
 
 	//matrices
 	D3DXMATRIX m_matTranslate;

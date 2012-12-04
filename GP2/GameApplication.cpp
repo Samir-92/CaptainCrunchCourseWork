@@ -159,8 +159,10 @@ bool CGameApplication::initGame()
 	//Set the name
 	pTestGameObject->setName("Zombie");
 	//Position
-	pTestGameObject->getTransform()->setPosition(-1.0f,0.0f,-1.0f);
+	pTestGameObject->getTransform()->setPosition(0.0f,0.0f,-1.0f);
 	pTestGameObject->getTransform()->setScale(0.01f,0.01f,0.01f);
+	pTestGameObject->getTransform()->setIsMoving(true);
+	pTestGameObject->getTransform()->setMovementDirection(true);
 	//create material for zombie
 	pMaterial=new CMaterialComponent();
 	pMaterial->SetRenderingDevice(m_pD3D10Device);
@@ -340,8 +342,15 @@ void CGameApplication::update()
 	}
 	m_pGameObjectManager->update(m_Timer.getElapsedTime());
 
-	
-	
+	CTransformComponent * pZombie=m_pGameObjectManager->findGameObject("Zombie")->getTransform();
+	//while(!pZombie->getIsMoving()){
+	if(pZombie->getIsMoving()){
+		//Move the zombie bitch!
+		pZombie->enemyMovement(m_Timer.getElapsedTime());
+		//pZombie->setIsMoving(true);
+		//pZombie->setRotation(0.1f,0.0f,0.1f);
+		//pZombie->enemyMovement(m_Timer.getElapsedTime());
+	}
 }
 
 bool CGameApplication::initInput()
