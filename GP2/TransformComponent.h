@@ -91,6 +91,16 @@ public:
 		m_isMoving = isMoving;
 	}
 
+	int getcarspeed()
+	{
+		return carspeed;
+	}
+
+	void setcarSpeed(int Speed)
+	{
+		carspeed = Speed;
+	}
+
 	int getMovementDirection()
 	{
 		//1/true for right
@@ -217,6 +227,8 @@ private:
 
 	bool m_isMoving;
 	bool m_moveDirRight;
+	
+	int carspeed;
 
 	//matrices
 	D3DXMATRIX m_matTranslate;

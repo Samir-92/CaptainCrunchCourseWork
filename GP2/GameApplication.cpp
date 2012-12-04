@@ -89,7 +89,7 @@ bool CGameApplication::initGame()
 	//Set the name
 	pTestGameObject->setName("Test");
 	//Position
-	pTestGameObject->getTransform()->setPosition(0.0f,-6.0f,10.0f);
+	pTestGameObject->getTransform()->setPosition(0.0f,0.0f,0.0f);
 	//create material
 	pMaterial=new CMaterialComponent();
 	pMaterial->SetRenderingDevice(m_pD3D10Device);
@@ -100,7 +100,7 @@ bool CGameApplication::initGame()
 	pMaterial->loadBumpTexture("armoredrecon_N.png");
 	pMaterial->loadParallaxTexture("armoredrecon_Height.png");
 	pTestGameObject->addComponent(pMaterial);
-
+	pTestGameObject->getTransform()->setcarSpeed(10);
 		//Audio - Create our Audio Component
 	CAudioSourceComponent *pAudio=new CAudioSourceComponent();
 	//Audio - If its a wav file, you should not stream
@@ -122,7 +122,7 @@ bool CGameApplication::initGame()
 	//Set the name
 	pTestGameObject->setName("floor");
 	//Position
-	pTestGameObject->getTransform()->setPosition(0.0f,-125.0f,200.0f);
+	pTestGameObject->getTransform()->setPosition(0.0f,0.0f,200.0f);
 	pTestGameObject->getTransform()->setRotation(180.0f,0.0f,0.0f);
 	//create material
 	pMaterial=new CMaterialComponent();
@@ -251,9 +251,9 @@ bool CGameApplication::initGame()
 	m_pD3D10Device->RSGetViewports(&numViewports,&vp);
 
 	CCameraComponent *pCamera=new CCameraComponent();
-	pCamera->setPosition(0.0f,2.0f,-5.0f);
+	pCamera->setPosition(0.0f,20.0f,-5.0f);
 	pCamera->setUp(0.0f,1.0f,0.0f);
-	pCamera->setLookAt(0.0f,0.0f,0.0f);
+	pCamera->setLookAt(0.0f,10.0f,0.0f);
 	pCamera->setFOV(D3DX_PI*0.25f);
 	pCamera->setAspectRatio((float)(vp.Width/vp.Height));
 	pCamera->setFarClip(1000.0f);
@@ -396,7 +396,7 @@ void CGameApplication::update()
 			CAudioSourceComponent *pAudio=(CAudioSourceComponent*)m_pGameObjectManager->findGameObject("Test")->getComponent("AudioSourceComponent");
 	
 			CTransformComponent * pTransform=m_pGameObjectManager->findGameObject("Test")->getTransform();
-			pTransform->MoveForward(m_Timer.getElapsedTime()*30);
+			pTransform->MoveForward(m_Timer.getElapsedTime()*pTransform->getcarspeed());
 			pAudio->play();
 
 		}else{
@@ -409,7 +409,7 @@ void CGameApplication::update()
 	{
 		//play sound
 		CTransformComponent * pTransform=m_pGameObjectManager->findGameObject("Test")->getTransform();
-		pTransform->MoveForward(m_Timer.getElapsedTime()*-30);
+		pTransform->MoveForward(m_Timer.getElapsedTime()*-(pTransform->getcarspeed()));
 		
 	}
 	if (CInput::getInstance().getKeyboard()->isKeyDown((int)'A'))
