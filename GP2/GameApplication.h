@@ -20,8 +20,6 @@
 #include "AudioSystem.h"
 #include <vector>
 
-#include <vector>
-
 using namespace std;
 
 class CGameApplication

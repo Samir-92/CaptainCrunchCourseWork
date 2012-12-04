@@ -54,9 +54,9 @@ bool CGameApplication::init()
 		return false;
 	if (!initInput())
 		return false;
-	if (!initGame())
-		return false;
 	if (!initAudio())
+		return false;
+	if (!initGame())
 		return false;
 	return true;
 }
@@ -104,10 +104,9 @@ bool CGameApplication::initGame()
 		//Audio - Create our Audio Component
 	CAudioSourceComponent *pAudio=new CAudioSourceComponent();
 	//Audio - If its a wav file, you should not stream
-	pAudio->setFilename("engine.wav");
+	pAudio->setFilename("Zombiesound.wav");
 	//Audio - stream set to false
-	
-	pAudio->setStream(true);
+	pAudio->setStream(false);
 	//Audio - Add it to the Game Object
 	pTestGameObject->addComponent(pAudio);
 
@@ -181,7 +180,6 @@ bool CGameApplication::initGame()
 	//Audio - Attach a listener to the camera
 	CAudioListenerComponent *pListener=new CAudioListenerComponent();
 	pCameraGameObject->addComponent(pListener);
-
 
 	CGameObject *pLightGameObject=new CGameObject();
 	pLightGameObject->setName("DirectionalLight");
@@ -296,11 +294,12 @@ void CGameApplication::update()
 	if (CInput::getInstance().getKeyboard()->isKeyDown((int)'W'))
 	{
 		if(!pCamera->isDebug()){
-			//play sound
+	
+			CAudioSourceComponent *pAudio=(CAudioSourceComponent*)m_pGameObjectManager->findGameObject("Test")->getComponent("AudioSourceComponent");
+	
 			CTransformComponent * pTransform=m_pGameObjectManager->findGameObject("Test")->getTransform();
 			pTransform->MoveForward(m_Timer.getElapsedTime()*30);
-			/* CAudioSourceComponent * pAudio=(CAudioSourceComponent *)m_pGameObjectManager->findGameObject("Test")->getComponent("AudioSourceComponent");
-			pAudio->play();*/
+			pAudio->play();
 
 		}else{
 			//Move the debug camera -- doesn't work yet.

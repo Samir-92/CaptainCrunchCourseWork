@@ -67,7 +67,7 @@
     <Filter Include="Header Files\Material">
       <UniqueIdentifier>{8fe81ab9-6500-4536-b8fd-c6b0beadd179}</UniqueIdentifier>
     </Filter>
-    <Filter Include="Sounds">
+    <Filter Include="Resource Files\Sounds">
       <UniqueIdentifier>{c7d7febc-ceb4-4092-89e9-8ecde31fe13c}</UniqueIdentifier>
     </Filter>
   </ItemGroup>
@@ -237,13 +237,13 @@
     </None>
     <None Include="fbxsdk-2013.1d.dll" />
     <None Include="..\..\..\audio\Zombiesound.wav">
-      <Filter>Sounds</Filter>
+      <Filter>Resource Files\Sounds</Filter>
     </None>
     <None Include="..\..\..\audio\engine.wav">
-      <Filter>Sounds</Filter>
+      <Filter>Resource Files\Sounds</Filter>
     </None>
     <None Include="..\..\..\audio\zombie.mp3">
-      <Filter>Sounds</Filter>
+      <Filter>Resource Files\Sounds</Filter>
     </None>
   </ItemGroup>
 </Project>
