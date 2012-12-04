@@ -168,7 +168,7 @@ bool CGameApplication::initGame()
 	pMaterial->SetRenderingDevice(m_pD3D10Device);
 	pMaterial->setEffectFilename("DirectionalLight.fx");
 	pMaterial->setAmbientMaterialColour(D3DXCOLOR(0.5f,0.5f,0.5f,1.0f));
-	pMaterial->loadDiffuseTexture("ZOMBIE.png");
+	//pMaterial->loadDiffuseTexture("ZOMBIE.png");
 	//pMaterial->loadSpecularTexture("barrel_spec_01.png");
 	//pMaterial->loadBumpTexture("barrel_nmap_01.png");
     pTestGameObject->addComponent(pMaterial);
@@ -181,6 +181,31 @@ bool CGameApplication::initGame()
 	//add the game object
 	m_pGameObjectManager->addGameObject(pTestGameObject);
 
+	pTestGameObject=new CGameObject();
+	//Set the name
+	pTestGameObject->setName("Zombie2");
+	//Position
+	pTestGameObject->getTransform()->setPosition(1.0f,0.0f,1.0f);
+	pTestGameObject->getTransform()->setScale(0.01f,0.01f,0.01f);
+	pTestGameObject->getTransform()->setIsMoving(true);
+	pTestGameObject->getTransform()->setMovementDirection(true);
+	//create material for zombie
+	pMaterial=new CMaterialComponent();
+	pMaterial->SetRenderingDevice(m_pD3D10Device);
+	pMaterial->setEffectFilename("DirectionalLight.fx");
+	pMaterial->setAmbientMaterialColour(D3DXCOLOR(0.5f,0.5f,0.5f,1.0f));
+	//pMaterial->loadDiffuseTexture("ZOMBIE.png");
+	//pMaterial->loadSpecularTexture("barrel_spec_01.png");
+	//pMaterial->loadBumpTexture("barrel_nmap_01.png");
+    pTestGameObject->addComponent(pMaterial);
+
+	//Create Mesh
+	pMesh=modelloader.loadModelFromFile(m_pD3D10Device,"humanoid.fbx");
+	//CMeshComponent *pMesh=modelloader.createCube(m_pD3D10Device,10.0f,10.0f,10.0f);
+	pMesh->SetRenderingDevice(m_pD3D10Device);
+	pTestGameObject->addComponent(pMesh);
+	//add the game object
+	m_pGameObjectManager->addGameObject(pTestGameObject);
 
 	//Create Mesh
 	CGameObject *pCameraGameObject=new CGameObject();
@@ -343,10 +368,12 @@ void CGameApplication::update()
 	m_pGameObjectManager->update(m_Timer.getElapsedTime());
 
 	CTransformComponent * pZombie=m_pGameObjectManager->findGameObject("Zombie")->getTransform();
+	CTransformComponent * pZombie2=m_pGameObjectManager->findGameObject("Zombie2")->getTransform();
 	//while(!pZombie->getIsMoving()){
-	if(pZombie->getIsMoving()){
+	if(pZombie->getIsMoving() || pZombie2->getIsMoving()){
 		//Move the zombie bitch!
 		pZombie->enemyMovement(m_Timer.getElapsedTime());
+		pZombie2->enemyMovementLR(m_Timer.getElapsedTime());
 		//pZombie->setIsMoving(true);
 		//pZombie->setRotation(0.1f,0.0f,0.1f);
 		//pZombie->enemyMovement(m_Timer.getElapsedTime());
