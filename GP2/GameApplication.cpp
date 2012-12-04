@@ -386,6 +386,16 @@ void CGameApplication::update()
 {
 	m_Timer.update();
 
+	//Audio - Update the audio system, this must be called to update streams and listener position
+	CAudioSystem::getInstance().update();
+
+	if (CInput::getInstance().getKeyboard()->isKeyDown((int)'A'))
+	{
+		//play sound
+		CTransformComponent * pTransform=m_pGameObjectManager->findGameObject("Test")->getTransform();
+		pTransform->rotate(m_Timer.getElapsedTime(),0.0f,0.0f);
+	}
+
 	//Recognize the camera
 	CCameraComponent * pCamera=m_pGameObjectManager->getMainCamera();
 
@@ -398,8 +408,10 @@ void CGameApplication::update()
 			CTransformComponent * pTransform=m_pGameObjectManager->findGameObject("Test")->getTransform();
 			pTransform->MoveForward(m_Timer.getElapsedTime()*pTransform->getcarspeed());
 			pAudio->play();
-
-		}else{
+			}
+		
+		else
+		{
 			//Move the debug camera -- doesn't work yet.
 			D3DXVECTOR3 cameraNewPosition = D3DXVECTOR3(m_Timer.getElapsedTime()*-30, 0, 0);
 			pCamera->setPosition(pCamera->getPosition().x + cameraNewPosition.x, cameraNewPosition.y, cameraNewPosition.z);
