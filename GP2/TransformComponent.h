@@ -71,14 +71,14 @@ public:
 		return m_vecPosition;
 	};
 
-	D3DXVECTOR3& getDirection()
-	{
-		return m_direction;
-	};
-
 	D3DXVECTOR3& getRotation()
 	{
 		return m_vecRotation;
+	};
+
+	D3DXVECTOR3& getDirection()
+	{
+		return m_direction;
 	};
 
 	bool getIsMoving()
