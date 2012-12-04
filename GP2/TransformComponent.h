@@ -22,6 +22,7 @@ public:
 		D3DXMatrixIdentity(&m_matScale);
 		D3DXMatrixIdentity(&m_matWorld);
 		D3DXQuaternionIdentity(&m_quatRotation);
+		m_direction=D3DXVECTOR3(1.0f,0.0f,1.0f);
 		m_strName="TransformComponent";
 	};
 	
@@ -70,10 +71,39 @@ public:
 		return m_vecPosition;
 	};
 
+	D3DXVECTOR3& getDirection()
+	{
+		return m_direction;
+	};
+
 	D3DXVECTOR3& getRotation()
 	{
 		return m_vecRotation;
 	};
+
+	bool getIsMoving()
+	{
+		return m_isMoving;
+	}
+
+	void setIsMoving(bool isMoving)
+	{
+		m_isMoving = isMoving;
+	}
+
+	int getMovementDirection()
+	{
+		//1/true for right
+		//0/false for left
+		return m_moveDirRight;
+	}
+
+	void setMovementDirection(bool moveDir)
+	{
+		//1/true for right
+		//0/false for left
+		m_moveDirRight = moveDir;
+	}
 
 	//get world
 	D3DXMATRIX& getWorld()
@@ -84,9 +114,11 @@ public:
 	//rotate
 	void rotate(float x,float y,float z)
 	{
-		m_vecRotation.x+=x;
-		m_vecRotation.y+=y;
-		m_vecRotation.z+=z;
+		if((m_vecRotation.y < 90)){
+			m_vecRotation.x+=x;
+			m_vecRotation.y+=y;
+			m_vecRotation.z+=z;
+		}
 	};
 
 	//translate
@@ -107,22 +139,91 @@ public:
 
 	void MoveForward(float speed)
 	{
-		
-		D3DXVECTOR3 direction;
-		//Calculate direction from rotation, replace the following line
-		direction=D3DXVECTOR3(1.0f,0.0f,1.0f);
-		//Normalize
-		D3DXVec3Normalize(&direction,&direction);
-		direction*=speed;
+		//Don't move the car if we are going to go off the screen.
+		if((m_vecPosition.x >= -5) && (m_vecPosition.x <= 5)){
+			
+			//Calculate direction from rotation, replace the following line
+			m_direction=D3DXVECTOR3(1.0f,0.0f,1.0f);
+			//Normalize
+			D3DXVec3Normalize(&m_direction,&m_direction);
+			//m_direction*=speed;
 
-		m_vecPosition.x+=(direction.x*sin(m_vecRotation.y));
-		m_vecPosition.z+=(direction.z*cos(m_vecRotation.y));
+			m_vecPosition.x+=(m_direction.x*sin(m_vecRotation.y));
+			m_vecPosition.z+=(m_direction.z*cos(m_vecRotation.y));
+			m_direction.x=m_direction.x*sin(m_vecRotation.y);
+			m_direction.z=m_direction.z*cos(m_vecRotation.y);
+
+
+		}
 	};
+	void enemyMovement(float speed)
+	{
+		//Don't move the zombie if zombie going off platform
+		//need to add
+		
+		////calculate direction from rotation
+		//m_direction=D3DXVECTOR3(1.0f,0.0f,1.0f);
+		////Normalize
+		//D3DXVec3Normalize(&m_direction, &m_direction);
+
+	 //   m_vecPosition.x+=(m_direction.x*sin(m_vecRotation.y));
+		//m_vecPosition.z+=(m_direction.z*cos(m_vecRotation.y));
+		//m_direction.x=m_direction.x*sin(m_vecRotation.y);
+		//m_direction.z=m_direction.z*cos(m_vecRotation.y);
+
+		//Move the zombie between a distance back and forward between distance
+		if(m_moveDirRight){
+			m_vecPosition.z += 0.001;
+			if(m_vecPosition.z >= 1.5){
+				m_moveDirRight = false;
+			}
+		}else{
+			m_vecPosition.z -= 0.001;
+			if(m_vecPosition.z <= -1.5){
+				m_moveDirRight = true;
+			}
+		}
+
+	};
+	void enemyMovementLR(float speed)
+	{
+		//Don't move the zombie if zombie going off platform
+		//need to add
+		
+		////calculate direction from rotation
+		//m_direction=D3DXVECTOR3(1.0f,0.0f,1.0f);
+		////Normalize
+		//D3DXVec3Normalize(&m_direction, &m_direction);
+
+	 //   m_vecPosition.x+=(m_direction.x*sin(m_vecRotation.y));
+		//m_vecPosition.z+=(m_direction.z*cos(m_vecRotation.y));
+		//m_direction.x=m_direction.x*sin(m_vecRotation.y);
+		//m_direction.z=m_direction.z*cos(m_vecRotation.y);
+
+		//Move the zombie between a distance back and forward between distance
+		if(m_moveDirRight){
+			m_vecPosition.x += 0.001;
+			if(m_vecPosition.x >= 1.5){
+				m_moveDirRight = false;
+			}
+		}else{
+			m_vecPosition.x -= 0.001;
+			if(m_vecPosition.x <= -1.5){
+				m_moveDirRight = true;
+			}
+		}
+
+	};
+
 private:
 	//vectors
 	D3DXVECTOR3 m_vecPosition;
 	D3DXVECTOR3 m_vecRotation;
 	D3DXVECTOR3 m_vecScale;
+	D3DXVECTOR3 m_direction;
+
+	bool m_isMoving;
+	bool m_moveDirRight;
 
 	//matrices
 	D3DXMATRIX m_matTranslate;

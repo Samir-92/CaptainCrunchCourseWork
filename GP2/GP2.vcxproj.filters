@@ -70,6 +70,9 @@
     <Filter Include="Resource Files\Sounds">
       <UniqueIdentifier>{c7d7febc-ceb4-4092-89e9-8ecde31fe13c}</UniqueIdentifier>
     </Filter>
+    <Filter Include="Resource Files\Images">
+      <UniqueIdentifier>{5a5cd510-c71a-46f6-af9c-266b780c0dc9}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="main.cpp">
