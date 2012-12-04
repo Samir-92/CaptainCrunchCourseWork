@@ -71,14 +71,14 @@ public:
 		return m_vecPosition;
 	};
 
-	D3DXVECTOR3& getRotation()
-	{
-		return m_vecRotation;
-	};
-
 	D3DXVECTOR3& getDirection()
 	{
 		return m_direction;
+	};
+
+		D3DXVECTOR3& getRotation()
+	{
+		return m_vecRotation;
 	};
 
 	bool getIsMoving()
@@ -139,24 +139,17 @@ public:
 
 	void MoveForward(float speed)
 	{
-		//Don't move the car if we are going to go off the screen.
-		if((m_vecPosition.x >= -5) && (m_vecPosition.x <= 5)){
-			
-			//Calculate direction from rotation, replace the following line
-			m_direction=D3DXVECTOR3(1.0f,0.0f,1.0f);
-			//Normalize
-			D3DXVec3Normalize(&m_direction,&m_direction);
-			//m_direction*=speed;
+		
+		D3DXVECTOR3 direction;
+		//Calculate direction from rotation, replace the following line
+		direction=D3DXVECTOR3(1.0f,0.0f,1.0f);
+		//Normalize
+		D3DXVec3Normalize(&direction,&direction);
+		direction*=speed;
 
-			m_vecPosition.x+=(m_direction.x*sin(m_vecRotation.y));
-			m_vecPosition.z+=(m_direction.z*cos(m_vecRotation.y));
-			m_direction.x=m_direction.x*sin(m_vecRotation.y);
-			m_direction.z=m_direction.z*cos(m_vecRotation.y);
-
-
-		}
-	};
-	void enemyMovement(float speed)
+		m_vecPosition.x+=(direction.x*sin(m_vecRotation.y));
+		m_vecPosition.z+=(direction.z*cos(m_vecRotation.y));
+	};void enemyMovement(float speed)
 	{
 		//Don't move the zombie if zombie going off platform
 		//need to add
