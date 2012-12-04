@@ -104,7 +104,7 @@ bool CGameApplication::initGame()
 		//Audio - Create our Audio Component
 	CAudioSourceComponent *pAudio=new CAudioSourceComponent();
 	//Audio - If its a wav file, you should not stream
-	pAudio->setFilename("44770__rfhache__f1-br-06-engine-starts-9.wav");
+	pAudio->setFilename("engine.wav");
 	//Audio - stream set to false
 	
 	pAudio->setStream(true);
@@ -299,9 +299,8 @@ void CGameApplication::update()
 			//play sound
 			CTransformComponent * pTransform=m_pGameObjectManager->findGameObject("Test")->getTransform();
 			pTransform->MoveForward(m_Timer.getElapsedTime()*30);
-			CAudioSourceComponent * pAudio=(CAudioSourceComponent *)m_pGameObjectManager->findGameObject("Test")->getComponent("AudioSourceComponent");
-	
-			pAudio->play();
+			/* CAudioSourceComponent * pAudio=(CAudioSourceComponent *)m_pGameObjectManager->findGameObject("Test")->getComponent("AudioSourceComponent");
+			pAudio->play();*/
 
 		}else{
 			//Move the debug camera -- doesn't work yet.
