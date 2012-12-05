@@ -56,7 +56,7 @@
       <SubSystem>Windows</SubSystem>
       <GenerateDebugInformation>true</GenerateDebugInformation>
       <AdditionalLibraryDirectories>$(HAVOKSDK_DIR)\Lib\win32_vs2010\debug_multithreaded_dll;$(FMODSDK_DIR)\lib;$(FBXSDK_DIR)\lib\vs2010\x86;$(DXSDK_DIR)\lib\x86</AdditionalLibraryDirectories>
-      <AdditionalDependencies>d3d10.lib;d3dx10.lib;xinput.lib;fbxsdk-2013.1d.lib;fmodex_vc.lib;%(AdditionalDependencies)</AdditionalDependencies>
+      <AdditionalDependencies>d3d10.lib;d3dx10.lib;xinput.lib;fbxsdk-2013.1d.lib;fmodex_vc.lib;hkBase.lib;hkCompat.lib;hkSceneData.lib;hkSerialize.lib;hkVisualize.lib;hkInternal.lib;hkGeometryUtilities.lib;hkcdInternal.lib;hkcdCollide.lib;hkpCollide.lib;hkpConstraintSolver.lib;hkpDynamics.lib;hkpInternal.lib;hkpUtilities.lib;hkpVehicle.lib;%(AdditionalDependencies)</AdditionalDependencies>
     </Link>
   </ItemDefinitionGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
@@ -80,7 +80,11 @@
     <ClCompile Include="AudioListenerComponent.cpp" />
     <ClCompile Include="AudioSourceComponent.cpp" />
     <ClCompile Include="AudioSystem.cpp" />
+    <ClCompile Include="BaseCollider.cpp" />
+    <ClCompile Include="BodyComponent.cpp" />
+    <ClCompile Include="BoxCollider.cpp" />
     <ClCompile Include="CameraComponent.cpp" />
+    <ClCompile Include="CapsuleCollider.cpp" />
     <ClCompile Include="DirectionalLightComponent.cpp" />
     <ClCompile Include="GameApplication.cpp" />
     <ClCompile Include="GameObject.cpp" />
@@ -92,9 +96,12 @@
     <ClCompile Include="LightComponent.cpp" />
     <ClCompile Include="main.cpp" />
     <ClCompile Include="MaterialComponent.cpp" />
+    <ClCompile Include="MeshCollider.cpp" />
     <ClCompile Include="MeshComponent.cpp" />
     <ClCompile Include="ModelLoader.cpp" />
     <ClCompile Include="Mouse.cpp" />
+    <ClCompile Include="Physics.cpp" />
+    <ClCompile Include="SphereCollider.cpp" />
     <ClCompile Include="Timer.cpp" />
     <ClCompile Include="Win32Window.cpp" />
   </ItemGroup>
@@ -102,7 +109,11 @@
     <ClInclude Include="AudioListenerComponent.h" />
     <ClInclude Include="AudioSourceComponent.h" />
     <ClInclude Include="AudioSystem.h" />
+    <ClInclude Include="BaseCollider.h" />
+    <ClInclude Include="BodyComponent.h" />
+    <ClInclude Include="BoxCollider.h" />
     <ClInclude Include="CameraComponent.h" />
+    <ClInclude Include="CapsuleCollider.h" />
     <ClInclude Include="DefaultEffect.h" />
     <ClInclude Include="DirectionLightComponent.h" />
     <ClInclude Include="GameApplication.h" />
@@ -115,22 +126,24 @@
     <ClInclude Include="Keyboard.h" />
     <ClInclude Include="LightComponent.h" />
     <ClInclude Include="MaterialComponent.h" />
+    <ClInclude Include="MeshCollider.h" />
     <ClInclude Include="MeshComponent.h" />
     <ClInclude Include="ModelLoader.h" />
     <ClInclude Include="Mouse.h" />
+    <ClInclude Include="Physics.h" />
+    <ClInclude Include="SphereCollider.h" />
     <ClInclude Include="Timer.h" />
     <ClInclude Include="TransformComponent.h" />
     <ClInclude Include="Vertex.h" />
     <ClInclude Include="Win32Window.h" />
   </ItemGroup>
   <ItemGroup>
-    <None Include="..\..\..\audio\engine.wav" />
     <None Include="..\..\..\audio\zombie.mp3" />
-    <None Include="..\..\..\audio\Zombiesound.wav" />
     <None Include="ambient.fx" />
     <None Include="Bumpmapping.fx" />
     <None Include="diffuse.fx" />
     <None Include="DirectionalLight.fx" />
+    <None Include="engine.wav" />
     <None Include="Environment.fx" />
     <None Include="fbxsdk-2013.1d.dll" />
     <None Include="Parallax.fx" />
@@ -138,6 +151,7 @@
     <None Include="Specular.fx" />
     <None Include="Texture.fx" />
     <None Include="Transform.fx" />
+    <None Include="zombienoise.wav" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">

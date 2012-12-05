@@ -1,6 +1,8 @@
 #pragma once
 
 #include "IComponent.h"
+#include "GameObject.h"
+#include "BodyComponent.h"
 
 #include <D3D10.h>
 #include <D3DX10.h>
@@ -51,15 +53,37 @@ public:
 	void setPosition(float x,float y,float z)
 	{
 		m_vecPosition=D3DXVECTOR3(x,y,z);
+		CBodyComponent *pBody=(CBodyComponent*)getParent()->getComponent("BodyComponent");
+		if (pBody)
+		{
+			pBody->getRigidBody()->setPosition(hkVector4(x,y,z));
+		}
 	};
 
 	//set rotation
 	void setRotation(float x,float y,float z)
 	{
 		m_vecRotation=D3DXVECTOR3(x,y,z);
-		
-	};
+		//We are using Quaternion for rotation, no gimble lock
+		D3DXQuaternionRotationYawPitchRoll(&m_quatRotation,m_vecRotation.y,m_vecRotation.x,m_vecRotation.z);
 
+		CBodyComponent *pBody=(CBodyComponent*)getParent()->getComponent("BodyComponent");
+		if (pBody)
+		{
+			pBody->getRigidBody()->setRotation(hkQuaternion(m_quatRotation.x,m_quatRotation.y,m_quatRotation.z,m_quatRotation.w));
+		}		
+	};
+	void setRotation(float x,float y,float z,float w)
+	{
+		m_quatRotation=D3DXQUATERNION(x,y,z,w);
+		CBodyComponent *pBody=(CBodyComponent*)getParent()->getComponent("BodyComponent");
+		if (pBody)
+		{
+			pBody->getRigidBody()->setRotation(hkQuaternion(m_quatRotation.x,m_quatRotation.y,m_quatRotation.z,m_quatRotation.w));
+		}
+		//D3DXQuaternionRotationYawPitchRoll(&m_quatRotation,x,y,z);
+		//get euler rotation
+	};
 	//set scale
 	void setScale(float x,float y,float z)
 	{
@@ -76,9 +100,9 @@ public:
 		return m_direction;
 	};
 
-		D3DXVECTOR3& getRotation()
+	D3DXQUATERNION& getRotation()
 	{
-		return m_vecRotation;
+		return m_quatRotation;
 	};
 
 	bool getIsMoving()
@@ -124,11 +148,10 @@ public:
 	//rotate
 	void rotate(float x,float y,float z)
 	{
-		if((m_vecRotation.y < 90)){
 			m_vecRotation.x+=x;
 			m_vecRotation.y+=y;
 			m_vecRotation.z+=z;
-		}
+			setRotation(m_vecRotation.x,m_vecRotation.y,m_vecRotation.z);
 	};
 
 	//translate
@@ -137,6 +160,7 @@ public:
 		m_vecPosition.x+=x;
 		m_vecPosition.y+=y;
 		m_vecPosition.z+=z;
+		setPosition(m_vecPosition.x,m_vecPosition.y,m_vecPosition.z);
 	};
 
 	//scale
@@ -159,7 +183,8 @@ public:
 
 		m_vecPosition.x+=(direction.x*sin(m_vecRotation.y));
 		m_vecPosition.z+=(direction.z*cos(m_vecRotation.y));
-	};void enemyMovement(float speed)
+	};
+	void enemyMovement(float speed)
 	{
 		//Don't move the zombie if zombie going off platform
 		//need to add

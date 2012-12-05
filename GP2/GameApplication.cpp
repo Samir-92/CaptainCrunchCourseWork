@@ -56,11 +56,24 @@ bool CGameApplication::init()
 		return false;
 	if (!initAudio())
 		return false;
+	if (!initPhysics())
+		return false;
 	if (!initGame())
 		return false;
 	return true;
 }
 
+void CGameApplication::contactPointCallback (const hkpContactPointEvent &event)
+{
+	//Called when a collision occurs
+	hkpRigidBody *pBody1=event.getBody(0);
+	hkpRigidBody *pBody2=event.getBody(1);
+
+	CGameObject *pGameObject1=(CGameObject*)pBody1->getUserData();
+	CGameObject *pGameObject2=(CGameObject*)pBody2->getUserData();
+
+	//Do something with the game objects
+}
 bool CGameApplication::initGame()
 {
     // Set primitive topology, how are we going to interpet the vertices in the vertex buffer - BMD
@@ -89,7 +102,7 @@ bool CGameApplication::initGame()
 	//Set the name
 	pTestGameObject->setName("Test");
 	//Position
-	pTestGameObject->getTransform()->setPosition(0.0f,0.0f,0.0f);
+	pTestGameObject->getTransform()->setPosition(0.0f,0.0f,-40.0f);
 	//create material
 	pMaterial=new CMaterialComponent();
 	pMaterial->SetRenderingDevice(m_pD3D10Device);
@@ -104,7 +117,7 @@ bool CGameApplication::initGame()
 		//Audio - Create our Audio Component
 	CAudioSourceComponent *pAudio=new CAudioSourceComponent();
 	//Audio - If its a wav file, you should not stream
-	pAudio->setFilename("Zombiesound.wav");
+	pAudio->setFilename("engine.wav");
 	//Audio - stream set to false
 	pAudio->setStream(false);
 	//Audio - Add it to the Game Object
@@ -115,6 +128,17 @@ bool CGameApplication::initGame()
 	//CMeshComponent *pMesh=modelloader.createCube(m_pD3D10Device,10.0f,10.0f,10.0f);
 	pMesh->SetRenderingDevice(m_pD3D10Device);
 	pTestGameObject->addComponent(pMesh);
+
+	////create box
+	//CSphereCollider *ps=new CSphereCollider();
+	//ps->setRadius(0.01f);
+	//pTestGameObject->addComponent(ps);
+
+	////create body make it fixed so no gravity effects it
+	//CBodyComponent *pBody=new CBodyComponent();
+	//pBody->setFixed(true);
+	//pTestGameObject->addComponent(pBody);
+
 	//add the game object
 	m_pGameObjectManager->addGameObject(pTestGameObject);
 
@@ -122,7 +146,7 @@ bool CGameApplication::initGame()
 	//Set the name
 	pTestGameObject->setName("floor");
 	//Position
-	pTestGameObject->getTransform()->setPosition(0.0f,0.0f,200.0f);
+	pTestGameObject->getTransform()->setPosition(0.0f,-100.0f,200.0f);
 	pTestGameObject->getTransform()->setRotation(180.0f,0.0f,0.0f);
 	//create material
 	pMaterial=new CMaterialComponent();
@@ -138,15 +162,25 @@ bool CGameApplication::initGame()
 	//CMeshComponent *pMesh=modelloader.createCube(m_pD3D10Device,10.0f,10.0f,10.0f);
 	pMesh->SetRenderingDevice(m_pD3D10Device);
 	pTestGameObject->addComponent(pMesh);
-	//add the game object
+
+	////create box
+	//CBoxCollider *pBox4=new CBoxCollider();
+	//pBox4->setExtents(0.01f,0.01f,0.01f);
+	//pTestGameObject->addComponent(pBox4);
+
+	////create body make it fixed so no gravity effects it
+	//CBodyComponent *pBody4=new CBodyComponent();
+	//pBody4->setFixed(true);
+	//pTestGameObject->addComponent(pBody4);
+	////add the game object
 	m_pGameObjectManager->addGameObject(pTestGameObject);
 
 	pTestGameObject=new CGameObject();
 	//Set the name
 	pTestGameObject->setName("Barrel");
 	//Position
-	pTestGameObject->getTransform()->setPosition(0.0f,0.0f,3.0f);
-	pTestGameObject->getTransform()->setScale(0.01f,0.01f,0.01f);
+	pTestGameObject->getTransform()->setPosition(0.0f,0.0f,6.0f);
+	pTestGameObject->getTransform()->setScale(0.05f,0.05f,0.05f);
 	//create material
 	pMaterial=new CMaterialComponent();
 	pMaterial->SetRenderingDevice(m_pD3D10Device);
@@ -162,6 +196,17 @@ bool CGameApplication::initGame()
 	//CMeshComponent *pMesh=modelloader.createCube(m_pD3D10Device,10.0f,10.0f,10.0f);
 	pMesh->SetRenderingDevice(m_pD3D10Device);
 	pTestGameObject->addComponent(pMesh);
+
+	//create box
+	CBoxCollider *pBox1=new CBoxCollider();
+	pBox1->setExtents(0.01f,0.01f,0.01f);
+	pTestGameObject->addComponent(pBox1);
+
+	//create body make it fixed so no gravity effects it
+	CBodyComponent *pBody1=new CBodyComponent();
+	pBody1->setFixed(true);
+	pTestGameObject->addComponent(pBody1);
+
 	//add the game object
 	m_pGameObjectManager->addGameObject(pTestGameObject);
 
@@ -169,7 +214,7 @@ bool CGameApplication::initGame()
 	//Set the name
 	pTestGameObject->setName("Barrel2");
 	//Position
-	pTestGameObject->getTransform()->setPosition(1.0f,0.0f,3.0f);
+	pTestGameObject->getTransform()->setPosition(1.0f,0.0f,1.0f);
 	pTestGameObject->getTransform()->setScale(0.01f,0.01f,0.01f);
 	//create material
 	pMaterial=new CMaterialComponent();
@@ -186,6 +231,17 @@ bool CGameApplication::initGame()
 	//CMeshComponent *pMesh=modelloader.createCube(m_pD3D10Device,10.0f,10.0f,10.0f);
 	pMesh->SetRenderingDevice(m_pD3D10Device);
 	pTestGameObject->addComponent(pMesh);
+
+	//create box
+	CBoxCollider *pBox2=new CBoxCollider();
+	pBox2->setExtents(0.01f,0.01f,0.01f);
+	pTestGameObject->addComponent(pBox2);
+
+	//create body make it fixed so no gravity effects it
+	CBodyComponent *pBody2=new CBodyComponent();
+	pBody2->setFixed(true);
+	pTestGameObject->addComponent(pBody2);
+
 	//add the game object
 	m_pGameObjectManager->addGameObject(pTestGameObject);
 	
@@ -212,6 +268,16 @@ bool CGameApplication::initGame()
 	//CMeshComponent *pMesh=modelloader.createCube(m_pD3D10Device,10.0f,10.0f,10.0f);
 	pMesh->SetRenderingDevice(m_pD3D10Device);
 	pTestGameObject->addComponent(pMesh);
+
+	//create box
+	CBoxCollider *pBox6=new CBoxCollider();
+	pBox6->setExtents(0.01f,0.01f,0.01f);
+	pTestGameObject->addComponent(pBox6);
+
+	//create body make it fixed so no gravity effects it
+	CBodyComponent *pBody6=new CBodyComponent();
+	pBody6->setFixed(true);
+	pTestGameObject->addComponent(pBody6);
 	//add the game object
 	m_pGameObjectManager->addGameObject(pTestGameObject);
 
@@ -386,32 +452,23 @@ void CGameApplication::update()
 {
 	m_Timer.update();
 
+	CPhysics::getInstance().update(m_Timer.getElapsedTime());
 	//Audio - Update the audio system, this must be called to update streams and listener position
 	CAudioSystem::getInstance().update();
-
-	if (CInput::getInstance().getKeyboard()->isKeyDown((int)'A'))
-	{
-		//play sound
-		CTransformComponent * pTransform=m_pGameObjectManager->findGameObject("Test")->getTransform();
-		pTransform->rotate(m_Timer.getElapsedTime(),0.0f,0.0f);
-	}
 
 	//Recognize the camera
 	CCameraComponent * pCamera=m_pGameObjectManager->getMainCamera();
 
-	if (CInput::getInstance().getKeyboard()->isKeyDown((int)'W'))
+	if (CInput::getInstance().getKeyboard()->keyPressed((int)'W'))
 	{
 		if(!pCamera->isDebug()){
 	
 			CAudioSourceComponent *pAudio=(CAudioSourceComponent*)m_pGameObjectManager->findGameObject("Test")->getComponent("AudioSourceComponent");
-	
 			CTransformComponent * pTransform=m_pGameObjectManager->findGameObject("Test")->getTransform();
 			pTransform->MoveForward(m_Timer.getElapsedTime()*pTransform->getcarspeed());
 			pAudio->play();
-			}
-		
-		else
-		{
+
+		}else{
 			//Move the debug camera -- doesn't work yet.
 			D3DXVECTOR3 cameraNewPosition = D3DXVECTOR3(m_Timer.getElapsedTime()*-30, 0, 0);
 			pCamera->setPosition(pCamera->getPosition().x + cameraNewPosition.x, cameraNewPosition.y, cameraNewPosition.z);
@@ -462,6 +519,13 @@ void CGameApplication::update()
 	}
 }
 
+bool CGameApplication::initPhysics()
+{
+	CPhysics::getInstance().init();
+	//Add the Game Application
+	CPhysics::getInstance().getPhysicsWorld()->addContactListener(this);
+	return true;
+}
 bool CGameApplication::initInput()
 {
 	CInput::getInstance().init();
