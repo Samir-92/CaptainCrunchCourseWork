@@ -119,13 +119,10 @@ bool CGameApplication::initGame()
 	CAudioSourceComponent *pAudio=new CAudioSourceComponent();
 	CAudioSourceComponent *pAudio2=new CAudioSourceComponent();
 	//Audio - If its a wav file, you should not stream
-	pAudio->setFilename("reverse.mp3");
-	pAudio->setStream(true);
-	pAudio2->setFilename("reverse.mp3");
-	pAudio2->setStream(true);
-	//Audio - stream set to false
-	//pAudio->setStream(false);
-	//Audio - Add it to the Game Object
+	//pAudio->setFilename("reverse.mp3");
+	//pAudio->setStream(true);
+	//pAudio2->setFilename("reverse.mp3");
+	//pAudio2->setStream(true);
 	pTestGameObject->addComponent(pAudio);
 	pTestGameObject->addComponent(pAudio2);
 
@@ -151,7 +148,7 @@ bool CGameApplication::initGame()
 	//Position
 	pTestGameObject->getTransform()->setPosition(0.0f,0.0f,0.0f);
 	pTestGameObject->getTransform()->setRotation(0.0f,0.0f,0.0f);
-	pTestGameObject->getTransform()->setScale(50.0f,-0.1f,50.0f);
+	pTestGameObject->getTransform()->setScale(50.0f,0.1f,50.0f);
 	//create material
 	pMaterial=new CMaterialComponent();
 	pMaterial->SetRenderingDevice(m_pD3D10Device);
@@ -167,7 +164,7 @@ bool CGameApplication::initGame()
 	pTestGameObject->addComponent(pMesh);
 	//create box
 	CBoxCollider *pBox4=new CBoxCollider();
-	pBox4->setExtents(100.0f,10.0f,100.0f);
+	pBox4->setExtents(500.0f,1.0f,500.0f);
 	pTestGameObject->addComponent(pBox4);
 	//create body make it fixed so no gravity effects it
 	CBodyComponent *pBody4=new CBodyComponent();
@@ -180,7 +177,7 @@ bool CGameApplication::initGame()
 	//Set the name
 	pTestGameObject->setName("Barrel");
 	//Position
-	pTestGameObject->getTransform()->setPosition(0.0f,1.0f,6.0f);
+	pTestGameObject->getTransform()->setPosition(0.0f,5.0f,6.0f);
 	pTestGameObject->getTransform()->setScale(0.01f,0.01f,0.01f);
 	//create material
 	pMaterial=new CMaterialComponent();
@@ -199,7 +196,7 @@ bool CGameApplication::initGame()
 	pTestGameObject->addComponent(pMesh);
 	//create box
 	CBoxCollider *pBox1=new CBoxCollider();
-	pBox1->setExtents(0.01f,0.01f,0.01f);
+	pBox1->setExtents(0.5f,0.5f,0.5f);
 	pTestGameObject->addComponent(pBox1);
 	//create body make it fixed so no gravity effects it
 	CBodyComponent *pBody1=new CBodyComponent();
@@ -212,7 +209,7 @@ bool CGameApplication::initGame()
 	//Set the name
 	pTestGameObject->setName("Barrel2");
 	//Position
-	pTestGameObject->getTransform()->setPosition(1.0f,1.0f,1.0f);
+	pTestGameObject->getTransform()->setPosition(1.0f,5.0f,1.0f);
 	pTestGameObject->getTransform()->setScale(0.01f,0.01f,0.01f);
 	//create material
 	pMaterial=new CMaterialComponent();
@@ -230,7 +227,7 @@ bool CGameApplication::initGame()
 	pTestGameObject->addComponent(pMesh);
 	//create box
 	CBoxCollider *pBox2=new CBoxCollider();
-	pBox2->setExtents(0.01f,0.01f,0.01f);
+	pBox2->setExtents(0.5f,0.5f,0.5f);
 	pTestGameObject->addComponent(pBox2);
 	//create body make it fixed so no gravity effects it
 	CBodyComponent *pBody2=new CBodyComponent();
@@ -244,7 +241,7 @@ bool CGameApplication::initGame()
 	//Set the name
 	pTestGameObject->setName("Zombie");
 	//Position
-	pTestGameObject->getTransform()->setPosition(0.0f,1.0f,-1.0f);
+	pTestGameObject->getTransform()->setPosition(0.0f,5.0f,-1.0f);
 	pTestGameObject->getTransform()->setScale(0.01f,0.01f,0.01f);
 	pTestGameObject->getTransform()->setIsMoving(true);
 	pTestGameObject->getTransform()->setMovementDirection(true);
@@ -264,7 +261,7 @@ bool CGameApplication::initGame()
 	pTestGameObject->addComponent(pMesh);
 	//create box
 	CBoxCollider *pBox6=new CBoxCollider();
-	pBox6->setExtents(0.01f,0.01f,0.01f);
+	pBox6->setExtents(0.5f,0.5f,0.5f);
 	pTestGameObject->addComponent(pBox6);
 	//create body make it fixed so no gravity effects it
 	CBodyComponent *pBody6=new CBodyComponent();
@@ -277,7 +274,7 @@ bool CGameApplication::initGame()
 	//Set the name
 	pTestGameObject->setName("Zombie2");
 	//Position
-	pTestGameObject->getTransform()->setPosition(1.0f,0.0f,1.0f);
+	pTestGameObject->getTransform()->setPosition(1.0f,5.0f,1.0f);
 	pTestGameObject->getTransform()->setScale(0.01f,0.01f,0.01f);
 	pTestGameObject->getTransform()->setIsMoving(true);
 	pTestGameObject->getTransform()->setMovementDirection(true);
@@ -297,7 +294,7 @@ bool CGameApplication::initGame()
 	pTestGameObject->addComponent(pMesh);
 	//create box
 	CBoxCollider *pBox8=new CBoxCollider();
-	pBox8->setExtents(0.01f,0.01f,0.01f);
+	pBox8->setExtents(0.5f,0.5f,0.5f);
 	pTestGameObject->addComponent(pBox8);
 	//create body make it fixed so no gravity effects it
 	CBodyComponent *pBody8=new CBodyComponent();
@@ -331,13 +328,13 @@ bool CGameApplication::initGame()
 	m_pGameObjectManager->addGameObject(pCameraGameObject);
 
 	//Audio - Create another audio component for music
-	CAudioSourceComponent *pMusic=new CAudioSourceComponent();
+	//CAudioSourceComponent *pMusic=new CAudioSourceComponent();
 	//Audio -If it is an mp3 or ogg then set stream to true
-	pMusic->setFilename("zombie.mp3");
+	//pMusic->setFilename("zombie.mp3");
 	//Audio - stream to true
-	pMusic->setStream(true);
+	//pMusic->setStream(true);
 	//Audio - Add to camera, don't call play until init has been called
-	pCameraGameObject->addComponent(pMusic);
+	//pCameraGameObject->addComponent(pMusic);
 
 	//Audio - Attach a listener to the camera
 	CAudioListenerComponent *pListener=new CAudioListenerComponent();
@@ -357,7 +354,7 @@ bool CGameApplication::initGame()
 	//init, this must be called after we have created all game objects
 	m_pGameObjectManager->init();
 	
-	pMusic->play();
+	//pMusic->play();
 
 	m_Timer.start();
 	return true;
@@ -452,7 +449,7 @@ void CGameApplication::update()
 
 	CPhysics::getInstance().update(m_Timer.getElapsedTime());
 	//Audio - Update the audio system, this must be called to update streams and listener position
-	CAudioSystem::getInstance().update();
+	//CAudioSystem::getInstance().update();
 
 	//Recognize the camera
 	CCameraComponent * pCamera=m_pGameObjectManager->getMainCamera();
@@ -464,8 +461,8 @@ void CGameApplication::update()
 		if(!pCamera->isDebug()){
 			
 		//Audio - call play
-			CAudioSourceComponent *pAudio2=(CAudioSourceComponent *)m_pGameObjectManager->findGameObject("Test")->getComponent("AudioSourceComponent");
-			pAudio2->play();
+			//CAudioSourceComponent *pAudio2=(CAudioSourceComponent *)m_pGameObjectManager->findGameObject("Test")->getComponent("AudioSourceComponent");
+			//pAudio2->play();
 			CTransformComponent * pTransform=m_pGameObjectManager->findGameObject("Test")->getTransform();
 			pTransform->MoveForward(m_Timer.getElapsedTime()*pTransform->getcarspeed());
 		}	
@@ -480,8 +477,8 @@ void CGameApplication::update()
 	else if (CInput::getInstance().getKeyboard()->isKeyDown((int)'S'))
 	{
 		//Audio - grab the audio component
-		CAudioSourceComponent * pAudio=(CAudioSourceComponent *)m_pGameObjectManager->findGameObject("Test")->getComponent("AudioSourceComponent");
-		pAudio->play(2);
+		//CAudioSourceComponent * pAudio=(CAudioSourceComponent *)m_pGameObjectManager->findGameObject("Test")->getComponent("AudioSourceComponent");
+		//pAudio->play(2);
 
 		CTransformComponent * pTransform=m_pGameObjectManager->findGameObject("Test")->getTransform();
 		pTransform->MoveForward(m_Timer.getElapsedTime()*-(pTransform->getcarspeed()));	
