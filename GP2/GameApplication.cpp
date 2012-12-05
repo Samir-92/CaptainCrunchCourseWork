@@ -82,6 +82,30 @@ bool CGameApplication::initGame()
 	//add the game object
 	m_pGameObjectManager->addGameObject(pTestGameObject);
 
+	pTestGameObject=new CGameObject();
+	//Set the name
+	pTestGameObject->setName("floor");
+	//Position
+	pTestGameObject->getTransform()->setPosition(0.0f,-125.0f,200.0f);
+	pTestGameObject->getTransform()->setRotation(180.0f,0.0f,0.0f);
+	pTestGameObject->getTransform()->setScale(0.6f,0.6f,0.6f);
+	//create material
+	pMaterial=new CMaterialComponent();
+	pMaterial->SetRenderingDevice(m_pD3D10Device);
+	pMaterial->setEffectFilename("DirectionalLight.fx");
+	pMaterial->setAmbientMaterialColour(D3DXCOLOR(0.5f,0.5f,0.5f,1.0f));
+	pMaterial->loadDiffuseTexture("rockwall.jpg");
+	//pMaterial->loadSpecularTexture("Floor.png");
+	pTestGameObject->addComponent(pMaterial);
+
+	//Create Mesh
+	pMesh=modelloader.loadModelFromFile(m_pD3D10Device,"floor.fbx");
+	//CMeshComponent *pMesh=modelloader.createCube(m_pD3D10Device,10.0f,10.0f,10.0f);
+	pMesh->SetRenderingDevice(m_pD3D10Device);
+	pTestGameObject->addComponent(pMesh);
+	//add the game object
+	m_pGameObjectManager->addGameObject(pTestGameObject);
+
 	//Create Game Object
 	pTestGameObject=new CGameObject();
 	//Set the name
@@ -170,7 +194,7 @@ bool CGameApplication::initGame()
 	pMaterial->SetRenderingDevice(m_pD3D10Device);
 	pMaterial->setEffectFilename("DirectionalLight.fx");
 	pMaterial->setAmbientMaterialColour(D3DXCOLOR(0.5f,0.5f,0.5f,1.0f));
-	//pMaterial->loadDiffuseTexture("ZOMBIE.png");
+	pMaterial->loadDiffuseTexture("zombie2.png");
 	//pMaterial->loadSpecularTexture("barrel_spec_01.png");
 	//pMaterial->loadBumpTexture("barrel_nmap_01.png");
     pTestGameObject->addComponent(pMaterial);
@@ -189,6 +213,7 @@ bool CGameApplication::initGame()
 	//Position
 	pTestGameObject->getTransform()->setPosition(1.0f,0.0f,1.0f);
 	pTestGameObject->getTransform()->setScale(0.01f,0.01f,0.01f);
+	pTestGameObject->getTransform()->setRotation(0.0f,0.0f,0.0f); 
 	pTestGameObject->getTransform()->setIsMoving(true);
 	pTestGameObject->getTransform()->setMovementDirection(true);
 	//create material for zombie
@@ -196,7 +221,7 @@ bool CGameApplication::initGame()
 	pMaterial->SetRenderingDevice(m_pD3D10Device);
 	pMaterial->setEffectFilename("DirectionalLight.fx");
 	pMaterial->setAmbientMaterialColour(D3DXCOLOR(0.5f,0.5f,0.5f,1.0f));
-	//pMaterial->loadDiffuseTexture("ZOMBIE.png");
+	pMaterial->loadDiffuseTexture("zombie2.png");
 	//pMaterial->loadSpecularTexture("barrel_spec_01.png");
 	//pMaterial->loadBumpTexture("barrel_nmap_01.png");
     pTestGameObject->addComponent(pMaterial);
@@ -211,7 +236,7 @@ bool CGameApplication::initGame()
 
 	//Create Mesh
 	CGameObject *pCameraGameObject=new CGameObject();
-	pCameraGameObject->getTransform()->setPosition(0.0f,2.0f,-5.0f);
+	pCameraGameObject->getTransform()->setPosition(0.0f,16.0f,-16.0f);
 	pCameraGameObject->setName("Camera");
 	
 

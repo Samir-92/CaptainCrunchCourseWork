@@ -169,12 +169,14 @@ public:
 		//Move the zombie between a distance back and forward between distance
 		if(m_moveDirRight){
 			m_vecPosition.z += 0.001;
-			if(m_vecPosition.z >= 1.5){
+			if(m_vecPosition.z >= 40.0){
+				m_vecRotation.y = 3;
 				m_moveDirRight = false;
 			}
 		}else{
 			m_vecPosition.z -= 0.001;
-			if(m_vecPosition.z <= -1.5){
+			if(m_vecPosition.z <= -4.5){
+				m_vecRotation.y = 0;
 				m_moveDirRight = true;
 			}
 		}
@@ -198,12 +200,14 @@ public:
 		//Move the zombie between a distance back and forward between distance
 		if(m_moveDirRight){
 			m_vecPosition.x += 0.001;
-			if(m_vecPosition.x >= 1.5){
+			if(m_vecPosition.x >= 9.3){
+				m_vecRotation.y = 1.5; 
 				m_moveDirRight = false;
 			}
 		}else{
 			m_vecPosition.x -= 0.001;
-			if(m_vecPosition.x <= -1.5){
+			if(m_vecPosition.x <= -9.3){
+				m_vecRotation.y = -1.5;
 				m_moveDirRight = true;
 			}
 		}

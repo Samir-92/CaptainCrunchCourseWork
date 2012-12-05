@@ -226,5 +226,12 @@
     <None Include="ZOMBIE.png">
       <Filter>Resource Files</Filter>
     </None>
+    <None Include="floor.FBX" />
+    <None Include="zombie2.png">
+      <Filter>Resource Files</Filter>
+    </None>
+    <None Include="rockwall.jpg">
+      <Filter>Resource Files</Filter>
+    </None>
   </ItemGroup>
 </Project>
