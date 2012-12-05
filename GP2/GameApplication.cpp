@@ -1,6 +1,6 @@
 #include "GameApplication.h"
 #include "GameObject.h"
-#include "cXAudio.h"
+
 
 
 
@@ -213,7 +213,7 @@ bool CGameApplication::initGame()
 	//Position
 	pTestGameObject->getTransform()->setPosition(1.0f,0.0f,1.0f);
 	pTestGameObject->getTransform()->setScale(0.01f,0.01f,0.01f);
-	pTestGameObject->getTransform()->setRotation(0.0f,0.0f,0.0f); 
+	pTestGameObject->getTransform()->setRotation(0.0f,1.578f,0.0f); 
 	pTestGameObject->getTransform()->setIsMoving(true);
 	pTestGameObject->getTransform()->setMovementDirection(true);
 	//create material for zombie

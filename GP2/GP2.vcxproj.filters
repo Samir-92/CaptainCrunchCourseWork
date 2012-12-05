@@ -102,9 +102,6 @@
     <ClCompile Include="MeshComponent.cpp">
       <Filter>Components\Geometry</Filter>
     </ClCompile>
-    <ClCompile Include="..\..\..\..\Desktop\GamesProgramming-Resit\cXAudio.cpp">
-      <Filter>Game</Filter>
-    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Win32Window.h">
@@ -166,9 +163,6 @@
     </ClInclude>
     <ClInclude Include="Geometry.h">
       <Filter>Components\Geometry</Filter>
-    </ClInclude>
-    <ClInclude Include="..\..\..\..\Desktop\GamesProgramming-Resit\cXAudio.h">
-      <Filter>Game</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
