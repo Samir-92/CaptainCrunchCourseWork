@@ -183,6 +183,7 @@ public:
 
 		m_vecPosition.x+=(direction.x*sin(m_vecRotation.y));
 		m_vecPosition.z+=(direction.z*cos(m_vecRotation.y));
+		setPosition(m_vecPosition.x,m_vecPosition.y,m_vecPosition.z);
 	};
 	void enemyMovement(float speed)
 	{
@@ -211,7 +212,7 @@ public:
 				m_moveDirRight = true;
 			}
 		}
-
+		setPosition(m_vecPosition.x,m_vecPosition.y,m_vecPosition.z);
 	};
 	void enemyMovementLR(float speed)
 	{
