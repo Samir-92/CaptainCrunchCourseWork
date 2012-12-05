@@ -102,7 +102,7 @@ bool CGameApplication::initGame()
 	//Set the name
 	pTestGameObject->setName("Test");
 	//Position
-	pTestGameObject->getTransform()->setPosition(0.0f,0.0f,-20.0f);
+	pTestGameObject->getTransform()->setPosition(0.0f,0.0f,-40.0f);
 	pTestGameObject->getTransform()->setScale(0.8f,0.8f,0.8f);
 	//create material
 	pMaterial=new CMaterialComponent();
@@ -117,12 +117,17 @@ bool CGameApplication::initGame()
 	pTestGameObject->getTransform()->setcarSpeed(10);
 		//Audio - Create our Audio Component
 	CAudioSourceComponent *pAudio=new CAudioSourceComponent();
+	CAudioSourceComponent *pAudio2=new CAudioSourceComponent();
 	//Audio - If its a wav file, you should not stream
-	pAudio->setFilename("engine.wav");
+	pAudio->setFilename("reverse.wav");
+	pAudio->setStream(true);
+	pAudio2->setFilename("driving.wav");
+	pAudio2->setStream(true);
 	//Audio - stream set to false
-	pAudio->setStream(false);
+	//pAudio->setStream(false);
 	//Audio - Add it to the Game Object
 	pTestGameObject->addComponent(pAudio);
+	pTestGameObject->addComponent(pAudio2);
 
 	//Create Mesh
 	pMesh=modelloader.loadModelFromFile(m_pD3D10Device,"armoredrecon.fbx");
@@ -147,7 +152,7 @@ bool CGameApplication::initGame()
 	//Set the name
 	pTestGameObject->setName("floor");
 	//Position
-	pTestGameObject->getTransform()->setPosition(0.0f,-1.0f,0.0f);
+	pTestGameObject->getTransform()->setPosition(0.0f,0.0f,0.0f);
 	pTestGameObject->getTransform()->setRotation(0.0f,0.0f,0.0f);
 	pTestGameObject->getTransform()->setScale(50.0f,-0.1f,50.0f);
 	//create material
@@ -460,17 +465,25 @@ void CGameApplication::update()
 
 	//Recognize the camera
 	CCameraComponent * pCamera=m_pGameObjectManager->getMainCamera();
-
-	if (CInput::getInstance().getKeyboard()->keyPressed((int)'W'))
-	{
-		if(!pCamera->isDebug()){
 	
-			//cAudioSourceComponent *pAudio=(CAudioSourceComponent*)m_pGameObjectManager->findGameObject("Test")->getComponent("AudioSourceComponent");
+				
+		//Audio - grab the audio component
+		
+		if (CInput::getInstance().getKeyboard()->keyPressed((int)'W'))
+		{
+		if(!pCamera->isDebug()){
+			
+		//Audio - call play
+			CAudioSourceComponent *pAudio2=(CAudioSourceComponent *)m_pGameObjectManager->findGameObject("Test")->getComponent("AudioSourceComponent");
+			pAudio2->play();
 			CTransformComponent * pTransform=m_pGameObjectManager->findGameObject("Test")->getTransform();
 			pTransform->MoveForward(m_Timer.getElapsedTime()*pTransform->getcarspeed());
-			//pAudio->play();
-
-		}else{
+		}
+			
+		
+		else
+		
+		{
 			//Move the debug camera -- doesn't work yet.
 			D3DXVECTOR3 cameraNewPosition = D3DXVECTOR3(m_Timer.getElapsedTime()*-30, 0, 0);
 			pCamera->setPosition(pCamera->getPosition().x + cameraNewPosition.x, cameraNewPosition.y, cameraNewPosition.z);
@@ -478,7 +491,12 @@ void CGameApplication::update()
 	}
 	else if (CInput::getInstance().getKeyboard()->isKeyDown((int)'S'))
 	{
-		//play sound
+				
+	
+		//Audio - grab the audio component
+		CAudioSourceComponent * pAudio=(CAudioSourceComponent *)m_pGameObjectManager->findGameObject("Test")->getComponent("AudioSourceComponent");
+		pAudio->play();
+
 		CTransformComponent * pTransform=m_pGameObjectManager->findGameObject("Test")->getTransform();
 		pTransform->MoveForward(m_Timer.getElapsedTime()*-(pTransform->getcarspeed()));
 		
@@ -695,3 +713,4 @@ bool CGameApplication::initWindow()
 		return false;
 	return true;
 }
+
