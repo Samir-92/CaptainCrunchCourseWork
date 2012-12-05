@@ -63,9 +63,12 @@ bool CGameApplication::init()
 		return false;
 	return true;
 }
+
+//Gui Stuff
 bool mainMenu=true;
 bool CGameApplication::initGUI()
 {
+	//Shows Gui if bool true
 	if(mainMenu==true)
 	{
 	D3D10_VIEWPORT vp;
@@ -74,6 +77,7 @@ bool CGameApplication::initGUI()
 	CGUIManager::getInstance().init(m_pD3D10Device,vp.Width,vp.Height);
 	return true;
 	}
+	//when false turns game function on
 	if(mainMenu==false)
 	{
 		CGameApplication::initGame();
@@ -83,6 +87,8 @@ bool CGameApplication::initGUI()
 
 bool CGameApplication::initGame()
 {
+
+	
     // Set primitive topology, how are we going to interpet the vertices in the vertex buffer - BMD
     //http://msdn.microsoft.com/en-us/library/bb173590%28v=VS.85%29.aspx - BMD
     m_pD3D10Device->IASetPrimitiveTopology( D3D10_PRIMITIVE_TOPOLOGY_TRIANGLELIST );	
@@ -252,6 +258,7 @@ void CGameApplication::render()
 	{
 		CGUIManager::getInstance().render();
 	}
+	//Remove Gui if main menu is false
 	if(mainMenu==false)
 	{
 		CGUIManager::getInstance().~CGUIManager();
@@ -268,26 +275,26 @@ void CGameApplication::update()
 	{
 	CGUIManager::getInstance().update();
 	}
+	//Remove GUI is main menu = false
 	if(mainMenu==false)
 	{
 		CGUIManager::getInstance().~CGUIManager();
-	}
+	
 	//Recognize the camera
 	CCameraComponent * pCamera=m_pGameObjectManager->getMainCamera();
 
+
+	//Once GUI has been removed car will not move forward 
+
+
+
+
+
 	if (CInput::getInstance().getKeyboard()->isKeyDown((int)'W'))
 	{
-		if(!pCamera->isDebug()){
 			//play sound
 			CTransformComponent * pTransform=m_pGameObjectManager->findGameObject("Test")->getTransform();
 			pTransform->MoveForward(m_Timer.getElapsedTime()*30);
-		}
-		else
-		{
-			//Move the debug camera -- doesn't work yet.
-			D3DXVECTOR3 cameraNewPosition = D3DXVECTOR3(m_Timer.getElapsedTime()*-30, 0, 0);
-			pCamera->setPosition(pCamera->getPosition().x + cameraNewPosition.x, cameraNewPosition.y, cameraNewPosition.z);
-		}
 	}
 	else if (CInput::getInstance().getKeyboard()->isKeyDown((int)'S'))
 	{
@@ -309,20 +316,14 @@ void CGameApplication::update()
 		pTransform->rotate(0.0f,m_Timer.getElapsedTime(),0.0f);
 	}
 
+	}
+
 	else if(CInput::getInstance().getKeyboard()->isKeyDown((int)'R'))
 	{
 		mainMenu=false;
 	}
 
-	//Do we want to go to debug mode with the camera -- doesn't work yet.
-	if (CInput::getInstance().getKeyboard()->isKeyDown((int)'P'))
-	{
-		if(pCamera->isDebug()){
-			pCamera->setDebug(false);
-		}else{
-			pCamera->setDebug(true);
-		}
-	}
+	
 	m_pGameObjectManager->update(m_Timer.getElapsedTime());
 
 	
