@@ -102,7 +102,7 @@ bool CGameApplication::initGame()
 	//Set the name
 	pTestGameObject->setName("Test");
 	//Position
-	pTestGameObject->getTransform()->setPosition(0.0f,0.0f,-40.0f);
+	pTestGameObject->getTransform()->setPosition(0.0f,0.0f,-20.0f);
 	pTestGameObject->getTransform()->setScale(0.8f,0.8f,0.8f);
 	//create material
 	pMaterial=new CMaterialComponent();
@@ -147,7 +147,7 @@ bool CGameApplication::initGame()
 	//Set the name
 	pTestGameObject->setName("floor");
 	//Position
-	pTestGameObject->getTransform()->setPosition(0.0f,0.0f,0.0f);
+	pTestGameObject->getTransform()->setPosition(0.0f,-1.0f,0.0f);
 	pTestGameObject->getTransform()->setRotation(0.0f,0.0f,0.0f);
 	pTestGameObject->getTransform()->setScale(50.0f,-0.1f,50.0f);
 	//create material
@@ -465,7 +465,7 @@ void CGameApplication::update()
 	{
 		if(!pCamera->isDebug()){
 	
-			//CAudioSourceComponent *pAudio=(CAudioSourceComponent*)m_pGameObjectManager->findGameObject("Test")->getComponent("AudioSourceComponent");
+			//cAudioSourceComponent *pAudio=(CAudioSourceComponent*)m_pGameObjectManager->findGameObject("Test")->getComponent("AudioSourceComponent");
 			CTransformComponent * pTransform=m_pGameObjectManager->findGameObject("Test")->getTransform();
 			pTransform->MoveForward(m_Timer.getElapsedTime()*pTransform->getcarspeed());
 			//pAudio->play();
