@@ -102,7 +102,7 @@ bool CGameApplication::initGame()
 	//Set the name
 	pTestGameObject->setName("Test");
 	//Position
-	pTestGameObject->getTransform()->setPosition(0.0f,10.0f,0.0f);
+	pTestGameObject->getTransform()->setPosition(0.0f,0.0f,-40.0f);
 	pTestGameObject->getTransform()->setScale(0.8f,0.8f,0.8f);
 	//create material
 	pMaterial=new CMaterialComponent();
@@ -135,15 +135,15 @@ bool CGameApplication::initGame()
 	pMesh->SetRenderingDevice(m_pD3D10Device);
 	pTestGameObject->addComponent(pMesh);
 
-	//create box
-	CBoxCollider *pBox=new CBoxCollider();
-	pBox->setExtents(0.01f,0.01f,0.01f);
-	pTestGameObject->addComponent(pBox);
+	////create box
+	//CSphereCollider *ps=new CSphereCollider();
+	//ps->setRadius(0.01f);
+	//pTestGameObject->addComponent(ps);
 
-	//create body make it fixed so no gravity effects it
-	CBodyComponent *pBody=new CBodyComponent();
-	pBody->setFixed(false);
-	pTestGameObject->addComponent(pBody);
+	////create body make it fixed so no gravity effects it
+	//CBodyComponent *pBody=new CBodyComponent();
+	//pBody->setFixed(true);
+	//pTestGameObject->addComponent(pBody);
 
 	//add the game object
 	m_pGameObjectManager->addGameObject(pTestGameObject);
@@ -154,7 +154,7 @@ bool CGameApplication::initGame()
 	//Position
 	pTestGameObject->getTransform()->setPosition(0.0f,0.0f,0.0f);
 	pTestGameObject->getTransform()->setRotation(0.0f,0.0f,0.0f);
-	pTestGameObject->getTransform()->setScale(50.0f,0.0f,50.0f);
+	pTestGameObject->getTransform()->setScale(50.0f,-0.1f,50.0f);
 	//create material
 	pMaterial=new CMaterialComponent();
 	pMaterial->SetRenderingDevice(m_pD3D10Device);
@@ -170,56 +170,88 @@ bool CGameApplication::initGame()
 	pMesh->SetRenderingDevice(m_pD3D10Device);
 	pTestGameObject->addComponent(pMesh);
 
+	////create box
+	//CBoxCollider *pBox4=new CBoxCollider();
+	//pBox4->setExtents(0.01f,0.01f,0.01f);
+	//pTestGameObject->addComponent(pBox4);
+
+	////create body make it fixed so no gravity effects it
+	//CBodyComponent *pBody4=new CBodyComponent();
+	//pBody4->setFixed(true);
+	//pTestGameObject->addComponent(pBody4);
+	////add the game object
+	m_pGameObjectManager->addGameObject(pTestGameObject);
+
+	pTestGameObject=new CGameObject();
+	//Set the name
+	pTestGameObject->setName("Barrel");
+	//Position
+	pTestGameObject->getTransform()->setPosition(0.0f,0.0f,6.0f);
+	pTestGameObject->getTransform()->setScale(0.01f,0.01f,0.01f);
+	//create material
+	pMaterial=new CMaterialComponent();
+	pMaterial->SetRenderingDevice(m_pD3D10Device);
+	pMaterial->setEffectFilename("Bumpmapping.fx");
+	pMaterial->setAmbientMaterialColour(D3DXCOLOR(0.5f,0.5f,0.5f,1.0f));
+	pMaterial->loadDiffuseTexture("barrel_color_02.png");
+	pMaterial->loadSpecularTexture("barrel_spec_02.png");
+	pMaterial->loadBumpTexture("barrel_nmap_02.png");
+    pTestGameObject->addComponent(pMaterial);
+
+	//Create Mesh
+	pMesh=modelloader.loadModelFromFile(m_pD3D10Device,"barrel.fbx");
+	//CMeshComponent *pMesh=modelloader.createCube(m_pD3D10Device,10.0f,10.0f,10.0f);
+	pMesh->SetRenderingDevice(m_pD3D10Device);
+	pTestGameObject->addComponent(pMesh);
+
 	//create box
-	CBoxCollider *pBox4=new CBoxCollider();
-	pBox4->setExtents(100.0f,0.001f,100.0f);
-	pTestGameObject->addComponent(pBox4);
+	CBoxCollider *pBox1=new CBoxCollider();
+	pBox1->setExtents(0.01f,0.01f,0.01f);
+	pTestGameObject->addComponent(pBox1);
 
 	//create body make it fixed so no gravity effects it
-	CBodyComponent *pBody4=new CBodyComponent();
-	pBody4->setFixed(true);
-	pTestGameObject->addComponent(pBody4);
+	CBodyComponent *pBody1=new CBodyComponent();
+	pBody1->setFixed(true);
+	pTestGameObject->addComponent(pBody1);
+
 	//add the game object
 	m_pGameObjectManager->addGameObject(pTestGameObject);
 
-	//pTestGameObject=new CGameObject();
-	////Set the name
-	//pTestGameObject->setName("Barrel");
-	////Position
-	//pTestGameObject->getTransform()->setPosition(0.0f,0.0f,6.0f);
-	//pTestGameObject->getTransform()->setScale(0.01f,0.01f,0.01f);
-	////create material
-	//pMaterial=new CMaterialComponent();
-	//pMaterial->SetRenderingDevice(m_pD3D10Device);
-	//pMaterial->setEffectFilename("Bumpmapping.fx");
-	//pMaterial->setAmbientMaterialColour(D3DXCOLOR(0.5f,0.5f,0.5f,1.0f));
-	//pMaterial->loadDiffuseTexture("barrel_color_02.png");
-	//pMaterial->loadSpecularTexture("barrel_spec_02.png");
-	//pMaterial->loadBumpTexture("barrel_nmap_02.png");
- //   pTestGameObject->addComponent(pMaterial);
+	pTestGameObject=new CGameObject();
+	//Set the name
+	pTestGameObject->setName("Barrel2");
+	//Position
+	pTestGameObject->getTransform()->setPosition(1.0f,0.0f,1.0f);
+	pTestGameObject->getTransform()->setScale(0.01f,0.01f,0.01f);
+	//create material
+	pMaterial=new CMaterialComponent();
+	pMaterial->SetRenderingDevice(m_pD3D10Device);
+	pMaterial->setEffectFilename("Bumpmapping.fx");
+	pMaterial->setAmbientMaterialColour(D3DXCOLOR(0.5f,0.5f,0.5f,1.0f));
+	pMaterial->loadDiffuseTexture("barrel_color_01.png");
+	pMaterial->loadSpecularTexture("barrel_spec_01.png");
+	pMaterial->loadBumpTexture("barrel_nmap_01.png");
+    pTestGameObject->addComponent(pMaterial);
 
-	////Create Mesh
-	//pMesh=modelloader.loadModelFromFile(m_pD3D10Device,"barrel.fbx");
-	////CMeshComponent *pMesh=modelloader.createCube(m_pD3D10Device,10.0f,10.0f,10.0f);
-	//pMesh->SetRenderingDevice(m_pD3D10Device);
-	//pTestGameObject->addComponent(pMesh);
+	//Create Mesh
+	pMesh=modelloader.loadModelFromFile(m_pD3D10Device,"barrel.fbx");
+	//CMeshComponent *pMesh=modelloader.createCube(m_pD3D10Device,10.0f,10.0f,10.0f);
+	pMesh->SetRenderingDevice(m_pD3D10Device);
+	pTestGameObject->addComponent(pMesh);
 
-	////create box
-	//CBoxCollider *pBox1=new CBoxCollider();
-	//pBox1->setExtents(0.01f,0.01f,0.01f);
-	//pTestGameObject->addComponent(pBox1);
+	//create box
+	CBoxCollider *pBox2=new CBoxCollider();
+	pBox2->setExtents(0.01f,0.01f,0.01f);
+	pTestGameObject->addComponent(pBox2);
 
-	////create body make it fixed so no gravity effects it
-	//CBodyComponent *pBody1=new CBodyComponent();
-	//pBody1->setFixed(true);
-	//pTestGameObject->addComponent(pBody1);
+	//create body make it fixed so no gravity effects it
+	CBodyComponent *pBody2=new CBodyComponent();
+	pBody2->setFixed(true);
+	pTestGameObject->addComponent(pBody2);
 
-	////add the game object
-	//m_pGameObjectManager->addGameObject(pTestGameObject);
-
-	////add the game object
-	//m_pGameObjectManager->addGameObject(pTestGameObject);
-	//
+	//add the game object
+	m_pGameObjectManager->addGameObject(pTestGameObject);
+	
 	pTestGameObject=new CGameObject();
 	//Set the name
 	pTestGameObject->setName("Zombie");
@@ -447,6 +479,8 @@ void CGameApplication::update()
 			CTransformComponent * pTransform=m_pGameObjectManager->findGameObject("Test")->getTransform();
 			pTransform->MoveForward(m_Timer.getElapsedTime()*pTransform->getcarspeed());
 		}
+			
+		
 		else
 		
 		{
