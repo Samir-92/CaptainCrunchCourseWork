@@ -70,6 +70,7 @@ public:
 
 	void setDebug(bool debug){
 		m_debug = debug;
+		
 	};
 
 	void moveForward(float speed)
@@ -81,6 +82,7 @@ public:
 
 		m_position.x+=(direction.x * 10);
 		m_position.z+=(direction.z * 10);
+		//getParent()->getTransform()->setPosition(m_position.x,m_position.y,m_position.z);
 		this->setPosition(m_position.x,m_position.y,m_position.z);
 	};
 

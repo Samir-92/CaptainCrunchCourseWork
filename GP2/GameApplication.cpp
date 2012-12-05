@@ -111,7 +111,7 @@ bool CGameApplication::initGame()
 	//Set the name
 	pTestGameObject->setName("floor");
 	//Position
-	pTestGameObject->getTransform()->setPosition(0.0f,-125.0f,200.0f);
+	pTestGameObject->getTransform()->setPosition(0.0f,-10.0f,200.0f);
 	pTestGameObject->getTransform()->setRotation(180.0f,0.0f,0.0f);
 	pTestGameObject->getTransform()->setScale(0.6f,0.6f,0.6f);
 	//create material
@@ -135,7 +135,7 @@ bool CGameApplication::initGame()
 	//Set the name
 	pTestGameObject->setName("Zombie");
 	//Position
-	pTestGameObject->getTransform()->setPosition(0.0f,-10.0f,-1.0f);
+	pTestGameObject->getTransform()->setPosition(0.0f,-2.0f,-1.0f);
 	pTestGameObject->getTransform()->setScale(0.01f,0.01f,0.01f);
 	pTestGameObject->getTransform()->setIsMoving(true);
 	pTestGameObject->getTransform()->setMovementDirection(true);
@@ -161,7 +161,7 @@ bool CGameApplication::initGame()
 	//Set the name
 	pTestGameObject->setName("Zombie2");
 	//Position
-	pTestGameObject->getTransform()->setPosition(1.0f,-10.0f,1.0f);
+	pTestGameObject->getTransform()->setPosition(1.0f,0.0f,1.0f);
 	pTestGameObject->getTransform()->setScale(0.01f,0.01f,0.01f);
 	pTestGameObject->getTransform()->setRotation(0.0f,0.0f,0.0f); 
 	pTestGameObject->getTransform()->setIsMoving(true);
