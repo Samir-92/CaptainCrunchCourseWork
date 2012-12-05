@@ -103,7 +103,7 @@ bool CGameApplication::initGame()
 	pTestGameObject->setName("Test");
 	//Position
 	pTestGameObject->getTransform()->setPosition(0.0f,0.0f,-40.0f);
-	pTestGameObject->getTransform()->setScale(0.01f,0.01f,0.01f);
+	pTestGameObject->getTransform()->setScale(0.8f,0.8f,0.8f);
 	//create material
 	pMaterial=new CMaterialComponent();
 	pMaterial->SetRenderingDevice(m_pD3D10Device);
