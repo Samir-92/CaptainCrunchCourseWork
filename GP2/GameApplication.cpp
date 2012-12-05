@@ -132,7 +132,7 @@ bool CGameApplication::initGame()
 	pMesh->SetRenderingDevice(m_pD3D10Device);
 	pTestGameObject->addComponent(pMesh);
 	CBoxCollider *pBox=new CBoxCollider();
-	pBox->setExtents(0.1f,0.1f,0.1f);
+	pBox->setExtents(0.1f,1.0f,0.1f);
 	pTestGameObject->addComponent(pBox);
 	//create body make it fixed so no gravity effects it
 	CBodyComponent *pBody=new CBodyComponent();
@@ -148,7 +148,7 @@ bool CGameApplication::initGame()
 	//Position
 	pTestGameObject->getTransform()->setPosition(0.0f,0.0f,0.0f);
 	pTestGameObject->getTransform()->setRotation(0.0f,0.0f,0.0f);
-	pTestGameObject->getTransform()->setScale(50.0f,0.1f,50.0f);
+	pTestGameObject->getTransform()->setScale(50.0f,0.05f,50.0f);
 	//create material
 	pMaterial=new CMaterialComponent();
 	pMaterial->SetRenderingDevice(m_pD3D10Device);
@@ -158,13 +158,13 @@ bool CGameApplication::initGame()
 	//pMaterial->loadSpecularTexture("Floor.png");
 	pTestGameObject->addComponent(pMaterial);
 	//Create Mesh
-	pMesh=modelloader.loadModelFromFile(m_pD3D10Device,"floor1.fbx");
+	pMesh=modelloader.loadModelFromFile(m_pD3D10Device,"floor.fbx");
 	//CMeshComponent *pMesh=modelloader.createCube(m_pD3D10Device,10.0f,10.0f,10.0f);
 	pMesh->SetRenderingDevice(m_pD3D10Device);
 	pTestGameObject->addComponent(pMesh);
 	//create box
 	CBoxCollider *pBox4=new CBoxCollider();
-	pBox4->setExtents(500.0f,1.0f,500.0f);
+	pBox4->setExtents(1000.0f,0.1f,1000.0f);
 	pTestGameObject->addComponent(pBox4);
 	//create body make it fixed so no gravity effects it
 	CBodyComponent *pBody4=new CBodyComponent();

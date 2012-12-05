@@ -162,7 +162,6 @@ public:
 		m_vecPosition.z+=z;
 		setPosition(m_vecPosition.x,m_vecPosition.y,m_vecPosition.z);
 	};
-
 	//scale
 	void scale(float x,float y, float z)
 	{
@@ -170,10 +169,8 @@ public:
 		m_vecScale.y+=y;
 		m_vecScale.z+=z;
 	};
-
 	void MoveForward(float speed)
 	{
-		
 		D3DXVECTOR3 direction;
 		//Calculate direction from rotation, replace the following line
 		direction=D3DXVECTOR3(1.0f,0.0f,1.0f);
