@@ -227,5 +227,6 @@
     <None Include="rockwall.jpg">
       <Filter>Resource Files</Filter>
     </None>
+    <None Include="SkyBoxNight.dds" />
   </ItemGroup>
 </Project>

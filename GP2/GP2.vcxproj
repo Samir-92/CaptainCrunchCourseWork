@@ -136,6 +136,7 @@
     <None Include="Parallax.fx" />
     <None Include="rockwall.jpg" />
     <None Include="ScreenSpace.fx" />
+    <None Include="SkyBoxNight.dds" />
     <None Include="Specular.fx" />
     <None Include="Texture.fx" />
     <None Include="Transform.fx" />
