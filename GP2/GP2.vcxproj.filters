@@ -302,8 +302,6 @@
     <None Include="punto.wav">
       <Filter>Resource Files\Sounds</Filter>
     </None>
-    <None Include="reverse.mp3">
-      <Filter>Resource Files\Sounds</Filter>
-    </None>
+    <None Include="reverse.mp3" />
   </ItemGroup>
 </Project>
