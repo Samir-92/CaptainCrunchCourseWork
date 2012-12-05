@@ -2,10 +2,9 @@
 #include "GameObject.h"
 #include "CameraComponent.h"
 #include "TransformComponent.h"
+
 #include "Input.h"
 #include "Keyboard.h"
-#include "Mouse.h"
-#include "ModelLoader.h"
 
 CGameApplication::CGameApplication(void)
 {
@@ -54,8 +53,6 @@ bool CGameApplication::init()
 		return false;
 	if (!initInput())
 		return false;
-	if (!initAudio())
-		return false;
 	if (!initGame())
 		return false;
 	return true;
@@ -90,6 +87,7 @@ bool CGameApplication::initGame()
 	pTestGameObject->setName("Test");
 	//Position
 	pTestGameObject->getTransform()->setPosition(0.0f,-6.0f,10.0f);
+	pTestGameObject->getTransform()->setScale(0.2f,0.2f,0.2f);
 	//create material
 	pMaterial=new CMaterialComponent();
 	pMaterial->SetRenderingDevice(m_pD3D10Device);
@@ -100,15 +98,6 @@ bool CGameApplication::initGame()
 	pMaterial->loadBumpTexture("armoredrecon_N.png");
 	pMaterial->loadParallaxTexture("armoredrecon_Height.png");
 	pTestGameObject->addComponent(pMaterial);
-
-		//Audio - Create our Audio Component
-	CAudioSourceComponent *pAudio=new CAudioSourceComponent();
-	//Audio - If its a wav file, you should not stream
-	pAudio->setFilename("Zombiesound.wav");
-	//Audio - stream set to false
-	pAudio->setStream(false);
-	//Audio - Add it to the Game Object
-	pTestGameObject->addComponent(pAudio);
 
 	//Create Mesh
 	pMesh=modelloader.loadModelFromFile(m_pD3D10Device,"armoredrecon.fbx");
@@ -124,12 +113,13 @@ bool CGameApplication::initGame()
 	//Position
 	pTestGameObject->getTransform()->setPosition(0.0f,-125.0f,200.0f);
 	pTestGameObject->getTransform()->setRotation(180.0f,0.0f,0.0f);
+	pTestGameObject->getTransform()->setScale(0.6f,0.6f,0.6f);
 	//create material
 	pMaterial=new CMaterialComponent();
 	pMaterial->SetRenderingDevice(m_pD3D10Device);
 	pMaterial->setEffectFilename("DirectionalLight.fx");
 	pMaterial->setAmbientMaterialColour(D3DXCOLOR(0.5f,0.5f,0.5f,1.0f));
-	pMaterial->loadDiffuseTexture("Floor.png");
+	pMaterial->loadDiffuseTexture("rockwall.jpg");
 	//pMaterial->loadSpecularTexture("Floor.png");
 	pTestGameObject->addComponent(pMaterial);
 
@@ -140,8 +130,60 @@ bool CGameApplication::initGame()
 	pTestGameObject->addComponent(pMesh);
 	//add the game object
 	m_pGameObjectManager->addGameObject(pTestGameObject);
+	
+	pTestGameObject=new CGameObject();
+	//Set the name
+	pTestGameObject->setName("Zombie");
+	//Position
+	pTestGameObject->getTransform()->setPosition(0.0f,-10.0f,-1.0f);
+	pTestGameObject->getTransform()->setScale(0.01f,0.01f,0.01f);
+	pTestGameObject->getTransform()->setIsMoving(true);
+	pTestGameObject->getTransform()->setMovementDirection(true);
+	//create material for zombie
+	pMaterial=new CMaterialComponent();
+	pMaterial->SetRenderingDevice(m_pD3D10Device);
+	pMaterial->setEffectFilename("DirectionalLight.fx");
+	pMaterial->setAmbientMaterialColour(D3DXCOLOR(0.5f,0.5f,0.5f,1.0f));
+	pMaterial->loadDiffuseTexture("zombie2.png");
+	//pMaterial->loadSpecularTexture("barrel_spec_01.png");
+	//pMaterial->loadBumpTexture("barrel_nmap_01.png");
+    pTestGameObject->addComponent(pMaterial);
 
 	//Create Mesh
+	pMesh=modelloader.loadModelFromFile(m_pD3D10Device,"humanoid.fbx");
+	//CMeshComponent *pMesh=modelloader.createCube(m_pD3D10Device,10.0f,10.0f,10.0f);
+	pMesh->SetRenderingDevice(m_pD3D10Device);
+	pTestGameObject->addComponent(pMesh);
+	//add the game object
+	m_pGameObjectManager->addGameObject(pTestGameObject);
+
+	pTestGameObject=new CGameObject();
+	//Set the name
+	pTestGameObject->setName("Zombie2");
+	//Position
+	pTestGameObject->getTransform()->setPosition(1.0f,-10.0f,1.0f);
+	pTestGameObject->getTransform()->setScale(0.01f,0.01f,0.01f);
+	pTestGameObject->getTransform()->setRotation(0.0f,0.0f,0.0f); 
+	pTestGameObject->getTransform()->setIsMoving(true);
+	pTestGameObject->getTransform()->setMovementDirection(true);
+	//create material for zombie
+	pMaterial=new CMaterialComponent();
+	pMaterial->SetRenderingDevice(m_pD3D10Device);
+	pMaterial->setEffectFilename("DirectionalLight.fx");
+	pMaterial->setAmbientMaterialColour(D3DXCOLOR(0.5f,0.5f,0.5f,1.0f));
+	pMaterial->loadDiffuseTexture("zombie2.png");
+	//pMaterial->loadSpecularTexture("barrel_spec_01.png");
+	//pMaterial->loadBumpTexture("barrel_nmap_01.png");
+    pTestGameObject->addComponent(pMaterial);
+
+	//Create Mesh
+	pMesh=modelloader.loadModelFromFile(m_pD3D10Device,"humanoid.fbx");
+	//CMeshComponent *pMesh=modelloader.createCube(m_pD3D10Device,10.0f,10.0f,10.0f);
+	pMesh->SetRenderingDevice(m_pD3D10Device);
+	pTestGameObject->addComponent(pMesh);
+	//add the game object
+	m_pGameObjectManager->addGameObject(pTestGameObject);
+	 
 
 
 	CGameObject *pCameraGameObject=new CGameObject();
@@ -168,19 +210,6 @@ bool CGameApplication::initGame()
 
 	m_pGameObjectManager->addGameObject(pCameraGameObject);
 
-	//Audio - Create another audio component for music
-	CAudioSourceComponent *pMusic=new CAudioSourceComponent();
-	//Audio -If it is an mp3 or ogg then set stream to true
-	pMusic->setFilename("zombie.mp3");
-	//Audio - stream to true
-	pMusic->setStream(true);
-	//Audio - Add to camera, don't call play until init has been called
-	pCameraGameObject->addComponent(pMusic);
-
-	//Audio - Attach a listener to the camera
-	CAudioListenerComponent *pListener=new CAudioListenerComponent();
-	pCameraGameObject->addComponent(pListener);
-
 	CGameObject *pLightGameObject=new CGameObject();
 	pLightGameObject->setName("DirectionalLight");
 
@@ -195,8 +224,6 @@ bool CGameApplication::initGame()
 	//init, this must be called after we have created all game objects
 	m_pGameObjectManager->init();
 	
-	pMusic->play();
-
 	m_Timer.start();
 	return true;
 }
@@ -294,17 +321,12 @@ void CGameApplication::update()
 	if (CInput::getInstance().getKeyboard()->isKeyDown((int)'W'))
 	{
 		if(!pCamera->isDebug()){
-	
-			CAudioSourceComponent *pAudio=(CAudioSourceComponent*)m_pGameObjectManager->findGameObject("Test")->getComponent("AudioSourceComponent");
-	
+			//play sound
 			CTransformComponent * pTransform=m_pGameObjectManager->findGameObject("Test")->getTransform();
 			pTransform->MoveForward(m_Timer.getElapsedTime()*30);
-			pAudio->play();
-
 		}else{
 			//Move the debug camera -- doesn't work yet.
-			D3DXVECTOR3 cameraNewPosition = D3DXVECTOR3(m_Timer.getElapsedTime()*-30, 0, 0);
-			pCamera->setPosition(pCamera->getPosition().x + cameraNewPosition.x, cameraNewPosition.y, cameraNewPosition.z);
+			pCamera->moveForward(m_Timer.getElapsedTime()*30);
 		}
 	}
 	else if (CInput::getInstance().getKeyboard()->isKeyDown((int)'S'))
@@ -337,6 +359,18 @@ void CGameApplication::update()
 		}
 	}
 
+	CTransformComponent * pZombie=m_pGameObjectManager->findGameObject("Zombie")->getTransform();
+	CTransformComponent * pZombie2=m_pGameObjectManager->findGameObject("Zombie2")->getTransform();
+	//while(!pZombie->getIsMoving()){
+	if(pZombie->getIsMoving() || pZombie2->getIsMoving()){
+		//Move the zombie bitch!
+		pZombie->enemyMovement(m_Timer.getElapsedTime());
+		pZombie2->enemyMovementLR(m_Timer.getElapsedTime());
+		//pZombie->setIsMoving(true);
+		//pZombie->setRotation(0.1f,0.0f,0.1f);
+		//pZombie->enemyMovement(m_Timer.getElapsedTime());
+	}
+
 	m_pGameObjectManager->update(m_Timer.getElapsedTime());
 	
 }
@@ -346,11 +380,7 @@ bool CGameApplication::initInput()
 	CInput::getInstance().init();
 	return true;
 }
-bool CGameApplication::initAudio()
-{
-	CAudioSystem::getInstance().init();
-	return true;
-}
+
 
 //initGraphics - initialise the graphics subsystem - BMD
 bool CGameApplication::initGraphics()

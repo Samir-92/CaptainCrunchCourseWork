@@ -72,6 +72,18 @@ public:
 		m_debug = debug;
 	};
 
+	void moveForward(float speed)
+	{
+		D3DXVECTOR3 direction = D3DXVECTOR3(1.0f,0.0f,1.0f);
+		//Normalize
+		D3DXVec3Normalize(&direction,&direction);
+		direction*=speed;
+
+		m_position.x+=(direction.x * 10);
+		m_position.z+=(direction.z * 10);
+		this->setPosition(m_position.x,m_position.y,m_position.z);
+	};
+
 private:
 	D3DXMATRIX m_matView;
 	D3DXMATRIX m_matProjection;

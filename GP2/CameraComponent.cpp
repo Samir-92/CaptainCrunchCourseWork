@@ -37,7 +37,7 @@ void CCameraComponent::update(float elapsedTime)
 	if(m_pTarget){
 
 		//New position of camera
-		D3DXVECTOR3 updateCamPos = D3DXVECTOR3(objPos.x,camPos.y,objPos.z - 15.0f);
+		D3DXVECTOR3 updateCamPos = D3DXVECTOR3(objPos.x,camPos.y,objPos.z - 10.0f);
 
 			D3DXVECTOR3 direction = D3DXVECTOR3(1.0f,0.0f,1.0f);
 			//Normalize
