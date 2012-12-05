@@ -103,6 +103,7 @@ bool CGameApplication::initGame()
 	pTestGameObject->setName("Test");
 	//Position
 	pTestGameObject->getTransform()->setPosition(0.0f,0.0f,-40.0f);
+	pTestGameObject->getTransform()->setScale(0.01f,0.01f,0.01f);
 	//create material
 	pMaterial=new CMaterialComponent();
 	pMaterial->SetRenderingDevice(m_pD3D10Device);
@@ -146,8 +147,9 @@ bool CGameApplication::initGame()
 	//Set the name
 	pTestGameObject->setName("floor");
 	//Position
-	pTestGameObject->getTransform()->setPosition(0.0f,-100.0f,200.0f);
-	pTestGameObject->getTransform()->setRotation(180.0f,0.0f,0.0f);
+	pTestGameObject->getTransform()->setPosition(0.0f,0.0f,0.0f);
+	pTestGameObject->getTransform()->setRotation(0.0f,0.0f,0.0f);
+	pTestGameObject->getTransform()->setScale(50.0f,-0.1f,50.0f);
 	//create material
 	pMaterial=new CMaterialComponent();
 	pMaterial->SetRenderingDevice(m_pD3D10Device);
@@ -158,7 +160,7 @@ bool CGameApplication::initGame()
 	pTestGameObject->addComponent(pMaterial);
 
 	//Create Mesh
-	pMesh=modelloader.loadModelFromFile(m_pD3D10Device,"floor.fbx");
+	pMesh=modelloader.loadModelFromFile(m_pD3D10Device,"floor1.fbx");
 	//CMeshComponent *pMesh=modelloader.createCube(m_pD3D10Device,10.0f,10.0f,10.0f);
 	pMesh->SetRenderingDevice(m_pD3D10Device);
 	pTestGameObject->addComponent(pMesh);
@@ -180,7 +182,7 @@ bool CGameApplication::initGame()
 	pTestGameObject->setName("Barrel");
 	//Position
 	pTestGameObject->getTransform()->setPosition(0.0f,0.0f,6.0f);
-	pTestGameObject->getTransform()->setScale(0.05f,0.05f,0.05f);
+	pTestGameObject->getTransform()->setScale(0.01f,0.01f,0.01f);
 	//create material
 	pMaterial=new CMaterialComponent();
 	pMaterial->SetRenderingDevice(m_pD3D10Device);
@@ -309,7 +311,7 @@ bool CGameApplication::initGame()
 
 
 	CGameObject *pCameraGameObject=new CGameObject();
-	//pCameraGameObject->getTransform()->setPosition(0.0f,2.0f,-5.0f);
+	pCameraGameObject->getTransform()->setPosition(0.0f,2.0f,-5.0f);
 	pCameraGameObject->setName("Camera");
 
 	D3D10_VIEWPORT vp;
@@ -317,7 +319,7 @@ bool CGameApplication::initGame()
 	m_pD3D10Device->RSGetViewports(&numViewports,&vp);
 
 	CCameraComponent *pCamera=new CCameraComponent();
-	pCamera->setPosition(0.0f,20.0f,-5.0f);
+	pCamera->setPosition(0.0f,30.0f,15.0f);
 	pCamera->setUp(0.0f,1.0f,0.0f);
 	pCamera->setLookAt(0.0f,10.0f,0.0f);
 	pCamera->setFOV(D3DX_PI*0.25f);
@@ -463,10 +465,10 @@ void CGameApplication::update()
 	{
 		if(!pCamera->isDebug()){
 	
-			CAudioSourceComponent *pAudio=(CAudioSourceComponent*)m_pGameObjectManager->findGameObject("Test")->getComponent("AudioSourceComponent");
+			//CAudioSourceComponent *pAudio=(CAudioSourceComponent*)m_pGameObjectManager->findGameObject("Test")->getComponent("AudioSourceComponent");
 			CTransformComponent * pTransform=m_pGameObjectManager->findGameObject("Test")->getTransform();
 			pTransform->MoveForward(m_Timer.getElapsedTime()*pTransform->getcarspeed());
-			pAudio->play();
+			//pAudio->play();
 
 		}else{
 			//Move the debug camera -- doesn't work yet.
