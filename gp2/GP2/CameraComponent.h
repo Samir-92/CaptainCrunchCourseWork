@@ -51,15 +51,46 @@ public:
 	{
 		m_fFarClip=farClip;
 	};
+
+	void setTarget(CGameObject* target)
+	{
+		m_pTarget = target;
+	};
+	
+	void setPosition(float x, float y, float z)
+	{
+		m_position = D3DXVECTOR3(x,y,z);
+	};
+
+	D3DXVECTOR3& getPosition()
+	{
+		return m_position;
+	};
+
+	bool isDebug()
+	{
+		return m_debug;
+	};
+
+	void setDebug(bool debug)
+	{
+		m_debug = debug;
+	};
 private:
 	D3DXMATRIX m_matView;
 	D3DXMATRIX m_matProjection;
 
+	bool m_debug;
+
 	D3DXVECTOR3 m_vecUp;
 	D3DXVECTOR3 m_vecLookAt;
+
+	D3DXVECTOR3 m_position;
 
 	float m_fAspectRatio;
 	float m_fFOV;
 	float m_fNearClip;
 	float m_fFarClip;
+
+	CGameObject* m_pTarget;
 };

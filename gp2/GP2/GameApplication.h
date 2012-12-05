@@ -13,6 +13,7 @@
 #include "MeshComponent.h"
 
 #include "ModelLoader.h"
+#include "GUIManager.h"
 
 #include <vector>
 
@@ -29,7 +30,7 @@ private:
 	bool initInput();
 	bool initGame();
 	bool initGraphics();
-
+	bool initGUI();
 	bool initWindow();
 	void render();
 	void update();

@@ -1,0 +1,25 @@
+<template name="window" content="content">
+<head>
+	<link type="text/rcss" href="rkt.rcss"/>
+	<link type="text/rcss" href="invader.rcss"/>
+</head>
+<body class="window">
+	<div id="title_bar">
+			<span id="title">Captain Crunch and the Cereal Killers</span>
+	</div>
+  <div id="window" style="position: absolute; left: 1px; top: 1px; color:black">
+    <window style="background-color:black">
+    <div id="content">
+      DESTROY ALL ZOMBIES!!!!!!!!!!!!!
+      <div align="centre">
+        <button type="button" style="position: absolute; left: 300px; top: 300px; ">
+          <div id="content">
+            START
+          </div>
+        </button>
+      </div>
+     </div>
+    </window>
+   </div>
+</body>
+</template>
