@@ -119,9 +119,9 @@ bool CGameApplication::initGame()
 	CAudioSourceComponent *pAudio=new CAudioSourceComponent();
 	CAudioSourceComponent *pAudio2=new CAudioSourceComponent();
 	//Audio - If its a wav file, you should not stream
-	pAudio->setFilename("reverse (2).wav");
+	pAudio->setFilename("reverse.mp3");
 	pAudio->setStream(true);
-	pAudio2->setFilename("accelerate.wav");
+	pAudio2->setFilename("reverse.mp3");
 	pAudio2->setStream(true);
 	//Audio - stream set to false
 	//pAudio->setStream(false);
@@ -495,7 +495,7 @@ void CGameApplication::update()
 	
 		//Audio - grab the audio component
 		CAudioSourceComponent * pAudio=(CAudioSourceComponent *)m_pGameObjectManager->findGameObject("Test")->getComponent("AudioSourceComponent");
-		pAudio->play();
+		pAudio->play(2);
 
 		CTransformComponent * pTransform=m_pGameObjectManager->findGameObject("Test")->getTransform();
 		pTransform->MoveForward(m_Timer.getElapsedTime()*-(pTransform->getcarspeed()));

@@ -148,7 +148,8 @@
     <None Include="Environment.fx" />
     <None Include="fbxsdk-2013.1d.dll" />
     <None Include="Parallax.fx" />
-    <None Include="reverse (2).wav" />
+    <None Include="punto.wav" />
+    <None Include="reverse.mp3" />
     <None Include="ScreenSpace.fx" />
     <None Include="Specular.fx" />
     <None Include="Texture.fx" />

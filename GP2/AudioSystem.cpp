@@ -105,15 +105,25 @@ Sound * CAudioSystem::loadSound(const string& filename, bool stream)
 	return pSound;
 }
 
-Channel * CAudioSystem::playSound(Sound * pSound)
+Channel * CAudioSystem::playSound(Sound * pSound, int loop)
 {
 	//play sound, return a channel so we can control the sound
 	//while its playing
 	Channel *pChannel;
 	m_pAudioSystem->playSound(FMOD_CHANNEL_FREE,pSound,false,&pChannel);
+	pChannel->setLoopCount(loop);
 
 	return pChannel;
 }
+
+Channel *CAudioSystem::playSound(Sound * pSound,Channel *pChannel,int loop)
+{
+	m_pAudioSystem->playSound(FMOD_CHANNEL_FREE,pSound,false,&pChannel);
+	pChannel->setLoopCount(loop);
+
+	return pChannel;
+}
+
 
 void CAudioSystem::updateListener(FMOD_VECTOR &position, FMOD_VECTOR &vel, FMOD_VECTOR &forward, FMOD_VECTOR &up)
 {

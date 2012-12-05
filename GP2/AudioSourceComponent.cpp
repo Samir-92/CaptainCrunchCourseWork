@@ -26,11 +26,16 @@ void CAudioSourceComponent::init()
 	
 }
 
-void CAudioSourceComponent::play()
+void CAudioSourceComponent::play(int loop)
 {
 	//play the sound, we get a channel which can be used to play, stop
 	//pause, control the volume of the sound
-	m_pChannel=CAudioSystem::getInstance().playSound(m_pSound);
+	if (!m_pChannel)
+		m_pChannel=CAudioSystem::getInstance().playSound(m_pSound,loop);
+	else
+	{
+		m_pChannel=CAudioSystem::getInstance().playSound(m_pSound,m_pChannel,loop);
+	}
 }
 
 void CAudioSourceComponent::stop()

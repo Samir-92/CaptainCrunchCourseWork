@@ -33,7 +33,7 @@ public:
 	};
 
 	//play
-	void play();
+	void play(int loop=1);
 	//stop
 	void stop();
 private:

@@ -299,7 +299,10 @@
     <None Include="accelerate.wav">
       <Filter>Resource Files\Sounds</Filter>
     </None>
-    <None Include="reverse (2).wav">
+    <None Include="punto.wav">
+      <Filter>Resource Files\Sounds</Filter>
+    </None>
+    <None Include="reverse.mp3">
       <Filter>Resource Files\Sounds</Filter>
     </None>
   </ItemGroup>
