@@ -296,5 +296,11 @@
     <None Include="zombienoise.wav">
       <Filter>Resource Files\Sounds</Filter>
     </None>
+    <None Include="accelerate.wav">
+      <Filter>Resource Files\Sounds</Filter>
+    </None>
+    <None Include="reverse (2).wav">
+      <Filter>Resource Files\Sounds</Filter>
+    </None>
   </ItemGroup>
 </Project>

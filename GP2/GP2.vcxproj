@@ -139,6 +139,7 @@
   </ItemGroup>
   <ItemGroup>
     <None Include="..\..\..\audio\zombie.mp3" />
+    <None Include="accelerate.wav" />
     <None Include="ambient.fx" />
     <None Include="Bumpmapping.fx" />
     <None Include="diffuse.fx" />
@@ -147,6 +148,7 @@
     <None Include="Environment.fx" />
     <None Include="fbxsdk-2013.1d.dll" />
     <None Include="Parallax.fx" />
+    <None Include="reverse (2).wav" />
     <None Include="ScreenSpace.fx" />
     <None Include="Specular.fx" />
     <None Include="Texture.fx" />

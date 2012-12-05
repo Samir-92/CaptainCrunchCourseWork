@@ -119,9 +119,9 @@ bool CGameApplication::initGame()
 	CAudioSourceComponent *pAudio=new CAudioSourceComponent();
 	CAudioSourceComponent *pAudio2=new CAudioSourceComponent();
 	//Audio - If its a wav file, you should not stream
-	pAudio->setFilename("reverse.wav");
+	pAudio->setFilename("reverse (2).wav");
 	pAudio->setStream(true);
-	pAudio2->setFilename("driving.wav");
+	pAudio2->setFilename("accelerate.wav");
 	pAudio2->setStream(true);
 	//Audio - stream set to false
 	//pAudio->setStream(false);
