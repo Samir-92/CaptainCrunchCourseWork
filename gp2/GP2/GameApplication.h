@@ -19,6 +19,13 @@
 
 using namespace std;
 
+enum GameState
+{
+	MAINMENU,
+	GAME,
+	PAUSE,
+	EXIT
+};
 
 class CGameApplication
 {
@@ -35,6 +42,13 @@ private:
 	bool initWindow();
 	void render();
 	void update();
+
+	void initTheGame();
+	void initMenu();
+
+	void updateGame();
+	void updateMenu();
+	void updatePauseGUI();
 private:
 	//Graphics
 	ID3D10Device * m_pD3D10Device;
@@ -51,4 +65,11 @@ private:
 	CGameObjectManager *m_pGameObjectManager;
 
 	CModelLoader modelloader;
+
+	Rocket::Core::ElementDocument *m_pMenu;
+	Rocket::Core::ElementDocument *m_pGameGUI;
+	Rocket::Core::ElementDocument *m_pPauseGUI;
+
+	GameState m_GameState;
+	float m_fCurrentTime;
 };

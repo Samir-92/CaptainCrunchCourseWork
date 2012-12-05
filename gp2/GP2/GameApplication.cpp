@@ -17,6 +17,8 @@ CGameApplication::CGameApplication(void)
 	m_pDepthStencelView=NULL;
 	m_pDepthStencilTexture=NULL;
 	m_pGameObjectManager=new CGameObjectManager();
+	m_GameState=MAINMENU;
+	m_fCurrentTime=0.0f;
 }
 
 CGameApplication::~CGameApplication(void)
@@ -65,33 +67,23 @@ bool CGameApplication::init()
 }
 
 //Gui Stuff
-bool mainMenu=true;
+
 bool CGameApplication::initGUI()
 {
-	//Shows Gui if bool true
-	if(mainMenu==true)
-	{
 	D3D10_VIEWPORT vp;
 	UINT numViewports=1;
 	m_pD3D10Device->RSGetViewports(&numViewports,&vp);
 	CGUIManager::getInstance().init(m_pD3D10Device,vp.Width,vp.Height);
 	return true;
-	}
-	//when false turns game function on
-	if(mainMenu==false)
-	{
-		CGameApplication::initGame();
-		return true;
-	}
 }
 
-bool CGameApplication::initGame()
+void CGameApplication::initTheGame()
 {
-
+	m_pGameObjectManager->clear();
 	
     // Set primitive topology, how are we going to interpet the vertices in the vertex buffer - BMD
     //http://msdn.microsoft.com/en-us/library/bb173590%28v=VS.85%29.aspx - BMD
-    m_pD3D10Device->IASetPrimitiveTopology( D3D10_PRIMITIVE_TOPOLOGY_TRIANGLELIST );	
+   /* m_pD3D10Device->IASetPrimitiveTopology( D3D10_PRIMITIVE_TOPOLOGY_TRIANGLELIST );*/	
 
 	CGameObject *pTestGameObject=new CGameObject();
 	//Set the name
@@ -121,9 +113,9 @@ bool CGameApplication::initGame()
 	pMaterial->setEffectFilename("DirectionalLight.fx");
 	pMaterial->setAmbientMaterialColour(D3DXCOLOR(0.2f,0.2f,0.2f,1.0f));
 	pMaterial->loadDiffuseTexture("armoredrecon_diff.png");
-	//pMaterial->loadSpecularTexture("armoredrecon_spec.png");
-	//pMaterial->loadBumpTexture("armoredrecon_N.png");
-	//pMaterial->loadParallaxTexture("armoredrecon_Height.png");
+	pMaterial->loadSpecularTexture("armoredrecon_spec.png");
+	pMaterial->loadBumpTexture("armoredrecon_N.png");
+	pMaterial->loadParallaxTexture("armoredrecon_Height.png");
 	pTestGameObject->addComponent(pMaterial);
 
 	//Create Mesh
@@ -172,6 +164,76 @@ bool CGameApplication::initGame()
 	//init, this must be called after we have created all game objects
 	m_pGameObjectManager->init();
 	m_Timer.start();
+}
+
+void CGameApplication::initMenu()
+{
+	m_pGameObjectManager->clear();
+
+	// Set primitive topology, how are we going to interpet the vertices in the vertex buffer - BMD
+    //http://msdn.microsoft.com/en-us/library/bb173590%28v=VS.85%29.aspx - BMD
+    m_pD3D10Device->IASetPrimitiveTopology( D3D10_PRIMITIVE_TOPOLOGY_TRIANGLELIST );	
+
+	CGameObject *pTestGameObject=new CGameObject();
+	//Set the name
+	pTestGameObject->setName("Sky");
+	CMeshComponent *pMesh=modelloader.loadModelFromFile(m_pD3D10Device,"sphere.fbx");
+	//CMeshComponent *pMesh=modelloader.createCube(m_pD3D10Device,10.0f,10.0f,10.0f);
+	pMesh->SetRenderingDevice(m_pD3D10Device);
+	CMaterialComponent *pMaterial=new CMaterialComponent();
+	pMaterial=new CMaterialComponent();
+	pMaterial->SetRenderingDevice(m_pD3D10Device);
+	pMaterial->setEffectFilename("Environment.fx");
+	pMaterial->loadEnvironmentTexture("Mars.dds");
+	pTestGameObject->addComponent(pMaterial);
+	pTestGameObject->addComponent(pMesh);
+	//add the game object
+	m_pGameObjectManager->addGameObject(pTestGameObject);
+
+	//Create Mesh
+	CGameObject *pCameraGameObject=new CGameObject();
+	//pCameraGameObject->getTransform()->setPosition(0.0f,0.0f,-5.0f);
+	pCameraGameObject->setName("Camera");
+
+	D3D10_VIEWPORT vp;
+	UINT numViewports=1;
+	m_pD3D10Device->RSGetViewports(&numViewports,&vp);
+
+	CCameraComponent *pCamera=new CCameraComponent();
+	pCamera->setUp(0.0f,2.0f,-5.0f);
+	pCamera->setUp(0.0f,1.0f,0.0f);
+	pCamera->setLookAt(0.0f,0.0f,0.0f);
+	pCamera->setFOV(D3DX_PI*0.25f);
+	pCamera->setAspectRatio((float)(vp.Width/vp.Height));
+	pCamera->setFarClip(1000.0f);
+	pCamera->setNearClip(0.1f);
+	//Debug to default
+	pCamera->setDebug(false);
+	pCameraGameObject->addComponent(pCamera);
+
+	pCamera->setTarget(m_pGameObjectManager->findGameObject("Test"));
+
+	m_pGameObjectManager->addGameObject(pCameraGameObject);
+
+	m_pMenu=CGUIManager::getInstance().loadGUI("cursor.rml");
+	m_pGameGUI=CGUIManager::getInstance().loadGUI("demo.rml");
+	m_pPauseGUI=CGUIManager::getInstance().loadGUI("window.rml");
+	m_pMenu->Show();
+
+	m_pGameObjectManager->init();
+}
+
+
+bool CGameApplication::initGame()
+{
+	// Set primitive topology, how are we going to interpet the vertices in the vertex buffer - BMD
+    //http://msdn.microsoft.com/en-us/library/bb173590%28v=VS.85%29.aspx - BMD
+    m_pD3D10Device->IASetPrimitiveTopology( D3D10_PRIMITIVE_TOPOLOGY_TRIANGLELIST );	
+
+	initMenu();
+
+	m_Timer.start();
+
 	return true;
 }
 
@@ -254,42 +316,17 @@ void CGameApplication::render()
 	}
 
 	//Render GUI Scene
-	if(mainMenu==true)
-	{
-		CGUIManager::getInstance().render();
-	}
-	//Remove Gui if main menu is false
-	if(mainMenu==false)
-	{
-		CGUIManager::getInstance().~CGUIManager();
-	}
+	CGUIManager::getInstance().render();
 	//Swaps the buffers in the chain, the back buffer to the front(screen)
 	//http://msdn.microsoft.com/en-us/library/bb174576%28v=vs.85%29.aspx - BMD
     m_pSwapChain->Present( 0, 0 );
 }
 
-void CGameApplication::update()
+void CGameApplication::updateGame()
 {
-	m_Timer.update();
-	if(mainMenu==true)
-	{
-	CGUIManager::getInstance().update();
-	}
-	//Remove GUI is main menu = false
-	if(mainMenu==false)
-	{
-		CGUIManager::getInstance().~CGUIManager();
-	
-	//Recognize the camera
-	CCameraComponent * pCamera=m_pGameObjectManager->getMainCamera();
-
+	m_pGameGUI->Show();
 
 	//Once GUI has been removed car will not move forward 
-
-
-
-
-
 	if (CInput::getInstance().getKeyboard()->isKeyDown((int)'W'))
 	{
 			//play sound
@@ -316,19 +353,74 @@ void CGameApplication::update()
 		pTransform->rotate(0.0f,m_Timer.getElapsedTime(),0.0f);
 	}
 
-	}
-
-	else if(CInput::getInstance().getKeyboard()->isKeyDown((int)'R'))
+	if(((int)m_fCurrentTime%1==0))
 	{
-		mainMenu=false;
-	}
-
-	
-	m_pGameObjectManager->update(m_Timer.getElapsedTime());
-
-	
-	
+		if(CInput::getInstance().getKeyboard()->isKeyDown((int)'P'))
+		{
+			if(m_GameState==GAME)
+			{
+				m_pGameGUI->Hide();
+				m_GameState=PAUSE;
+				m_pPauseGUI->Show();
+			}
+		}
+	}	
 }
+
+void CGameApplication::updateMenu()
+{
+	if(CInput::getInstance().getKeyboard()->isKeyDown((int)'M'))
+	{
+		m_pMenu->Hide();
+		m_GameState=GAME;
+		initGame();
+	}
+}
+
+void CGameApplication::updatePauseGUI()
+{
+	if(((int)m_fCurrentTime%1==0))
+	{
+		if(CInput::getInstance().getKeyboard()->isKeyDown((int)'N'))
+		{
+			if(m_GameState==PAUSE)
+			{
+				m_pPauseGUI->Hide();
+				m_GameState=GAME;
+				m_pGameGUI->Show();
+			}
+		}
+
+			
+	}
+}
+
+void CGameApplication::update()
+{
+	m_Timer.update();
+	m_fCurrentTime+=m_Timer.getElapsedTime();
+	CCameraComponent * pCamera=m_pGameObjectManager->getMainCamera();
+	switch(m_GameState)
+	{
+	case MAINMENU:
+		{
+			updateMenu();
+			break;
+		}
+	case GAME:
+		{
+			updateGame();
+			break;
+		}
+	case PAUSE:
+		{
+			updatePauseGUI();
+			break;
+		}
+	}
+	m_pGameObjectManager->update(m_Timer.getElapsedTime());
+}
+
 
 bool CGameApplication::initInput()
 {
