@@ -79,6 +79,9 @@
     <Filter Include="Physics">
       <UniqueIdentifier>{6871b4f8-fa05-487b-9940-5ab7934f81a4}</UniqueIdentifier>
     </Filter>
+    <Filter Include="Components\ParticleSystem">
+      <UniqueIdentifier>{2185fe28-80f4-427b-947d-3b2f5642f91f}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="main.cpp">
@@ -164,6 +167,21 @@
     </ClCompile>
     <ClCompile Include="CXBOXController.cpp">
       <Filter>Input</Filter>
+    </ClCompile>
+    <ClCompile Include="d3dclass.cpp">
+      <Filter>Components\ParticleSystem</Filter>
+    </ClCompile>
+    <ClCompile Include="graphicsclass.cpp">
+      <Filter>Components\ParticleSystem</Filter>
+    </ClCompile>
+    <ClCompile Include="particleshaderclass.cpp">
+      <Filter>Components\ParticleSystem</Filter>
+    </ClCompile>
+    <ClCompile Include="particlesystemclass.cpp">
+      <Filter>Components\ParticleSystem</Filter>
+    </ClCompile>
+    <ClCompile Include="textureclass.cpp">
+      <Filter>Components\ParticleSystem</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
@@ -259,6 +277,21 @@
     </ClInclude>
     <ClInclude Include="CXBOXController.h">
       <Filter>Input</Filter>
+    </ClInclude>
+    <ClInclude Include="d3dclass.h">
+      <Filter>Components\ParticleSystem</Filter>
+    </ClInclude>
+    <ClInclude Include="graphicsclass.h">
+      <Filter>Components\ParticleSystem</Filter>
+    </ClInclude>
+    <ClInclude Include="particleshaderclass.h">
+      <Filter>Components\ParticleSystem</Filter>
+    </ClInclude>
+    <ClInclude Include="particlesystemclass.h">
+      <Filter>Components\ParticleSystem</Filter>
+    </ClInclude>
+    <ClInclude Include="textureclass.h">
+      <Filter>Components\ParticleSystem</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>

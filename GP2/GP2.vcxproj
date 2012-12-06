@@ -86,11 +86,13 @@
     <ClCompile Include="CameraComponent.cpp" />
     <ClCompile Include="CapsuleCollider.cpp" />
     <ClCompile Include="CXBOXController.cpp" />
+    <ClCompile Include="d3dclass.cpp" />
     <ClCompile Include="DirectionalLightComponent.cpp" />
     <ClCompile Include="GameApplication.cpp" />
     <ClCompile Include="GameObject.cpp" />
     <ClCompile Include="GameObjectManager.cpp" />
     <ClCompile Include="Geometry.cpp" />
+    <ClCompile Include="graphicsclass.cpp" />
     <ClCompile Include="Input.cpp" />
     <ClCompile Include="Joypad.cpp" />
     <ClCompile Include="Keyboard.cpp" />
@@ -101,8 +103,11 @@
     <ClCompile Include="MeshComponent.cpp" />
     <ClCompile Include="ModelLoader.cpp" />
     <ClCompile Include="Mouse.cpp" />
+    <ClCompile Include="particleshaderclass.cpp" />
+    <ClCompile Include="particlesystemclass.cpp" />
     <ClCompile Include="Physics.cpp" />
     <ClCompile Include="SphereCollider.cpp" />
+    <ClCompile Include="textureclass.cpp" />
     <ClCompile Include="Timer.cpp" />
     <ClCompile Include="Win32Window.cpp" />
   </ItemGroup>
@@ -116,12 +121,14 @@
     <ClInclude Include="CameraComponent.h" />
     <ClInclude Include="CapsuleCollider.h" />
     <ClInclude Include="CXBOXController.h" />
+    <ClInclude Include="d3dclass.h" />
     <ClInclude Include="DefaultEffect.h" />
     <ClInclude Include="DirectionLightComponent.h" />
     <ClInclude Include="GameApplication.h" />
     <ClInclude Include="GameObject.h" />
     <ClInclude Include="GameObjectManager.h" />
     <ClInclude Include="Geometry.h" />
+    <ClInclude Include="graphicsclass.h" />
     <ClInclude Include="IComponent.h" />
     <ClInclude Include="Input.h" />
     <ClInclude Include="Joypad.h" />
@@ -132,8 +139,11 @@
     <ClInclude Include="MeshComponent.h" />
     <ClInclude Include="ModelLoader.h" />
     <ClInclude Include="Mouse.h" />
+    <ClInclude Include="particleshaderclass.h" />
+    <ClInclude Include="particlesystemclass.h" />
     <ClInclude Include="Physics.h" />
     <ClInclude Include="SphereCollider.h" />
+    <ClInclude Include="textureclass.h" />
     <ClInclude Include="Timer.h" />
     <ClInclude Include="TransformComponent.h" />
     <ClInclude Include="Vertex.h" />
