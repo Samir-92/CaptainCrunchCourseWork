@@ -133,7 +133,7 @@ bool CGameApplication::initGame()
 	pMesh->SetRenderingDevice(m_pD3D10Device);
 	pTestGameObject->addComponent(pMesh);
 	CBoxCollider *pBox=new CBoxCollider();
-	pBox->setExtents(10.0f,1.0f,10.0f);
+	pBox->setExtents(10.0f,2.0f,10.0f);
 	pTestGameObject->addComponent(pBox);
 	//create body make it fixed so no gravity effects it
 	CBodyComponent *pBody=new CBodyComponent();
@@ -197,7 +197,7 @@ bool CGameApplication::initGame()
 	pTestGameObject->addComponent(pMesh);
 	//create box
 	CBoxCollider *pBox1=new CBoxCollider();
-	pBox1->setExtents(1.0f,1.0f,1.0f);
+	pBox1->setExtents(10.0f,1.0f,10.0f);
 	pTestGameObject->addComponent(pBox1);
 	//create body make it fixed so no gravity effects it
 	CBodyComponent *pBody1=new CBodyComponent();
@@ -228,7 +228,7 @@ bool CGameApplication::initGame()
 	pTestGameObject->addComponent(pMesh);
 	//create box
 	CBoxCollider *pBox2=new CBoxCollider();
-	pBox2->setExtents(1.0f,1.0f,1.0f);
+	pBox2->setExtents(10.0f,1.0f,10.0f);
 	pTestGameObject->addComponent(pBox2);
 	//create body make it fixed so no gravity effects it
 	CBodyComponent *pBody2=new CBodyComponent();
@@ -242,7 +242,7 @@ bool CGameApplication::initGame()
 	//Set the name
 	pTestGameObject->setName("Zombie");
 	//Position
-	pTestGameObject->getTransform()->setPosition(0.0f,5.0f,-1.0f);
+	pTestGameObject->getTransform()->setPosition(0.0f,1.0f,-1.0f);
 	pTestGameObject->getTransform()->setScale(0.01f,0.01f,0.01f);
 	pTestGameObject->getTransform()->setIsMoving(true);
 	pTestGameObject->getTransform()->setMovementDirection(true);
@@ -262,7 +262,7 @@ bool CGameApplication::initGame()
 	pTestGameObject->addComponent(pMesh);
 	//create box
 	CBoxCollider *pBox6=new CBoxCollider();
-	pBox6->setExtents(5.0f,1.0f,5.0f);
+	pBox6->setExtents(5.0f,0.01f,5.0f);
 	pTestGameObject->addComponent(pBox6);
 	//create body make it fixed so no gravity effects it
 	CBodyComponent *pBody6=new CBodyComponent();
@@ -275,7 +275,7 @@ bool CGameApplication::initGame()
 	//Set the name
 	pTestGameObject->setName("Zombie2");
 	//Position
-	pTestGameObject->getTransform()->setPosition(1.0f,5.0f,1.0f);
+	pTestGameObject->getTransform()->setPosition(1.0f,1.0f,1.0f);
 	pTestGameObject->getTransform()->setScale(0.01f,0.01f,0.01f);
 	pTestGameObject->getTransform()->setIsMoving(true);
 	pTestGameObject->getTransform()->setMovementDirection(true);
@@ -295,7 +295,7 @@ bool CGameApplication::initGame()
 	pTestGameObject->addComponent(pMesh);
 	//create box
 	CBoxCollider *pBox8=new CBoxCollider();
-	pBox8->setExtents(5.0f,1.0f,5.0f);
+	pBox8->setExtents(5.0f,0.01f,5.0f);
 	pTestGameObject->addComponent(pBox8);
 	//create body make it fixed so no gravity effects it
 	CBodyComponent *pBody8=new CBodyComponent();
@@ -495,34 +495,29 @@ void CGameApplication::update()
 		pTransform->rotate(0.0f,m_Timer.getElapsedTime(),0.0f);
 	}
 
-	while(true)
 	if(Player1->IsConnected())
 		{
-			if(Player1->GetState().Gamepad.wButtons & XINPUT_GAMEPAD_A)
+			if(Player1->GetState().Gamepad.wButtons & XINPUT_GAMEPAD_RIGHT_SHOULDER)
 			{
-	pTransform->MoveForward(m_Timer.getElapsedTime());
-		Player1->Vibrate(15535, 15535);
+				pTransform->MoveForward(m_Timer.getElapsedTime()*pTransform->getcarspeed());
+				Player1->Vibrate(15535, 15535);
 			}
 
-			if(Player1->GetState().Gamepad.wButtons & XINPUT_GAMEPAD_B)
+			if(Player1->GetState().Gamepad.wButtons & XINPUT_GAMEPAD_LEFT_SHOULDER)
 			{
-		pTransform->MoveForward(m_Timer.getElapsedTime()*-1);
+				pTransform->MoveForward(m_Timer.getElapsedTime()*-(pTransform->getcarspeed()));
 			}
 
-			if(Player1->GetState().Gamepad.wButtons & XINPUT_GAMEPAD_X)
+			if(Player1->GetState().Gamepad.wButtons & XINPUT_GAMEPAD_DPAD_LEFT)
 			{
-		pTransform->rotate(0.0f,m_Timer.getElapsedTime()*-1,0.0f);				
+				pTransform->rotate(0.0f,m_Timer.getElapsedTime()*-1,0.0f);				
 			}
 
-			if(Player1->GetState().Gamepad.wButtons & XINPUT_GAMEPAD_Y)
+			if(Player1->GetState().Gamepad.wButtons & XINPUT_GAMEPAD_DPAD_RIGHT)
 			{
-	pTransform->rotate(0.0f,m_Timer.getElapsedTime()*1,0.0f);
+				pTransform->rotate(0.0f,m_Timer.getElapsedTime()*1,0.0f);
 			}
-	}
-			else
-		{
-			break;
-		}
+	}	
 
 	//Do we want to go to debug mode with the camera -- doesn't work yet.
 	if (CInput::getInstance().getKeyboard()->isKeyDown((int)'P'))
