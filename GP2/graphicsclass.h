@@ -9,7 +9,7 @@
 // MY CLASS INCLUDES //
 ///////////////////////
 #include "d3dclass.h"
-#include "cameraclass.h"
+//#include "CameraComponent.h"
 #include "particleshaderclass.h"
 #include "particlesystemclass.h"
 
@@ -42,7 +42,7 @@ private:
 
 private:
 	D3DClass* m_D3D;
-	CameraClass* m_Camera;
+	//CameraClass* m_Camera;
 	ParticleShaderClass* m_ParticleShader;
 	ParticleSystemClass* m_ParticleSystem;
 };

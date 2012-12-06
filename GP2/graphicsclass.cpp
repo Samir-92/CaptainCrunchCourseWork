@@ -7,7 +7,7 @@
 GraphicsClass::GraphicsClass()
 {
 	m_D3D = 0;
-	m_Camera = 0;
+//	m_Camera = 0;
 	m_ParticleShader = 0;
 	m_ParticleSystem = 0;
 }
@@ -44,14 +44,14 @@ bool GraphicsClass::Initialize(int screenWidth, int screenHeight, HWND hwnd)
 	}
 
 	// Create the camera object.
-	m_Camera = new CameraClass;
-	if(!m_Camera)
+//	m_Camera = new CameraClass;
+//	if(!m_Camera)
 	{
 		return false;
 	}
 
 	// Set the initial position of the camera.
-	m_Camera->SetPosition(0.0f, -2.0f, -10.0f);
+//	m_Camera->SetPosition(0.0f, -2.0f, -10.0f);
 	
 	// Create the particle shader object.
 	m_ParticleShader = new ParticleShaderClass;
@@ -105,10 +105,10 @@ void GraphicsClass::Shutdown()
 	}
 
 	// Release the camera object.
-	if(m_Camera)
+	//if(m_Camera)
 	{
-		delete m_Camera;
-		m_Camera = 0;
+	//	delete m_Camera;
+	//m_Camera = 0;
 	}
 
 	// Release the D3D object.
@@ -151,10 +151,10 @@ bool GraphicsClass::Render()
 	m_D3D->BeginScene(0.0f, 0.0f, 0.0f, 1.0f);
 
 	// Generate the view matrix based on the camera's position.
-	m_Camera->Render();
+//	m_Camera->Render();
 
 	// Get the world, view, and projection matrices from the camera and d3d objects.
-	m_Camera->GetViewMatrix(viewMatrix);
+	//m_Camera->GetViewMatrix(viewMatrix);
 	m_D3D->GetWorldMatrix(worldMatrix);
 	m_D3D->GetProjectionMatrix(projectionMatrix);
 
