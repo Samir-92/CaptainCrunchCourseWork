@@ -5,10 +5,6 @@
       <UniqueIdentifier>{4FC737F1-C7A5-4376-A066-2A32D752A2FF}</UniqueIdentifier>
       <Extensions>cpp;c;cc;cxx;def;odl;idl;hpj;bat;asm;asmx</Extensions>
     </Filter>
-    <Filter Include="Header Files">
-      <UniqueIdentifier>{93995380-89BD-4b04-88EB-625FBE52EBFB}</UniqueIdentifier>
-      <Extensions>h;hpp;hxx;hm;inl;inc;xsd</Extensions>
-    </Filter>
     <Filter Include="Resource Files">
       <UniqueIdentifier>{67DA6AB6-F800-4c08-8B7A-83BB121AAD01}</UniqueIdentifier>
       <Extensions>rc;ico;cur;bmp;dlg;rc2;rct;bin;rgs;gif;jpg;jpeg;jpe;resx;tiff;tif;png;wav;mfcribbon-ms</Extensions>
@@ -52,26 +48,14 @@
     <Filter Include="Components\Audio">
       <UniqueIdentifier>{a761e176-970a-4789-97e7-79a15f000a9b}</UniqueIdentifier>
     </Filter>
-    <Filter Include="Header Files\Audio">
-      <UniqueIdentifier>{18abd057-bf34-42f1-b1f7-af275a14b569}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="Header Files\Camera">
-      <UniqueIdentifier>{cd590914-9aec-407c-934f-020d87d4610e}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="Header Files\Geometry">
-      <UniqueIdentifier>{7e0b711b-bc7a-4e9a-a3da-3c3339bd74fd}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="Header Files\Lights">
-      <UniqueIdentifier>{db9f3523-ddf1-449b-8dfb-2295c0ce4593}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="Header Files\Material">
-      <UniqueIdentifier>{8fe81ab9-6500-4536-b8fd-c6b0beadd179}</UniqueIdentifier>
-    </Filter>
     <Filter Include="Resource Files\Sounds">
       <UniqueIdentifier>{c7d7febc-ceb4-4092-89e9-8ecde31fe13c}</UniqueIdentifier>
     </Filter>
     <Filter Include="Resource Files\Images">
       <UniqueIdentifier>{5a5cd510-c71a-46f6-af9c-266b780c0dc9}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="ParticleSystem">
+      <UniqueIdentifier>{7d41f9c8-39d7-4d5a-be84-6e43e7a95566}</UniqueIdentifier>
     </Filter>
   </ItemGroup>
   <ItemGroup>
@@ -135,6 +119,24 @@
     <ClCompile Include="AudioListenerComponent.cpp">
       <Filter>Components\Audio</Filter>
     </ClCompile>
+    <ClCompile Include="cxboxcontroller.cpp">
+      <Filter>Input</Filter>
+    </ClCompile>
+    <ClCompile Include="ParticleSystem\particleshaderclass.cpp">
+      <Filter>ParticleSystem</Filter>
+    </ClCompile>
+    <ClCompile Include="ParticleSystem\particlesystemclass.cpp">
+      <Filter>ParticleSystem</Filter>
+    </ClCompile>
+    <ClCompile Include="ParticleSystem\textureclass.cpp">
+      <Filter>ParticleSystem</Filter>
+    </ClCompile>
+    <ClCompile Include="ParticleSystem\d3dclass.cpp">
+      <Filter>ParticleSystem</Filter>
+    </ClCompile>
+    <ClCompile Include="ParticleSystem\graphicsclass.cpp">
+      <Filter>ParticleSystem</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Win32Window.h">
@@ -142,9 +144,6 @@
     </ClInclude>
     <ClInclude Include="Timer.h">
       <Filter>Timer</Filter>
-    </ClInclude>
-    <ClInclude Include="Vertex.h">
-      <Filter>Header Files</Filter>
     </ClInclude>
     <ClInclude Include="ModelLoader.h">
       <Filter>Model</Filter>
@@ -161,50 +160,23 @@
     <ClInclude Include="Joypad.h">
       <Filter>Input</Filter>
     </ClInclude>
-    <ClInclude Include="GameApplication.h">
-      <Filter>Header Files</Filter>
+    <ClInclude Include="cxboxcontroller.h">
+      <Filter>Input</Filter>
     </ClInclude>
-    <ClInclude Include="GameObject.h">
-      <Filter>Header Files</Filter>
+    <ClInclude Include="ParticleSystem\graphicsclass.h">
+      <Filter>ParticleSystem</Filter>
     </ClInclude>
-    <ClInclude Include="GameObjectManager.h">
-      <Filter>Header Files</Filter>
+    <ClInclude Include="ParticleSystem\particleshaderclass.h">
+      <Filter>ParticleSystem</Filter>
     </ClInclude>
-    <ClInclude Include="DefaultEffect.h">
-      <Filter>Header Files</Filter>
+    <ClInclude Include="ParticleSystem\particlesystemclass.h">
+      <Filter>ParticleSystem</Filter>
     </ClInclude>
-    <ClInclude Include="IComponent.h">
-      <Filter>Header Files</Filter>
+    <ClInclude Include="ParticleSystem\textureclass.h">
+      <Filter>ParticleSystem</Filter>
     </ClInclude>
-    <ClInclude Include="TransformComponent.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="AudioListenerComponent.h">
-      <Filter>Header Files\Audio</Filter>
-    </ClInclude>
-    <ClInclude Include="AudioSystem.h">
-      <Filter>Header Files\Audio</Filter>
-    </ClInclude>
-    <ClInclude Include="AudioSourceComponent.h">
-      <Filter>Header Files\Audio</Filter>
-    </ClInclude>
-    <ClInclude Include="CameraComponent.h">
-      <Filter>Header Files\Camera</Filter>
-    </ClInclude>
-    <ClInclude Include="MeshComponent.h">
-      <Filter>Header Files\Geometry</Filter>
-    </ClInclude>
-    <ClInclude Include="Geometry.h">
-      <Filter>Header Files\Geometry</Filter>
-    </ClInclude>
-    <ClInclude Include="DirectionLightComponent.h">
-      <Filter>Header Files\Lights</Filter>
-    </ClInclude>
-    <ClInclude Include="LightComponent.h">
-      <Filter>Header Files\Lights</Filter>
-    </ClInclude>
-    <ClInclude Include="MaterialComponent.h">
-      <Filter>Header Files\Material</Filter>
+    <ClInclude Include="ParticleSystem\d3dclass.h">
+      <Filter>ParticleSystem</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>

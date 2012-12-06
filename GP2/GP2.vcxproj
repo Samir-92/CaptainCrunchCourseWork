@@ -81,6 +81,7 @@
     <ClCompile Include="AudioSourceComponent.cpp" />
     <ClCompile Include="AudioSystem.cpp" />
     <ClCompile Include="CameraComponent.cpp" />
+    <ClCompile Include="cxboxcontroller.cpp" />
     <ClCompile Include="DirectionalLightComponent.cpp" />
     <ClCompile Include="GameApplication.cpp" />
     <ClCompile Include="GameObject.cpp" />
@@ -95,32 +96,27 @@
     <ClCompile Include="MeshComponent.cpp" />
     <ClCompile Include="ModelLoader.cpp" />
     <ClCompile Include="Mouse.cpp" />
+    <ClCompile Include="ParticleSystem\d3dclass.cpp" />
+    <ClCompile Include="ParticleSystem\graphicsclass.cpp" />
+    <ClCompile Include="ParticleSystem\particleshaderclass.cpp" />
+    <ClCompile Include="ParticleSystem\particlesystemclass.cpp" />
+    <ClCompile Include="ParticleSystem\textureclass.cpp" />
     <ClCompile Include="Timer.cpp" />
     <ClCompile Include="Win32Window.cpp" />
   </ItemGroup>
   <ItemGroup>
-    <ClInclude Include="AudioListenerComponent.h" />
-    <ClInclude Include="AudioSourceComponent.h" />
-    <ClInclude Include="AudioSystem.h" />
-    <ClInclude Include="CameraComponent.h" />
-    <ClInclude Include="DefaultEffect.h" />
-    <ClInclude Include="DirectionLightComponent.h" />
-    <ClInclude Include="GameApplication.h" />
-    <ClInclude Include="GameObject.h" />
-    <ClInclude Include="GameObjectManager.h" />
-    <ClInclude Include="Geometry.h" />
-    <ClInclude Include="IComponent.h" />
+    <ClInclude Include="cxboxcontroller.h" />
     <ClInclude Include="Input.h" />
     <ClInclude Include="Joypad.h" />
     <ClInclude Include="Keyboard.h" />
-    <ClInclude Include="LightComponent.h" />
-    <ClInclude Include="MaterialComponent.h" />
-    <ClInclude Include="MeshComponent.h" />
     <ClInclude Include="ModelLoader.h" />
     <ClInclude Include="Mouse.h" />
+    <ClInclude Include="ParticleSystem\d3dclass.h" />
+    <ClInclude Include="ParticleSystem\graphicsclass.h" />
+    <ClInclude Include="ParticleSystem\particleshaderclass.h" />
+    <ClInclude Include="ParticleSystem\particlesystemclass.h" />
+    <ClInclude Include="ParticleSystem\textureclass.h" />
     <ClInclude Include="Timer.h" />
-    <ClInclude Include="TransformComponent.h" />
-    <ClInclude Include="Vertex.h" />
     <ClInclude Include="Win32Window.h" />
   </ItemGroup>
   <ItemGroup>

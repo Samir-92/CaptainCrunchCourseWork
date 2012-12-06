@@ -6,6 +6,8 @@
 #include "Keyboard.h"
 #include "Mouse.h"
 #include "ModelLoader.h"
+#include "CXBOXController.h"
+
 
 CGameApplication::CGameApplication(void)
 {
@@ -295,6 +297,40 @@ bool CGameApplication::initGame()
 	
 	pMusic->play();
 
+	// Create the particle shader object.<<<<<<<<<<<<<<
+	m_ParticleShader = new ParticleShaderClass;
+	if(!m_ParticleShader)
+	{
+		return false;
+	}
+
+	// Initialize the particle shader object. <<<<<<<<<
+	result = m_ParticleShader->Initialize(m_D3D->GetDevice(), hwnd);
+	if(!result)
+	{
+		MessageBox(hwnd, L"Could not initialize the particle shader object.", L"Error", MB_OK);
+		return false;
+	}
+
+	// Create the particle system object. <<<<<<<
+	m_ParticleSystem = new ParticleSystemClass;
+	if(!m_ParticleSystem)
+	{
+		return false;
+	}
+
+	// Initialize the particle system object.
+	result = m_ParticleSystem->Initialize(m_D3D->GetDevice(), L"../Engine/data/star.dds");
+	if(!result)
+	{
+		return false;
+	}
+
+
+
+
+
+
 	m_Timer.start();
 	return true;
 }
@@ -388,7 +424,7 @@ void CGameApplication::update()
 
 	//Recognize the camera
 	CCameraComponent * pCamera=m_pGameObjectManager->getMainCamera();
-
+	// move forward
 	if (CInput::getInstance().getKeyboard()->isKeyDown((int)'W'))
 	{
 		if(!pCamera->isDebug()){
@@ -405,6 +441,7 @@ void CGameApplication::update()
 			pCamera->setPosition(pCamera->getPosition().x + cameraNewPosition.x, cameraNewPosition.y, cameraNewPosition.z);
 		}
 	}
+	// backwards 
 	else if (CInput::getInstance().getKeyboard()->isKeyDown((int)'S'))
 	{
 		//play sound
@@ -412,12 +449,14 @@ void CGameApplication::update()
 		pTransform->MoveForward(m_Timer.getElapsedTime()*-30);
 		
 	}
+	// left 
 	if (CInput::getInstance().getKeyboard()->isKeyDown((int)'A'))
 	{
 		//play sound
 		CTransformComponent * pTransform=m_pGameObjectManager->findGameObject("Test")->getTransform();
 		pTransform->rotate(0.0f,m_Timer.getElapsedTime()*-1,0.0f);
 	}
+	//right
 	else if (CInput::getInstance().getKeyboard()->isKeyDown((int)'D'))
 	{
 		//play sound
@@ -448,10 +487,57 @@ void CGameApplication::update()
 		//pZombie->setRotation(0.1f,0.0f,0.1f);
 		//pZombie->enemyMovement(m_Timer.getElapsedTime());
 	}
+
+CXBOXController* Player1;
+		Player1 = new CXBOXController(1);
+
+		while(true)
+    {
+        if(Player1->IsConnected())
+        {
+            if(Player1->GetState().Gamepad.wButtons & XINPUT_GAMEPAD_A)
+            {
+                if(!pCamera->isDebug()){
+	
+			CAudioSourceComponent *pAudio=(CAudioSourceComponent*)m_pGameObjectManager->findGameObject("Test")->getComponent("AudioSourceComponent");
+	
+			CTransformComponent * pTransform=m_pGameObjectManager->findGameObject("Test")->getTransform();
+			pTransform->MoveForward(m_Timer.getElapsedTime()*30);
+			pAudio->play();
+            }
+
+            if(Player1->GetState().Gamepad.wButtons & XINPUT_GAMEPAD_B)
+            {
+                CTransformComponent * pTransform=m_pGameObjectManager->findGameObject("Test")->getTransform();
+		pTransform->rotate(0.0f,m_Timer.getElapsedTime(),0.0f);
+            }
+
+            if(Player1->GetState().Gamepad.wButtons & XINPUT_GAMEPAD_X)
+            {
+                //play sound
+		CTransformComponent * pTransform=m_pGameObjectManager->findGameObject("Test")->getTransform();
+		pTransform->rotate(0.0f,m_Timer.getElapsedTime()*-1,0.0f);
+            }
+
+            if(Player1->GetState().Gamepad.wButtons & XINPUT_GAMEPAD_Y)
+            {
+                //play sound
+		CTransformComponent * pTransform=m_pGameObjectManager->findGameObject("Test")->getTransform();
+		pTransform->MoveForward(m_Timer.getElapsedTime()*-30);
+			}
+          
+        
+}
+
+
 }
 
 bool CGameApplication::initInput()
 {
+
+
+
+
 	CInput::getInstance().init();
 	return true;
 }
