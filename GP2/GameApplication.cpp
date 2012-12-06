@@ -6,6 +6,7 @@
 #include "Keyboard.h"
 #include "Mouse.h"
 #include "ModelLoader.h"
+#include "CXBOXController.h"
 
 CGameApplication::CGameApplication(void)
 {
@@ -354,6 +355,9 @@ bool CGameApplication::initGame()
 	//init, this must be called after we have created all game objects
 	m_pGameObjectManager->init();
 	
+	//360 controller
+	Player1 = new CXBOXController(1);
+
 	pMusic->play();
 
 	m_Timer.start();
@@ -491,6 +495,35 @@ void CGameApplication::update()
 		pTransform->rotate(0.0f,m_Timer.getElapsedTime(),0.0f);
 	}
 
+	while(true)
+	if(Player1->IsConnected())
+		{
+			if(Player1->GetState().Gamepad.wButtons & XINPUT_GAMEPAD_A)
+			{
+	pTransform->MoveForward(m_Timer.getElapsedTime());
+		Player1->Vibrate(15535, 15535);
+			}
+
+			if(Player1->GetState().Gamepad.wButtons & XINPUT_GAMEPAD_B)
+			{
+		pTransform->MoveForward(m_Timer.getElapsedTime()*-1);
+			}
+
+			if(Player1->GetState().Gamepad.wButtons & XINPUT_GAMEPAD_X)
+			{
+		pTransform->rotate(0.0f,m_Timer.getElapsedTime()*-1,0.0f);				
+			}
+
+			if(Player1->GetState().Gamepad.wButtons & XINPUT_GAMEPAD_Y)
+			{
+	pTransform->rotate(0.0f,m_Timer.getElapsedTime()*1,0.0f);
+			}
+	}
+			else
+		{
+			break;
+		}
+
 	//Do we want to go to debug mode with the camera -- doesn't work yet.
 	if (CInput::getInstance().getKeyboard()->isKeyDown((int)'P'))
 	{
@@ -501,16 +534,18 @@ void CGameApplication::update()
 		}
 	}
 
-	m_pGameObjectManager->update(m_Timer.getElapsedTime());
-	
 	CTransformComponent * pZombie=m_pGameObjectManager->findGameObject("Zombie")->getTransform();
 	CTransformComponent * pZombie2=m_pGameObjectManager->findGameObject("Zombie2")->getTransform();
-	//while(!pZombie->getIsMoving()){
-	if(pZombie->getIsMoving() || pZombie2->getIsMoving()){
+
+	if(pZombie->getIsMoving() || pZombie2->getIsMoving())
+	{
 		//Move the zombie bitch!
 		pZombie->enemyMovement(m_Timer.getElapsedTime());
 		pZombie2->enemyMovementLR(m_Timer.getElapsedTime());
 	}
+
+	m_pGameObjectManager->update(m_Timer.getElapsedTime());
+	
 }
 
 bool CGameApplication::initPhysics()
@@ -683,7 +718,7 @@ bool CGameApplication::initGraphics()
 bool CGameApplication::initWindow()
 {
 	m_pWindow=new CWin32Window();
-	if (!m_pWindow->init(TEXT("Games Programming"),800,640,false))
+	if (!m_pWindow->init(TEXT("CAPTAIN CRUNCH AND THE CEREAL KILLERS"),800,640,false))
 		return false;
 	return true;
 }
