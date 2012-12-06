@@ -115,10 +115,9 @@ float4 PS(PS_INPUT input):SV_TARGET
 	float3 halfVec=normalize(lightDir+input.cameraDirection);
 	float specular=pow(saturate(dot(normal,halfVec)),specularPower);
 	
-	return diffuseMap.Sample(wrapSampler,input.texCoord);
-	//return ((ambientMaterialColour*ambientLightColour)+
-	//(diffuseColour*diffuseLightColour*diffuse)+
-	//(specularColour*specularLightColour*specular));
+	return ((ambientMaterialColour*ambientLightColour)+
+	(diffuseColour*diffuseLightColour*diffuse)+
+	(specularColour*specularLightColour*specular));
 }
 
 RasterizerState DisableCulling
@@ -126,10 +125,6 @@ RasterizerState DisableCulling
     CullMode = NONE;
 };
 
-DepthStencilState EnableZBuffering
-{
-	DepthEnable=True;
-};
 technique10 Render
 {
 	pass P0
@@ -138,7 +133,5 @@ technique10 Render
 		SetGeometryShader( NULL );
 		SetPixelShader( CompileShader( ps_4_0,  PS() ) );
 		SetRasterizerState(DisableCulling); 
-		SetDepthStencilState(EnableZBuffering,0);
-
 	}
 }

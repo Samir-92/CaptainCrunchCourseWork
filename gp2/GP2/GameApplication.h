@@ -13,21 +13,25 @@
 #include "MeshComponent.h"
 
 #include "ModelLoader.h"
-#include "GUIManager.h"
 
+// 360 controller
+#include "CXBOXController.h"
+
+//Audio - Includes
+#include "AudioListenerComponent.h"
+#include "AudioSourceComponent.h"
+#include "AudioSystem.h"
+
+//Physics
+#include "Physics.h"
+#include "BodyComponent.h"
+#include "BoxCollider.h"
+#include "SphereCollider.h"
 #include <vector>
 
 using namespace std;
 
-enum GameState
-{
-	MAINMENU,
-	GAME,
-	PAUSE,
-	EXIT
-};
-
-class CGameApplication
+class CGameApplication:public hkpContactListener 
 {
 public:
 	CGameApplication(void);
@@ -38,17 +42,14 @@ private:
 	bool initInput();
 	bool initGame();
 	bool initGraphics();
-	bool initGUI();
+	bool initPhysics();
+	bool initAudio();
 	bool initWindow();
 	void render();
 	void update();
+	
+	void contactPointCallback (const hkpContactPointEvent &event); 
 
-	void initTheGame();
-	void initMenu();
-
-	void updateGame();
-	void updateMenu();
-	void updatePauseGUI();
 private:
 	//Graphics
 	ID3D10Device * m_pD3D10Device;
@@ -56,20 +57,14 @@ private:
 	ID3D10RenderTargetView * m_pRenderTargetView;
 	ID3D10DepthStencilView * m_pDepthStencelView;
 	ID3D10Texture2D *m_pDepthStencilTexture;
-
 	CWin32Window * m_pWindow;
-
 	CTimer m_Timer;
+
+	//360 controller
+	CXBOXController* Player1;
 	
 	//Get Game Object Manager
 	CGameObjectManager *m_pGameObjectManager;
 
 	CModelLoader modelloader;
-
-	Rocket::Core::ElementDocument *m_pMenu;
-	Rocket::Core::ElementDocument *m_pGameGUI;
-	Rocket::Core::ElementDocument *m_pPauseGUI;
-
-	GameState m_GameState;
-	float m_fCurrentTime;
 };

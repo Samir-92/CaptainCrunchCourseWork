@@ -53,8 +53,8 @@ void CCameraComponent::update(float elapsedTime)
 
 		//Where the camera looks
 		m_vecLookAt = objPos;
-	
 	}
+
 	D3DXMatrixLookAtLH(&m_matView,&pTransform->getPosition(),&m_vecLookAt,&m_vecUp);
 	D3DXMatrixPerspectiveFovLH(&m_matProjection,m_fAspectRatio,m_fFOV,m_fNearClip,m_fFarClip);
 }

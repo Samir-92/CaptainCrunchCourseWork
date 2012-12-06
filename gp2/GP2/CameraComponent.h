@@ -52,30 +52,26 @@ public:
 		m_fFarClip=farClip;
 	};
 
-	void setTarget(CGameObject* target)
-	{
+	void setTarget(CGameObject* target){
 		m_pTarget = target;
 	};
-	
-	void setPosition(float x, float y, float z)
-	{
+
+	void setPosition(float x, float y, float z){
 		m_position = D3DXVECTOR3(x,y,z);
 	};
 
-	D3DXVECTOR3& getPosition()
-	{
+	D3DXVECTOR3& getPosition(){
 		return m_position;
 	};
 
-	bool isDebug()
-	{
+	bool isDebug(){
 		return m_debug;
-	};
+	}
 
-	void setDebug(bool debug)
-	{
+	void setDebug(bool debug){
 		m_debug = debug;
 	};
+
 private:
 	D3DXMATRIX m_matView;
 	D3DXMATRIX m_matProjection;
