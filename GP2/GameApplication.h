@@ -14,6 +14,9 @@
 
 #include "ModelLoader.h"
 
+// 360 controller
+#include "CXBOXController.h"
+
 //Audio - Includes
 #include "AudioListenerComponent.h"
 #include "AudioSourceComponent.h"
@@ -56,6 +59,9 @@ private:
 	ID3D10Texture2D *m_pDepthStencilTexture;
 	CWin32Window * m_pWindow;
 	CTimer m_Timer;
+
+	//360 controller
+	CXBOXController* Player1;
 	
 	//Get Game Object Manager
 	CGameObjectManager *m_pGameObjectManager;

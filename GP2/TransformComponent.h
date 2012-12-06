@@ -162,6 +162,7 @@ public:
 		m_vecPosition.z+=z;
 		setPosition(m_vecPosition.x,m_vecPosition.y,m_vecPosition.z);
 	};
+
 	//scale
 	void scale(float x,float y, float z)
 	{
@@ -169,8 +170,10 @@ public:
 		m_vecScale.y+=y;
 		m_vecScale.z+=z;
 	};
+
 	void MoveForward(float speed)
 	{
+		
 		D3DXVECTOR3 direction;
 		//Calculate direction from rotation, replace the following line
 		direction=D3DXVECTOR3(1.0f,0.0f,1.0f);
@@ -184,6 +187,18 @@ public:
 	};
 	void enemyMovement(float speed)
 	{
+		//Don't move the zombie if zombie going off platform
+		//need to add
+		
+		////calculate direction from rotation
+		//m_direction=D3DXVECTOR3(1.0f,0.0f,1.0f);
+		////Normalize
+		//D3DXVec3Normalize(&m_direction, &m_direction);
+
+	 //   m_vecPosition.x+=(m_direction.x*sin(m_vecRotation.y));
+		//m_vecPosition.z+=(m_direction.z*cos(m_vecRotation.y));
+		//m_direction.x=m_direction.x*sin(m_vecRotation.y);
+		//m_direction.z=m_direction.z*cos(m_vecRotation.y);
 
 		//Move the zombie between a distance back and forward between distance
 		if(m_moveDirRight){
@@ -201,6 +216,18 @@ public:
 	};
 	void enemyMovementLR(float speed)
 	{
+		//Don't move the zombie if zombie going off platform
+		//need to add
+		
+		////calculate direction from rotation
+		//m_direction=D3DXVECTOR3(1.0f,0.0f,1.0f);
+		////Normalize
+		//D3DXVec3Normalize(&m_direction, &m_direction);
+
+	 //   m_vecPosition.x+=(m_direction.x*sin(m_vecRotation.y));
+		//m_vecPosition.z+=(m_direction.z*cos(m_vecRotation.y));
+		//m_direction.x=m_direction.x*sin(m_vecRotation.y);
+		//m_direction.z=m_direction.z*cos(m_vecRotation.y);
 
 		//Move the zombie between a distance back and forward between distance
 		if(m_moveDirRight){
@@ -214,7 +241,7 @@ public:
 				m_moveDirRight = true;
 			}
 		}
-		setPosition(m_vecPosition.x,m_vecPosition.y,m_vecPosition.z);
+
 	};
 
 private:

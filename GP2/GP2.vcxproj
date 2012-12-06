@@ -85,6 +85,7 @@
     <ClCompile Include="BoxCollider.cpp" />
     <ClCompile Include="CameraComponent.cpp" />
     <ClCompile Include="CapsuleCollider.cpp" />
+    <ClCompile Include="CXBOXController.cpp" />
     <ClCompile Include="DirectionalLightComponent.cpp" />
     <ClCompile Include="GameApplication.cpp" />
     <ClCompile Include="GameObject.cpp" />
@@ -114,6 +115,7 @@
     <ClInclude Include="BoxCollider.h" />
     <ClInclude Include="CameraComponent.h" />
     <ClInclude Include="CapsuleCollider.h" />
+    <ClInclude Include="CXBOXController.h" />
     <ClInclude Include="DefaultEffect.h" />
     <ClInclude Include="DirectionLightComponent.h" />
     <ClInclude Include="GameApplication.h" />

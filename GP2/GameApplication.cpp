@@ -6,6 +6,7 @@
 #include "Keyboard.h"
 #include "Mouse.h"
 #include "ModelLoader.h"
+#include "CXBOXController.h"
 
 CGameApplication::CGameApplication(void)
 {
@@ -97,12 +98,12 @@ bool CGameApplication::initGame()
 	//add the game object
 	m_pGameObjectManager->addGameObject(pTestGameObject);
 
-	///////////CAR///////////
+	//Create Game Object
 	pTestGameObject=new CGameObject();
 	//Set the name
 	pTestGameObject->setName("Test");
 	//Position
-	pTestGameObject->getTransform()->setPosition(0.0f,5.0f,-20.0f);
+	pTestGameObject->getTransform()->setPosition(0.0f,0.0f,-40.0f);
 	pTestGameObject->getTransform()->setScale(0.8f,0.8f,0.8f);
 	//create material
 	pMaterial=new CMaterialComponent();
@@ -123,6 +124,9 @@ bool CGameApplication::initGame()
 	pAudio->setStream(true);
 	pAudio2->setFilename("reverse.mp3");
 	pAudio2->setStream(true);
+	//Audio - stream set to false
+	//pAudio->setStream(false);
+	//Audio - Add it to the Game Object
 	pTestGameObject->addComponent(pAudio);
 	pTestGameObject->addComponent(pAudio2);
 
@@ -131,24 +135,27 @@ bool CGameApplication::initGame()
 	//CMeshComponent *pMesh=modelloader.createCube(m_pD3D10Device,10.0f,10.0f,10.0f);
 	pMesh->SetRenderingDevice(m_pD3D10Device);
 	pTestGameObject->addComponent(pMesh);
-	CBoxCollider *pBox=new CBoxCollider();
-	pBox->setExtents(10.0f,1.0f,10.0f);
-	pTestGameObject->addComponent(pBox);
-	//create body make it fixed so no gravity effects it
-	CBodyComponent *pBody=new CBodyComponent();
-	pBody->setFixed(false);
-	pTestGameObject->addComponent(pBody);
+
+	////create box
+	//CSphereCollider *ps=new CSphereCollider();
+	//ps->setRadius(0.01f);
+	//pTestGameObject->addComponent(ps);
+
+	////create body make it fixed so no gravity effects it
+	//CBodyComponent *pBody=new CBodyComponent();
+	//pBody->setFixed(true);
+	//pTestGameObject->addComponent(pBody);
+
 	//add the game object
 	m_pGameObjectManager->addGameObject(pTestGameObject);
 
-	//////FLOOR/////////
 	pTestGameObject=new CGameObject();
 	//Set the name
 	pTestGameObject->setName("floor");
 	//Position
 	pTestGameObject->getTransform()->setPosition(0.0f,0.0f,0.0f);
 	pTestGameObject->getTransform()->setRotation(0.0f,0.0f,0.0f);
-	pTestGameObject->getTransform()->setScale(50.0f,0.5f,50.0f);
+	pTestGameObject->getTransform()->setScale(50.0f,-0.1f,50.0f);
 	//create material
 	pMaterial=new CMaterialComponent();
 	pMaterial->SetRenderingDevice(m_pD3D10Device);
@@ -157,19 +164,22 @@ bool CGameApplication::initGame()
 	pMaterial->loadDiffuseTexture("Floor.png");
 	//pMaterial->loadSpecularTexture("Floor.png");
 	pTestGameObject->addComponent(pMaterial);
+
 	//Create Mesh
-	pMesh=modelloader.loadModelFromFile(m_pD3D10Device,"floor.fbx");
+	pMesh=modelloader.loadModelFromFile(m_pD3D10Device,"floor1.fbx");
 	//CMeshComponent *pMesh=modelloader.createCube(m_pD3D10Device,10.0f,10.0f,10.0f);
 	pMesh->SetRenderingDevice(m_pD3D10Device);
 	pTestGameObject->addComponent(pMesh);
-	//create box
-	CBoxCollider *pBox4=new CBoxCollider();
-	pBox4->setExtents(1000.0f,0.5f,1000.0f);
-	pTestGameObject->addComponent(pBox4);
-	//create body make it fixed so no gravity effects it
-	CBodyComponent *pBody4=new CBodyComponent();
-	pBody4->setFixed(true);
-	pTestGameObject->addComponent(pBody4);
+
+	////create box
+	//CBoxCollider *pBox4=new CBoxCollider();
+	//pBox4->setExtents(0.01f,0.01f,0.01f);
+	//pTestGameObject->addComponent(pBox4);
+
+	////create body make it fixed so no gravity effects it
+	//CBodyComponent *pBody4=new CBodyComponent();
+	//pBody4->setFixed(true);
+	//pTestGameObject->addComponent(pBody4);
 	////add the game object
 	m_pGameObjectManager->addGameObject(pTestGameObject);
 
@@ -177,7 +187,7 @@ bool CGameApplication::initGame()
 	//Set the name
 	pTestGameObject->setName("Barrel");
 	//Position
-	pTestGameObject->getTransform()->setPosition(0.0f,1.0f,6.0f);
+	pTestGameObject->getTransform()->setPosition(0.0f,0.0f,6.0f);
 	pTestGameObject->getTransform()->setScale(0.01f,0.01f,0.01f);
 	//create material
 	pMaterial=new CMaterialComponent();
@@ -194,14 +204,17 @@ bool CGameApplication::initGame()
 	//CMeshComponent *pMesh=modelloader.createCube(m_pD3D10Device,10.0f,10.0f,10.0f);
 	pMesh->SetRenderingDevice(m_pD3D10Device);
 	pTestGameObject->addComponent(pMesh);
+
 	//create box
 	CBoxCollider *pBox1=new CBoxCollider();
-	pBox1->setExtents(1.0f,1.0f,1.0f);
+	pBox1->setExtents(0.01f,0.01f,0.01f);
 	pTestGameObject->addComponent(pBox1);
+
 	//create body make it fixed so no gravity effects it
 	CBodyComponent *pBody1=new CBodyComponent();
-	pBody1->setFixed(false);
+	pBody1->setFixed(true);
 	pTestGameObject->addComponent(pBody1);
+
 	//add the game object
 	m_pGameObjectManager->addGameObject(pTestGameObject);
 
@@ -209,7 +222,7 @@ bool CGameApplication::initGame()
 	//Set the name
 	pTestGameObject->setName("Barrel2");
 	//Position
-	pTestGameObject->getTransform()->setPosition(-8.0f,1.0f,1.0f);
+	pTestGameObject->getTransform()->setPosition(1.0f,0.0f,1.0f);
 	pTestGameObject->getTransform()->setScale(0.01f,0.01f,0.01f);
 	//create material
 	pMaterial=new CMaterialComponent();
@@ -220,28 +233,31 @@ bool CGameApplication::initGame()
 	pMaterial->loadSpecularTexture("barrel_spec_01.png");
 	pMaterial->loadBumpTexture("barrel_nmap_01.png");
     pTestGameObject->addComponent(pMaterial);
+
 	//Create Mesh
 	pMesh=modelloader.loadModelFromFile(m_pD3D10Device,"barrel.fbx");
 	//CMeshComponent *pMesh=modelloader.createCube(m_pD3D10Device,10.0f,10.0f,10.0f);
 	pMesh->SetRenderingDevice(m_pD3D10Device);
 	pTestGameObject->addComponent(pMesh);
+
 	//create box
 	CBoxCollider *pBox2=new CBoxCollider();
-	pBox2->setExtents(1.0f,1.0f,1.0f);
+	pBox2->setExtents(0.01f,0.01f,0.01f);
 	pTestGameObject->addComponent(pBox2);
+
 	//create body make it fixed so no gravity effects it
 	CBodyComponent *pBody2=new CBodyComponent();
-	pBody2->setFixed(false);
+	pBody2->setFixed(true);
 	pTestGameObject->addComponent(pBody2);
+
 	//add the game object
 	m_pGameObjectManager->addGameObject(pTestGameObject);
 	
-	//////ZOMBIE/////
 	pTestGameObject=new CGameObject();
 	//Set the name
 	pTestGameObject->setName("Zombie");
 	//Position
-	pTestGameObject->getTransform()->setPosition(0.0f,5.0f,-1.0f);
+	pTestGameObject->getTransform()->setPosition(0.0f,0.0f,-1.0f);
 	pTestGameObject->getTransform()->setScale(0.01f,0.01f,0.01f);
 	pTestGameObject->getTransform()->setIsMoving(true);
 	pTestGameObject->getTransform()->setMovementDirection(true);
@@ -250,22 +266,25 @@ bool CGameApplication::initGame()
 	pMaterial->SetRenderingDevice(m_pD3D10Device);
 	pMaterial->setEffectFilename("DirectionalLight.fx");
 	pMaterial->setAmbientMaterialColour(D3DXCOLOR(0.5f,0.5f,0.5f,1.0f));
-	pMaterial->loadDiffuseTexture("zombie.png");
+	//pMaterial->loadDiffuseTexture("ZOMBIE.png");
 	//pMaterial->loadSpecularTexture("barrel_spec_01.png");
 	//pMaterial->loadBumpTexture("barrel_nmap_01.png");
     pTestGameObject->addComponent(pMaterial);
+
 	//Create Mesh
 	pMesh=modelloader.loadModelFromFile(m_pD3D10Device,"humanoid.fbx");
 	//CMeshComponent *pMesh=modelloader.createCube(m_pD3D10Device,10.0f,10.0f,10.0f);
 	pMesh->SetRenderingDevice(m_pD3D10Device);
 	pTestGameObject->addComponent(pMesh);
+
 	//create box
 	CBoxCollider *pBox6=new CBoxCollider();
-	pBox6->setExtents(5.0f,1.0f,5.0f);
+	pBox6->setExtents(0.01f,0.01f,0.01f);
 	pTestGameObject->addComponent(pBox6);
+
 	//create body make it fixed so no gravity effects it
 	CBodyComponent *pBody6=new CBodyComponent();
-	pBody6->setFixed(false);
+	pBody6->setFixed(true);
 	pTestGameObject->addComponent(pBody6);
 	//add the game object
 	m_pGameObjectManager->addGameObject(pTestGameObject);
@@ -274,7 +293,7 @@ bool CGameApplication::initGame()
 	//Set the name
 	pTestGameObject->setName("Zombie2");
 	//Position
-	pTestGameObject->getTransform()->setPosition(1.0f,5.0f,1.0f);
+	pTestGameObject->getTransform()->setPosition(1.0f,0.0f,1.0f);
 	pTestGameObject->getTransform()->setScale(0.01f,0.01f,0.01f);
 	pTestGameObject->getTransform()->setIsMoving(true);
 	pTestGameObject->getTransform()->setMovementDirection(true);
@@ -283,25 +302,19 @@ bool CGameApplication::initGame()
 	pMaterial->SetRenderingDevice(m_pD3D10Device);
 	pMaterial->setEffectFilename("DirectionalLight.fx");
 	pMaterial->setAmbientMaterialColour(D3DXCOLOR(0.5f,0.5f,0.5f,1.0f));
-	pMaterial->loadDiffuseTexture("zombie.png");
+	//pMaterial->loadDiffuseTexture("ZOMBIE.png");
 	//pMaterial->loadSpecularTexture("barrel_spec_01.png");
 	//pMaterial->loadBumpTexture("barrel_nmap_01.png");
     pTestGameObject->addComponent(pMaterial);
+
 	//Create Mesh
 	pMesh=modelloader.loadModelFromFile(m_pD3D10Device,"humanoid.fbx");
 	//CMeshComponent *pMesh=modelloader.createCube(m_pD3D10Device,10.0f,10.0f,10.0f);
 	pMesh->SetRenderingDevice(m_pD3D10Device);
 	pTestGameObject->addComponent(pMesh);
-	//create box
-	CBoxCollider *pBox8=new CBoxCollider();
-	pBox8->setExtents(5.0f,1.0f,5.0f);
-	pTestGameObject->addComponent(pBox8);
-	//create body make it fixed so no gravity effects it
-	CBodyComponent *pBody8=new CBodyComponent();
-	pBody8->setFixed(false);
-	pTestGameObject->addComponent(pBody8);
 	//add the game object
 	m_pGameObjectManager->addGameObject(pTestGameObject);
+
 
 	CGameObject *pCameraGameObject=new CGameObject();
 	pCameraGameObject->getTransform()->setPosition(0.0f,2.0f,-5.0f);
@@ -353,6 +366,9 @@ bool CGameApplication::initGame()
 
 	//init, this must be called after we have created all game objects
 	m_pGameObjectManager->init();
+
+	//360 controller
+	Player1 = new CXBOXController(1);
 	
 	pMusic->play();
 
@@ -436,6 +452,7 @@ void CGameApplication::render()
 				}
 			}
 		}
+
 	}
 	//Swaps the buffers in the chain, the back buffer to the front(screen)
 	//http://msdn.microsoft.com/en-us/library/bb174576%28v=vs.85%29.aspx - BMD
@@ -452,44 +469,91 @@ void CGameApplication::update()
 
 	//Recognize the camera
 	CCameraComponent * pCamera=m_pGameObjectManager->getMainCamera();
-	CTransformComponent * pTransform=m_pGameObjectManager->findGameObject("Test")->getTransform();
-	if(pTransform->getPosition().y < -5 || pTransform->getPosition().y > 10)
-	{
-		pTransform->setPosition(pTransform->getPosition().x, 5, pTransform->getPosition().z);
-	}
+	
+				
+		//Audio - grab the audio component
+		
 		if (CInput::getInstance().getKeyboard()->keyPressed((int)'W'))
 		{
 		if(!pCamera->isDebug()){
 			
 		//Audio - call play
 			CAudioSourceComponent *pAudio2=(CAudioSourceComponent *)m_pGameObjectManager->findGameObject("Test")->getComponent("AudioSourceComponent");
-			//pAudio2->play();
+			pAudio2->play();
+			CTransformComponent * pTransform=m_pGameObjectManager->findGameObject("Test")->getTransform();
 			pTransform->MoveForward(m_Timer.getElapsedTime()*pTransform->getcarspeed());
-		}	
+		}
+			
 		
 		else
+		
 		{
 			//Move the debug camera -- doesn't work yet.
 			D3DXVECTOR3 cameraNewPosition = D3DXVECTOR3(m_Timer.getElapsedTime()*-30, 0, 0);
 			pCamera->setPosition(pCamera->getPosition().x + cameraNewPosition.x, cameraNewPosition.y, cameraNewPosition.z);
 		}
 	}
-    else if (CInput::getInstance().getKeyboard()->isKeyDown((int)'S'))
+	else if (CInput::getInstance().getKeyboard()->isKeyDown((int)'S'))
 	{
+				
+	
 		//Audio - grab the audio component
 		CAudioSourceComponent * pAudio=(CAudioSourceComponent *)m_pGameObjectManager->findGameObject("Test")->getComponent("AudioSourceComponent");
-		//pAudio->play(2);
+		pAudio->play(2);
 
-		pTransform->MoveForward(m_Timer.getElapsedTime()*-(pTransform->getcarspeed()));	
+		CTransformComponent * pTransform=m_pGameObjectManager->findGameObject("Test")->getTransform();
+		pTransform->MoveForward(m_Timer.getElapsedTime()*-(pTransform->getcarspeed()));
+		
 	}
 	if (CInput::getInstance().getKeyboard()->isKeyDown((int)'A'))
 	{
+		//play sound
+		CTransformComponent * pTransform=m_pGameObjectManager->findGameObject("Test")->getTransform();
 		pTransform->rotate(0.0f,m_Timer.getElapsedTime()*-1,0.0f);
 	}
 	else if (CInput::getInstance().getKeyboard()->isKeyDown((int)'D'))
 	{
+		//play sound
+		CTransformComponent * pTransform=m_pGameObjectManager->findGameObject("Test")->getTransform();
 		pTransform->rotate(0.0f,m_Timer.getElapsedTime(),0.0f);
 	}
+
+	while(true)
+
+	if(Player1->IsConnected())
+		{
+			if(Player1->GetState().Gamepad.wButtons & XINPUT_GAMEPAD_A)
+			{
+				CTransformComponent * pTransform=m_pGameObjectManager->findGameObject("Test")->getTransform();
+		pTransform->MoveForward(m_Timer.getElapsedTime());
+		Player1->Vibrate(15535, 15535);
+			}
+
+			if(Player1->GetState().Gamepad.wButtons & XINPUT_GAMEPAD_B)
+			{
+				CTransformComponent * pTransform=m_pGameObjectManager->findGameObject("Test")->getTransform();
+		pTransform->MoveForward(m_Timer.getElapsedTime()*-1);
+			}
+
+			if(Player1->GetState().Gamepad.wButtons & XINPUT_GAMEPAD_X)
+			{
+				CTransformComponent * pTransform=m_pGameObjectManager->findGameObject("Test")->getTransform();
+		pTransform->rotate(0.0f,m_Timer.getElapsedTime()*-1,0.0f);				
+			}
+
+			if(Player1->GetState().Gamepad.wButtons & XINPUT_GAMEPAD_Y)
+			{
+				CTransformComponent * pTransform=m_pGameObjectManager->findGameObject("Test")->getTransform();
+		pTransform->rotate(0.0f,m_Timer.getElapsedTime()*1,0.0f);
+			}
+			else
+		{
+			break;
+		}
+
+	}
+
+	
 
 	//Do we want to go to debug mode with the camera -- doesn't work yet.
 	if (CInput::getInstance().getKeyboard()->isKeyDown((int)'P'))
@@ -510,6 +574,9 @@ void CGameApplication::update()
 		//Move the zombie bitch!
 		pZombie->enemyMovement(m_Timer.getElapsedTime());
 		pZombie2->enemyMovementLR(m_Timer.getElapsedTime());
+		//pZombie->setIsMoving(true);
+		//pZombie->setRotation(0.1f,0.0f,0.1f);
+		//pZombie->enemyMovement(m_Timer.getElapsedTime());
 	}
 }
 

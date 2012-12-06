@@ -92,7 +92,8 @@ void CPhysics::update(float updateTime)
 		//Update visual debugger
 		//if (m_bVisualDebug)
 		//	m_pVisualDebugger->step();
-	}	
+	}
+	
 }
 
 //destroy

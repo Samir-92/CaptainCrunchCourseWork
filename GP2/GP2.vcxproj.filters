@@ -162,6 +162,9 @@
     <ClCompile Include="Physics.cpp">
       <Filter>Physics</Filter>
     </ClCompile>
+    <ClCompile Include="CXBOXController.cpp">
+      <Filter>Input</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Win32Window.h">
@@ -253,6 +256,9 @@
     </ClInclude>
     <ClInclude Include="Physics.h">
       <Filter>Physics</Filter>
+    </ClInclude>
+    <ClInclude Include="CXBOXController.h">
+      <Filter>Input</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
